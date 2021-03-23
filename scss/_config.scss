@@ -1,0 +1,20 @@
+$font-stack: 'Roboto', sans-serif;
+$font-stack-s: 'Montserrat', sans-serif;
+$light-color: #f4f4f4;
+$primary-color: #036ffc;
+$primary-2: lighten($primary-color, 10%);
+$secondary-color: #000000;
+$primary-light: (lighten($primary-color, 40%));
+
+@function set-text-color($color) {
+  @if (lightness($color) > 70) {
+    @return (lighten($secondary-color, 10%));
+  } @else {
+    @return $light-color;
+  }
+}
+
+@mixin set-background($color) {
+  background-color: $color;
+  color: set-text-color($color);
+}

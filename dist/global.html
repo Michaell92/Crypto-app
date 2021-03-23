@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet"
+    href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <title>Coinstats</title>
+  </head>
+  <body>
+    <div id="showcase">
+      <ul id="nav-top">
+        <ul id="nav-data"></ul>
+        <ul>
+          <li>
+            <a class="btn-secondary txt-center" href="#">Sign in</a>
+          </li>
+          <li>
+            <a class="btn-primary txt-center" href="#">Create account</a>
+          </li>
+        </ul>
+      </ul>
+
+      <nav id="navbar">
+        <ul id="base-nav">
+          <li><a href="index.html">Coinstats</a></li>
+          <li>
+            Markets <i class="fas fa-angle-down"></i>
+            <ul>
+              <li><a href="global.html">Global</a></li>
+              <li><a href="index.html">Cryptocurrenies</a></li>
+              <li><a href="table.html">Exchanges</a></li>
+              <li><a href="finance.html">Finance Platforms</a></li>
+            </ul>
+          </li>
+          <li><a href="#">News</a></li>
+          <li><a href="#">Chart</a></li>
+          <li>
+            <form action="#" id="searchForm">
+              <label for="search">
+                <input
+                  type="search"
+                  id="search"
+                  name="search"
+                  placeholder=" Search"
+                />
+                <i class="fas fa-search fa-lg" id="searchIcon"></i>
+              </label>
+            </form>
+          </li>
+          <li>
+            <a href="#">My Portfolio <i class="fas fa-chart-line"></i></a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <section id="home-a">
+      <div id="totalData">
+        <div class="total">
+          <div id="total"><a href="index.html"></a></div>
+          <div id="markets"><a href="table.html"></a></div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="card" id="globalStats"></div>
+      </div>
+    </section>
+
+    <script src="js/globalBundle.js"></script>
+  </body>
+</html>

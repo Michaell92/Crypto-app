@@ -1,0 +1,56 @@
+.container {
+  max-width: 1300px;
+  padding: 0 20px;
+  margin: 5rem auto;
+  overflow: none;
+}
+
+.lead {
+  margin: 1rem 0;
+  font-size: 25px;
+}
+
+.text-center {
+  text-align: center;
+  display: none;
+}
+
+a {
+  text-decoration: none;
+  color: (lighten($secondary-color, 10%));
+}
+
+i {
+  display: inline-block;
+}
+
+.hover:hover {
+  color: $primary-color;
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.hover:active {
+  transform: scale(1);
+}
+
+.no-select {
+  user-select: none;
+}
+
+$spaceamounts: (1, 2, 3, 4, 5);
+
+@each $space in $spaceamounts {
+  .m-#{$space} {
+    margin: #{$space}rem;
+  }
+  .my-#{$space} {
+    margin: #{$space}rem 0;
+  }
+  .p-#{$space} {
+    padding: #{$space}rem;
+  }
+  .py-#{$space} {
+    padding: #{$space}rem 0;
+  }
+}

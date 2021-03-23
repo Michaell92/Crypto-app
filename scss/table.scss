@@ -21,31 +21,28 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin: auto;
+    max-width: 800px;
     padding: 0 70px;
     margin-bottom: 5px;
     font-family: $font-stack;
-    // font-weight: bold;
     div {
       display: flex;
       align-items: center;
       justify-content: center;
     }
     div > div {
-      border-bottom: 2px solid #fff;
+      border-bottom: 2px solid transparent;
       padding: 0 2px;
       cursor: pointer;
     }
     div > div:hover {
       border-color: $primary-2;
     }
-    #total {
-      // width: 85px;
-    }
     #total a,
     #markets a {
       margin-left: 5px;
       font-family: $font-stack-s;
-      // font-weight: bold;
       font-size: 15px;
       & span {
         color: $primary-color;
@@ -53,22 +50,6 @@ body {
     }
     #markets {
       margin-left: 15px;
-    }
-    #favorites {
-      margin-right: 15px;
-      span {
-        margin-right: 5px;
-      }
-      i {
-        color: lighten(gold, 30%);
-        transition: color 0.5s;
-      }
-      &:active i {
-        transform: scale(0.95);
-      }
-      .active {
-        color: gold;
-      }
     }
     #list-pages {
       border: none;
@@ -84,10 +65,10 @@ body {
     }
   }
 
-  #main-table {
+  #market-table {
     border-collapse: collapse;
     visibility: hidden;
-    width: 1200px;
+    width: 750px;
     margin: auto;
     thead {
       border-top: 1px solid (lighten($secondary-color, 80%));
@@ -95,7 +76,11 @@ body {
       th {
         font-weight: bold;
         line-height: 40px;
+        width: 150px;
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        th:first-child {
+          width: 20rem;
+        }
         a i {
           visibility: hidden;
           color: (lighten($secondary-color, 70%));
@@ -114,14 +99,11 @@ body {
       td {
         padding: 20px 20px;
         font-size: 14px;
-        &:not(:nth-child(2)) {
+        text-align: center;
+        &:not(:nth-child(1)) {
           font-family: $font-stack;
           font-weight: bold;
           color: (lighten($secondary-color, 5%));
-        }
-        &:nth-child(5),
-        &:nth-child(6) {
-          text-align: center;
         }
       }
       tr {
@@ -130,13 +112,9 @@ body {
           width: 20px;
           margin-right: 10px;
         }
-        & > :nth-child(1) {
-          text-align: center;
-        }
         // Positioning icon and name
-        & > :nth-child(2) {
+        & > :nth-child(1) {
           display: flex;
-          width: 20rem;
           font-weight: normal;
           font-size: 16px;
           font-family: $font-stack;
@@ -150,72 +128,6 @@ body {
             border-bottom: 2px solid transparent;
             &:hover {
               border-color: $primary-light;
-            }
-          }
-          & > :last-child {
-            position: absolute;
-            font-family: $font-stack-s;
-            transform: translateX(15rem);
-            font-size: 12px;
-            font-weight: lighter;
-            color: (lighten($secondary-color, 40%));
-          }
-        }
-        & > :last-child {
-          .newFav {
-            color: $primary-color;
-          }
-          a {
-            margin-right: 7px;
-          }
-          .favHover:hover {
-            color: (lighten($primary-color, 35%));
-          }
-          a i {
-            color: $primary-light;
-          }
-          i:active {
-            transform: scale(0.95);
-          }
-          // Adding tooltips
-          & > :first-child {
-            position: relative;
-
-            &::before {
-              content: attr(data-fav);
-              @extend %tooltipBox;
-            }
-            &:hover::before {
-              visibility: visible;
-              opacity: 100;
-            }
-            &::after {
-              @extend %tooltipArrow;
-              margin-right: -8px;
-            }
-            &:hover::after {
-              visibility: visible;
-              opacity: 100;
-            }
-          }
-          // Second tooltip
-          & > :nth-child(2) {
-            position: relative;
-            &::before {
-              content: attr(data-port);
-              @extend %tooltipBox;
-            }
-            &:hover::before {
-              visibility: visible;
-              opacity: 100;
-            }
-            &::after {
-              @extend %tooltipArrow;
-              margin-right: -9px;
-            }
-            &:hover::after {
-              visibility: visible;
-              opacity: 100;
             }
           }
         }

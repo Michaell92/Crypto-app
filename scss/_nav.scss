@@ -1,0 +1,171 @@
+#nav-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  // color: $light-color;
+  background: #e6fdff;
+  background: (lighten($primary-color, 47%));
+  font-size: 14px;
+  border-bottom: 2px solid $primary-light;
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style-type: none;
+    padding: 0 2rem;
+    li {
+      padding: 1rem 0;
+    }
+  }
+  > ul:first-child {
+    color: $secondary-color;
+    li {
+      padding-right: 25px;
+      a {
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+#navbar {
+  max-width: 1500px;
+  padding: 0 20px;
+  margin: 0 auto;
+  overflow: none;
+  color: (lighten($secondary-color, 10%));
+
+  #base-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    margin-top: 50px;
+    margin-left: -20px;
+    border-top: 1px solid $primary-light;
+    border-bottom: 1px solid $primary-light;
+    & > li {
+      margin-right: -10px;
+      user-select: none;
+
+      &:not(:nth-child(5)) > a:hover {
+        border-bottom: 2px solid $primary-2;
+      }
+      > a {
+        padding: 2px;
+      }
+
+      ul {
+        display: none;
+      }
+    }
+    // Styling dropdown menu
+    & > li:nth-child(2) {
+      position: relative;
+      cursor: pointer;
+      i {
+        color: (lighten($primary-color, 35%));
+      }
+      &:hover i {
+        transform: rotate(180deg);
+        color: $primary-color;
+      }
+      &:hover ul {
+        display: block;
+        position: absolute;
+        z-index: 1;
+        width: 240px;
+        background-color: $light-color;
+        border: solid 1px (lighten($secondary-color, 85%));
+        margin-top: 5px;
+        li {
+          margin: 0;
+          padding: 0 0 10px 10px;
+
+          &:first-child {
+            padding-top: 10px;
+          }
+
+          &::after {
+            content: '';
+            display: block;
+            visibility: hidden;
+            background-color: $primary-light;
+            width: 0;
+            height: 1px;
+            margin-top: 2px;
+          }
+          &:hover::after {
+            visibility: visible;
+            width: 180px;
+            transition: width 0.5s;
+          }
+          &:last-child {
+            padding-bottom: 5px;
+          }
+        }
+      }
+    }
+    // Styling search bar
+    & > :nth-child(5) {
+      margin-left: 2rem;
+      padding: 0;
+      label {
+        position: relative;
+        input {
+          position: relative;
+          width: 50rem;
+          padding: 10px;
+          height: 2rem;
+          background: (lighten(#000, 94%));
+          font-size: 12px;
+          font-family: $font-stack-s;
+          border: solid 1px (lighten($secondary-color, 87%));
+          border-radius: 4px;
+          &:focus {
+            outline: none;
+          }
+        }
+        input::-webkit-search-cancel-button {
+          -webkit-appearance: none;
+        }
+        i {
+          position: absolute;
+          cursor: pointer;
+          padding: 10px 22px;
+          right: 0px;
+          top: -6px;
+          text-align: center;
+          font-size: 18px;
+          color: $primary-light;
+        }
+        i:hover {
+          font-size: 20px;
+          color: $primary-color;
+          transition: color 0.5s, width 0.5s, height 0.5s;
+        }
+      }
+    }
+
+    & > :last-child {
+      margin-left: 20px;
+      i {
+        color: $primary-light;
+      }
+      a:hover i {
+        color: $primary-2;
+      }
+    }
+  }
+
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style-type: none;
+    margin-bottom: 1rem;
+    li {
+      padding: 1rem;
+    }
+  }
+}

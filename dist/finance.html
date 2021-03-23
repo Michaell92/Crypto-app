@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/finance.css" />
     <link rel="stylesheet"
     href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css
     />
@@ -61,68 +61,35 @@
         </ul>
       </nav>
     </div>
-    <section id="home-a">
+    <section id="home-b">
       <div class="container">
         <div id="table-info">
           <div>
             <div id="total"><a href="index.html"></a></div>
-            <div id="markets"><a href="table.html"></a></div>
-          </div>
-          <div>
-            <div id="favorites" class="no-select">
-              <span>Favorites</span><i class="fas fa-star"></i>
-            </div>
-            <div id="list-pages" class="no-select">
-              <i id="1" class="fas fa-arrow-left left"></i>
-              <i id="" class="fas fa-arrow-right hover right"></i>
+            <div id="markets">
+              <a href="table.html"></a>
             </div>
           </div>
         </div>
 
-        <table id="main-table">
+        <table id="finance-table">
           <thead>
             <tr>
               <th>
-                <a href="#" id="rank" class="ordered">#</a>
+                <a href="#" id="platform" class="unordered">Name</a>
               </th>
               <th>
-                <a href="#" id="coin" class="unordered">Coin</a>
-              </th>
-              <th>
-                <a href="#" id="price" class="unordered"
-                  ><i class="fas fa-caret-down"></i> Price</a
+                <a href="#" id="category" class="unordered"
+                  ><i class="fas fa-caret-down"></i>Centralized</a
                 >
               </th>
               <th>
-                <a href="#" id="mcap" class="unordered"
-                  ><i class="fas fa-caret-down"></i> Market Cap</a
-                >
-              </th>
-              <th>
-                <a href="#" id="daily" class="unordered"
-                  ><i class="fas fa-caret-down"></i> 24h</a
-                >
-              </th>
-              <th>
-                <a href="#" id="weekly" class="unordered"
-                  ><i class="fas fa-caret-down"></i> 7d</a
-                >
-              </th>
-              <th>
-                <a href="#" id="volume" class="unordered"
-                  ><i class="fas fa-caret-down"></i> Volume</a
-                >
+                <a href="#" id="product" class="unordered">Product</a>
               </th>
               <th>
                 <a href="#" id="supply" class="unordered"
-                  ><i class="fas fa-caret-down"></i> Circulating supply</a
+                  ><i class="fas fa-caret-down"></i>Supply rate %</a
                 >
-              </th>
-              <!-- <th>
-                <a href="#">Total supply</a>
-              </th> -->
-              <th>
-                <a href="#"></a>
               </th>
             </tr>
           </thead>
@@ -131,6 +98,6 @@
       </div>
     </section>
 
-    <script src="js/bundle.js"></script>
+    <script src="js/financeBundle.js"></script>
   </body>
 </html>
