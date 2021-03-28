@@ -1,7 +1,6 @@
 import { http } from './http';
 import { nav } from './nav';
 import { finance } from './finance-ui';
-import { filter } from './filterList';
 
 const globalLink = 'https://api.coingecko.com/api/v3/global';
 const platformLink =
@@ -23,10 +22,9 @@ document.getElementById('mt-body').addEventListener('change', (e) => {
     .catch((err) => console.log(err));
 });
 // Filter list
-document.querySelector('#search').addEventListener('keyup', (e) => {
-  filter.filterList(e.target, 0);
-});
+document.querySelector('#search').addEventListener('keyup', filterList);
 async function finUI() {
+  console.log('test');
   const dataSet = [platformLink, productLink];
   const getArr = [];
   await Promise.all(
@@ -43,4 +41,50 @@ async function finUI() {
   );
 
   finance.finData(getArr);
+}
+// Sort by name
+document.querySelector('#platform').addEventListener('click', sortByName);
+// Sort by category
+document.querySelector('#category').addEventListener('click', sortByCategory);
+// Sort by supply rate
+document.querySelector('#supply').addEventListener('click', sortBySupplyRate);
+
+function filterList(e) {
+  // Check if there is input value
+  if (e.target.value == (null || undefined)) return;
+
+  const rowArr = Array.from(
+    document.querySelector('#mt-body').querySelectorAll('tr')
+  );
+
+  // Check for searched value and display only those who match
+  for (let i = 0; i < rowArr.length; i++) {
+    if (
+      rowArr[i].childNodes[0].firstChild.innerHTML
+        .toUpperCase()
+        .match(e.target.value.toUpperCase()) != null
+    ) {
+      rowArr[i].style.display = '';
+    } else {
+      rowArr[i].style.display = 'none';
+    }
+  }
+}
+
+// Sort by name
+function sortByName(e) {
+  e.preventDefault();
+  finance.sort_1(e.target);
+}
+
+// Sort by category
+function sortByCategory(e) {
+  e.preventDefault();
+  finance.sort_2(e.target);
+}
+
+// Sort by supply rate
+function sortBySupplyRate(e) {
+  e.preventDefault();
+  finance.sort_3(e.target);
 }

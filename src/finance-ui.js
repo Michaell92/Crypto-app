@@ -1,6 +1,6 @@
 class Finance {
   constructor() {
-    this.tbody = document.getElementById('mt-body');
+    this.tBody = document.getElementById('mt-body');
     this.table = document.getElementById('finance-table');
   }
   async finData(data) {
@@ -40,7 +40,7 @@ class Finance {
       }</td>
       </tr>`;
     }
-    this.tbody.innerHTML = html;
+    this.tBody.innerHTML = html;
   }
 
   // Change supply rate
@@ -51,6 +51,128 @@ class Finance {
         supply.innerHTML = parseFloat(data[i].supply_rate_percentage).toFixed(
           2
         );
+      }
+    }
+  }
+
+  // Sort by name
+  sort_1(target) {
+    const rows = Array.from(
+      document.querySelector('#mt-body').querySelectorAll('tr')
+    );
+    this.tBody.innerHTML = '';
+    if (target.className == 'unordered') {
+      target.className = 'ordered';
+      const reversed = rows.sort((a, b) => {
+        return a.firstElementChild.firstElementChild.innerHTML.toUpperCase() >
+          b.firstElementChild.firstElementChild.innerHTML.toUpperCase()
+          ? 1
+          : a.firstElementChild.firstElementChild.innerHTML.toUpperCase() <
+            b.firstElementChild.firstElementChild.innerHTML.toUpperCase()
+          ? -1
+          : 0;
+      });
+
+      for (let i = 0; i < rows.length; i++) {
+        const row = this.tBody.insertRow(i);
+        row.innerHTML = reversed[i].innerHTML;
+      }
+    } else {
+      target.className = 'unordered';
+
+      const reversed = rows.sort((a, b) => {
+        return a.firstElementChild.firstElementChild.innerHTML.toUpperCase() <
+          b.firstElementChild.firstElementChild.innerHTML.toUpperCase()
+          ? 1
+          : a.firstElementChild.firstElementChild.innerHTML.toUpperCase() >
+            b.firstElementChild.firstElementChild.innerHTML.toUpperCase()
+          ? -1
+          : 0;
+      });
+
+      for (let i = 0; i < rows.length; i++) {
+        const row = this.tBody.insertRow(i);
+        row.innerHTML = reversed[i].innerHTML;
+      }
+    }
+  }
+
+  // Sort by category
+  sort_2(target) {
+    const rows = Array.from(
+      document.querySelector('#mt-body').querySelectorAll('tr')
+    );
+    this.tBody.innerHTML = '';
+
+    if (target.className == 'unordered') {
+      target.className = 'ordered';
+      target.firstChild.className = 'fas fa-caret-down';
+      const newArr = [
+        ...rows.filter((row) =>
+          row.children[1].firstChild.classList.contains('fa-check') ? 1 : 0
+        ),
+        ...rows.filter((row) =>
+          row.children[1].firstChild.classList.contains('fa-check') ? 0 : 1
+        ),
+      ];
+      for (let i = 0; i < rows.length; i++) {
+        const row = this.tBody.insertRow(i);
+        row.innerHTML = newArr[i].innerHTML;
+      }
+    } else {
+      target.className = 'unordered';
+      target.firstChild.className = 'fas fa-caret-up';
+      const newArr = [
+        ...rows.filter((row) =>
+          row.children[1].firstChild.classList.contains('fa-check') ? 0 : 1
+        ),
+        ...rows.filter((row) =>
+          row.children[1].firstChild.classList.contains('fa-check') ? 1 : 0
+        ),
+      ];
+
+      for (let i = 0; i < rows.length; i++) {
+        const row = this.tBody.insertRow(i);
+        row.innerHTML = newArr[i].innerHTML;
+      }
+    }
+  }
+
+  // Sort by supply rate
+  sort_3(target) {
+    const rows = Array.from(
+      document.querySelector('#mt-body').querySelectorAll('tr')
+    );
+    this.tBody.innerHTML = '';
+    if (target.className == 'unordered') {
+      target.className = 'ordered';
+      target.firstChild.className = 'fas fa-caret-down';
+      const reversed = rows.sort((a, b) => {
+        let aa = a.children[3].innerHTML;
+        let bb = b.children[3].innerHTML;
+        return (
+          parseFloat(bb === '' ? '-1' : bb) - parseFloat(aa === '' ? '-1' : aa)
+        );
+      });
+
+      for (let i = 0; i < rows.length; i++) {
+        const row = this.tBody.insertRow(i);
+        row.innerHTML = reversed[i].innerHTML;
+      }
+    } else {
+      target.className = 'unordered';
+      target.firstChild.className = 'fas fa-caret-up';
+      const reversed = rows.sort((a, b) => {
+        let aa = a.children[3].innerHTML;
+        let bb = b.children[3].innerHTML;
+        return (
+          parseFloat(aa === '' ? '-1' : aa) - parseFloat(bb === '' ? '-1' : bb)
+        );
+      });
+
+      for (let i = 0; i < rows.length; i++) {
+        const row = this.tBody.insertRow(i);
+        row.innerHTML = reversed[i].innerHTML;
       }
     }
   }

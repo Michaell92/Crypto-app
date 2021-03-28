@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/finance.css" />
+    <link rel="stylesheet" href="css/news.css" />
     <link rel="stylesheet"
     href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css
     />
@@ -61,43 +61,39 @@
         </ul>
       </nav>
     </div>
-    <section id="home-b">
+    <section id="home-c">
       <div class="container">
-        <div id="table-info">
-          <div>
-            <div id="total"><a href="index.html"></a></div>
-            <div id="markets">
-              <a href="table.html"></a>
-            </div>
-          </div>
+        <div id="news-info">
+          Select category:
+          <span id="category=general&" class="category general no-select"
+            >general</span
+          >
+          <span id="category=milestone&" class="category no-select"
+            >milestone</span
+          >
+          <span id="category=partnership&" class="category no-select"
+            >partnership</span
+          >
+          <span id="category=exchange_listing&" class="category no-select"
+            >exchange listing</span
+          >
+          <span id="category=software_release&" class="category no-select"
+            >software release</span
+          >
+          <span id="category=fund_movement&" class="category no-select"
+            >fund movement</span
+          >
+          <span id="category=new_listings&" class="category no-select"
+            >new listings</span
+          >
+          <span id="category=event&" class="category no-select">event</span>
         </div>
-
-        <table id="finance-table">
-          <thead>
-            <tr>
-              <th>
-                <a href="#" id="platform" class="unordered">Name</a>
-              </th>
-              <th>
-                <a href="#" id="category" class="unordered"
-                  ><i class="fas fa-caret-down"></i> Centralized</a
-                >
-              </th>
-              <th>
-                <a href="#" id="product" class="unordered">Product</a>
-              </th>
-              <th>
-                <a href="#" id="supply" class="unordered"
-                  ><i class="fas fa-caret-down"></i> Supply rate %</a
-                >
-              </th>
-            </tr>
-          </thead>
-          <tbody id="mt-body"></tbody>
-        </table>
+        <div id="main"></div>
+        <div id="wait-circle"></div>
+        <div id="load" class="btn-primary lead txt-center">Load More</div>
       </div>
     </section>
 
-    <script src="js/financeBundle.js"></script>
+    <script src="js/newsBundle.js"></script>
   </body>
 </html>

@@ -1,15 +1,20 @@
 %btn {
   display: inline-block;
-  padding: 4px 17px;
-  margin: 4px;
-  border-radius: 8px;
+  padding: 10px 20px;
+  margin: auto 5px;
+  height: 40px;
+  max-width: 150px;
   font-size: 14px;
   user-select: none;
+  cursor: pointer;
+  text-align: center;
   // font-weight: bold;
+  border-radius: 100px;
 
-  // &:hover {
-  //   transform: scale(0.98);
-  // }
+  &:hover {
+    transform: scale(1.01);
+    transition-duration: 0.1s;
+  }
 }
 %tooltipBox {
   position: absolute;

@@ -4,11 +4,17 @@ import { http } from './http';
 class Nav {
   constructor() {
     this.topNav = document.querySelector('#nav-data');
-    this.total = document.querySelector('#total').firstElementChild;
-    this.exchanges = document.querySelector('#markets').firstElementChild;
+    this.total;
+    this.exchanges;
+    if (
+      document.querySelector('#total') &&
+      document.querySelector('#markets')
+    ) {
+      this.total = document.querySelector('#total').firstElementChild;
+      this.exchanges = document.querySelector('#markets').firstElementChild;
+    }
   }
   getMarketData(link) {
-    console.log(link);
     http
       .get(link)
       .then((data) => {
@@ -56,11 +62,13 @@ function navData(market, topNav, total, exchanges) {
     ? ((li.style.color = 'red'), (li.querySelector('i').style.color = 'red'))
     : (li.style.color = '#333333');
 
-  // Get total coins
-  total.innerHTML = `Coins: <span class="span-info">${market.data.active_cryptocurrencies}</span>`;
+  if (total && exchanges) {
+    // Get total coins
+    total.innerHTML = `Coins: <span class="span-info">${market.data.active_cryptocurrencies}</span>`;
 
-  // Get total exchanges
-  exchanges.innerHTML = `Exchanges: <span class="span-info">${market.data.markets}</span>`;
+    // Get total exchanges
+    exchanges.innerHTML = `Exchanges: <span class="span-info">${market.data.markets}</span>`;
+  }
 }
 
 export const nav = new Nav();
