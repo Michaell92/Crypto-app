@@ -23,8 +23,10 @@ document.getElementById('mt-body').addEventListener('change', (e) => {
 });
 // Filter list
 document.querySelector('#search').addEventListener('keyup', filterList);
+
 async function finUI() {
-  console.log('test');
+  document.getElementById('loader').className = 'loader';
+
   const dataSet = [platformLink, productLink];
   const getArr = [];
   await Promise.all(
@@ -40,8 +42,25 @@ async function finUI() {
     })
   );
 
-  finance.finData(getArr);
+  await finance.finData(getArr);
+
+  const tBody = document.getElementById('mt-body').innerHTML;
+  const finData = document.getElementById('mt-body').firstChild.firstChild
+    .firstChild.innerHTML;
+
+  if (
+    finData === '' ||
+    finData === 'undefined' ||
+    finData === null ||
+    tBody === '' ||
+    tBody === undefined ||
+    tBody === null
+  ) {
+    finUI();
+  }
+  document.getElementById('loader').className = '';
 }
+
 // Sort by name
 document.querySelector('#platform').addEventListener('click', sortByName);
 // Sort by category

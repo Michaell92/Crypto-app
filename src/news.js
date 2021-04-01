@@ -14,10 +14,19 @@ document.addEventListener('DOMContentLoaded', category());
 document.getElementById('load').addEventListener('click', loadMore);
 
 async function getNewsData(link) {
+  document.getElementById('wait-circle').classList = 'loader';
+
   await http
     .get(link)
     .then((data) => news.getData(data.status_updates))
     .catch((err) => console.log(err));
+
+  const main = document.getElementById('main').innerHTML;
+  if (main === '' || main === undefined || main === null) {
+    getNewsData(link);
+  }
+
+  document.getElementById('wait-circle').classList = 'hidden';
 }
 
 // Load more posts
@@ -27,8 +36,7 @@ async function loadMore(e, x) {
   if (!x) {
     counter++;
   }
-  // Add loader
-  document.getElementById('wait-circle').classList = 'loader';
+  // Hide load button
   document.getElementById('load').style.visibility = 'hidden';
 
   // Get current category
@@ -38,8 +46,7 @@ async function loadMore(e, x) {
   const newsLink = `https://api.coingecko.com/api/v3/status_updates?${category}per_page=10&page=${counter}`;
   await getNewsData(newsLink);
 
-  // Remove circle
-  document.getElementById('wait-circle').classList = '';
+  // Show load button
   document.getElementById('load').style.visibility = 'visible';
 }
 

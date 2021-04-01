@@ -9,8 +9,8 @@ const globalLink = 'https://api.coingecko.com/api/v3/global';
 const coinsLink =
   'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false&price_change_percentage=7d';
 const icon = document.querySelector('#favorites').childNodes[2];
-// Event listeners
 
+// Event listeners
 document.addEventListener('DOMContentLoaded', nav.getMarketData(globalLink));
 document.addEventListener('DOMContentLoaded', getCoinData(coinsLink));
 document.querySelector('#rank').addEventListener('click', sortByRank);
@@ -38,8 +38,9 @@ document.querySelector('#searchIcon').addEventListener('click', getCoin);
 document.querySelector('#searchForm').addEventListener('submit', getCoin);
 
 // Create table
-function getCoinData(link) {
-  http
+async function getCoinData(link) {
+  document.getElementById('loader').className = 'loader';
+  await http
     .get(link)
     .then((data) => {
       ui.tableData(data);
@@ -47,6 +48,13 @@ function getCoinData(link) {
     .catch((err) => {
       console.log(err);
     });
+
+  // Check if properly loaded
+  const tBody = document.getElementById('mt-body').innerHTML;
+  if (tBody === '' || tBody === undefined || tBody === null) {
+    getCoinData(link);
+  }
+  document.getElementById('loader').className = '';
 }
 
 // Sort by rank
@@ -118,9 +126,8 @@ function showFavorites(e) {
 
     // Get coins
     let favArr = JSON.parse(localStorage.getItem('coins'));
-
     // Get favs
-    if (favArr && favArr.length > 0) {
+    if (favArr.length > 1) {
       const query = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${favArr.join()}&order=market_cap_desc&price_change_percentage=7d`;
 
       // Get coins
@@ -133,7 +140,7 @@ function showFavorites(e) {
         .catch((err) => console.log(err));
     } else {
       document.querySelector('#mt-body').innerHTML = '';
-      let test = document.querySelector('.message');
+      const test = document.querySelector('.message');
 
       // Check for message and display message
       if (!test)

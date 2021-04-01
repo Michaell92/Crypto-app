@@ -31,21 +31,16 @@ body {
       justify-content: center;
     }
     div > div {
-      border-bottom: 2px solid #fff;
-      padding: 0 2px;
+      border-bottom: 2px solid transparent;
+      margin: 0 2px;
       cursor: pointer;
     }
     div > div:hover {
-      border-color: $primary-2;
-    }
-    #total {
-      // width: 85px;
+      border-color: $primary-light;
     }
     #total a,
     #markets a {
-      margin-left: 5px;
       font-family: $font-stack-s;
-      // font-weight: bold;
       font-size: 15px;
       & span {
         color: $primary-color;
@@ -262,3 +257,4 @@ body {
 @import 'utilities';
 @import 'buttons';
 @import 'media';
+@import 'loader';

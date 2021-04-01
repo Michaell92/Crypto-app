@@ -47,14 +47,23 @@
     & > li {
       margin-right: -10px;
       user-select: none;
-
-      &:not(:nth-child(5)) > a:hover {
-        border-bottom: 2px solid $primary-2;
+      &:not(:nth-child(5)) > a {
+        position: relative;
       }
-      > a {
-        padding: 2px;
+      &:not(:nth-child(5)) > a::after {
+        content: '';
+        display: block;
+        position: absolute;
+        background-color: $primary-color;
+        width: 0;
+        transition: width 0.3s linear;
+        height: 2px;
+        pointer-events: none;
       }
-
+      &:not(:nth-child(5)) > a:hover::after {
+        width: 102%;
+        transition: width 0.3s linear;
+      }
       ul {
         display: none;
       }
@@ -89,15 +98,14 @@
           &::after {
             content: '';
             display: block;
-            visibility: hidden;
             background-color: $primary-light;
             width: 0;
+            transition: width 0.5s;
             height: 1px;
             margin-top: 2px;
           }
           &:hover::after {
-            visibility: visible;
-            width: 180px;
+            width: 80%;
             transition: width 0.5s;
           }
           &:last-child {
@@ -110,11 +118,13 @@
     & > :nth-child(5) {
       margin-left: 2rem;
       padding: 0;
+      max-width: 40rem;
+      flex: 1;
       label {
         position: relative;
         input {
           position: relative;
-          width: 50rem;
+          width: 100%;
           padding: 10px;
           height: 2rem;
           background: (lighten(#000, 94%));
@@ -153,7 +163,7 @@
         color: $primary-light;
       }
       a:hover i {
-        color: $primary-2;
+        color: $primary-color;
       }
     }
   }

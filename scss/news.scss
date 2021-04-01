@@ -66,15 +66,18 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 100px auto 0 auto;
+    margin: 80px auto 0 auto;
     max-width: 70%;
     .card {
       display: flex;
       flex-direction: column;
       gap: 10px;
       margin-bottom: 50px;
-      border: 5px solid $primary-light;
+      border: 5px solid $primary-color;
       padding: 10px;
+      width: 100%;
+      color: #fff;
+      background: rgb(45, 48, 71);
       .projectInfo {
         display: flex;
         align-items: center;
@@ -111,7 +114,6 @@ body {
         font-size: 10px;
         color: white;
         span {
-          background-color: blue;
           padding: 5px;
           border-radius: 5px;
         }
@@ -121,6 +123,46 @@ body {
       }
     }
   }
+}
+
+.coin {
+  @include set-background(orange);
+}
+
+.market {
+  @include set-background(purple);
+}
+
+.general {
+  @include set-background($primary-color);
+}
+
+.milestone {
+  @include set-background($primary-light);
+}
+
+.partnership {
+  @include set-background(green);
+}
+
+.exchange_listing {
+  @include set-background(darkgrey);
+}
+
+.software_release {
+  @include set-background(rgb(99, 12, 12));
+}
+
+.fund_movement {
+  @include set-background(rgb(144, 103, 27));
+}
+
+.new_listings {
+  @include set-background(yellow);
+}
+
+.event {
+  @include set-background(rgb(52, 11, 52));
 }
 
 @import 'nav';

@@ -1,0 +1,27 @@
+@import 'config';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: $light-color;
+  overflow-y: scroll;
+  font-family: $font-stack-s;
+  line-height: 1.6;
+  font-size: 16px;
+  color: (lighten($secondary-color, 20%));
+}
+
+#myChart {
+  max-width: 650px;
+  margin: 35px auto;
+}
+
+@import 'nav';
+@import 'utilities';
+@import 'buttons';
+@import 'media';
+@import 'loader';

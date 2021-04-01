@@ -25,13 +25,20 @@ document.querySelector('#searchIcon').addEventListener('click', getMarket);
 document.querySelector('#searchForm').addEventListener('submit', getMarket);
 
 // Create market table
-function createTable(link) {
-  http
+async function createTable(link) {
+  document.getElementById('loader').classList = 'loader';
+  await http
     .get(link)
     .then((data) => {
       table.fetchMarkets(data);
     })
     .catch((error) => console.log(error));
+
+  const tBody = document.getElementById('mt-body').innerHTML;
+  if (tBody === '' || tBody === undefined || tBody === null) {
+    createTable(link);
+  }
+  document.getElementById('loader').className = '';
 }
 
 // Sort by name

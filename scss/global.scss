@@ -52,6 +52,7 @@ body {
     justify-content: space-between;
     margin: 0 100px 0 100px;
     border-bottom: 2px solid darkturquoise;
+
     > div {
       margin: 0 100px;
     }
@@ -65,10 +66,7 @@ body {
   #defiData {
     display: flex;
     flex-direction: column;
-    h1 {
-      margin: -40px 0 50px 0;
-      text-align: center;
-    }
+
     & > div {
       display: flex;
       flex-direction: row;
@@ -85,24 +83,18 @@ body {
   }
   #percent {
     display: flex;
+    align-items: center;
+    justify-content: flex-start;
     flex-direction: column;
-    div {
-      display: grid;
-      grid-template-columns: auto auto auto auto auto;
-      grid-gap: 20px;
-      span {
-        margin-right: 5px;
-      }
-    }
-    h1 {
-      margin: -40px 0 50px 0;
-      text-align: center;
-    }
   }
   #globalStats {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    h1 {
+      margin: -40px 0 50px 0;
+      text-align: center;
+    }
     & > div {
       width: 700px;
       height: 400px;

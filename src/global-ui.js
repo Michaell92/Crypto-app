@@ -1,11 +1,11 @@
 class GlobalData {
   constructor() {
-    this.cardData = document.querySelector('#globalStats');
+    this.cardData = document.getElementById('globalStats');
     this.topData = document.getElementById('totalData');
   }
 
   // Display data
-  globalData(data) {
+  async globalData(data) {
     const global = data[0];
     const defi = data[1];
     const icos = `<div id="icos">
@@ -17,7 +17,7 @@ class GlobalData {
       <h1>Defi Stats</h1>
       <div id="stats">
       <div>
-      <span>Defi market cap: <span class="span-info">${parseFloat(
+      <span>Defi market cap: <span id="marketCap" class="span-info">${parseFloat(
         defi.data.defi_market_cap
       )
         .toFixed(0)
@@ -54,45 +54,64 @@ class GlobalData {
     </div>
     <div></div>
     <div id="percent">
-      <h1>Market Share - Btc</h1>
-      <div>
-      <span>Btc: <span class="span-info">${parseFloat(
-        global.data.market_cap_percentage.btc
-      ).toFixed(2)}</span></span>
-      <span>Eth: <span class="span-info">${parseFloat(
-        global.data.market_cap_percentage.eth
-      ).toFixed(2)}</span></span>
-      <span>Usdt: <span class="span-info">${parseFloat(
-        global.data.market_cap_percentage.usdt
-      ).toFixed(2)}</span></span>
-      <span>Dot: <span class="span-info">${parseFloat(
-        global.data.market_cap_percentage.dot
-      ).toFixed(2)}</span></span>
-      <span>Ada: <span class="span-info">${parseFloat(
-        global.data.market_cap_percentage.ada
-      ).toFixed(2)}</span></span>
-      <span>Bnb: <span class="span-info">${parseFloat(
-        global.data.market_cap_percentage.bnb
-      ).toFixed(2)}</span></span>
-      <span>Xrp: <span class="span-info">${parseFloat(
-        global.data.market_cap_percentage.xrp
-      ).toFixed(2)}</span></span>
-      <span>Ltc: <span class="span-info">${parseFloat(
-        global.data.market_cap_percentage.ltc
-      ).toFixed(2)}</span></span>
-      <span>Link: <span class="span-info">${parseFloat(
-        global.data.market_cap_percentage.link
-      ).toFixed(2)}</span></span>
-      <span>Uni: <span class="span-info">${parseFloat(
-        global.data.market_cap_percentage.uni
-      ).toFixed(2)}</span></span>
-      </div>
+      <h1>Market Share</h1>
+      <div id="chartStats"></div>
     </div>`;
 
-    this.cardData.innerHTML = html;
+    // Add total data
     const newData = document.createElement('div');
     newData.innerHTML = icos;
     this.topData.appendChild(newData);
+
+    // Add global data
+    this.cardData.innerHTML = html;
+  }
+
+  // Create chart
+  totalChart(global) {
+    const coinData = global.data.market_cap_percentage;
+    const coins = [];
+    const data = [];
+
+    for (const coin in coinData) {
+      coins.push(coin);
+      data.push(parseFloat(coinData[coin].toFixed(1)));
+    }
+
+    coins.push('other');
+    data.push(parseFloat((100 - data.reduce((a, b) => a + b)).toFixed(1)));
+    console.log(coins, data);
+    const chartElement = document.getElementById('chartStats');
+
+    const options = {
+      series: data,
+      chart: {
+        width: '130%',
+        type: 'pie',
+      },
+      labels: coins,
+      theme: {
+        monochrome: {
+          enabled: true,
+        },
+      },
+      plotOptions: {
+        pie: {
+          dataLabels: {
+            offset: -5,
+          },
+        },
+      },
+      dataLabels: {
+        formatter(val, opts) {
+          const name = opts.w.globals.labels[opts.seriesIndex];
+          return [name, val.toFixed(1) + '%'];
+        },
+      },
+    };
+
+    const myChart = new ApexCharts(chartElement, options);
+    myChart.render();
   }
 }
 

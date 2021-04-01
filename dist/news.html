@@ -15,6 +15,7 @@
     <title>Coinstats</title>
   </head>
   <body>
+    <div id="loadWrap"><div id="wait-circle"></div></div>
     <div id="showcase">
       <ul id="nav-top">
         <ul id="nav-data"></ul>
@@ -41,7 +42,7 @@
             </ul>
           </li>
           <li><a href="news.html">News</a></li>
-          <li><a href="#">Chart</a></li>
+          <li><a href="chart.html">Chart</a></li>
           <li>
             <form action="#" id="searchForm">
               <label for="search">
@@ -65,9 +66,7 @@
       <div class="container">
         <div id="news-info">
           Select category:
-          <span id="category=general&" class="category general no-select"
-            >general</span
-          >
+          <span id="category=general&" class="category no-select">general</span>
           <span id="category=milestone&" class="category no-select"
             >milestone</span
           >
@@ -88,8 +87,8 @@
           >
           <span id="category=event&" class="category no-select">event</span>
         </div>
+        <h1 class="text-center">Live news</h1>
         <div id="main"></div>
-        <div id="wait-circle"></div>
         <div id="load" class="btn-primary lead txt-center">Load More</div>
       </div>
     </section>

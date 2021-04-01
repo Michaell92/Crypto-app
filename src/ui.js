@@ -7,7 +7,7 @@ class UI {
     this.fav = document.querySelector('#favorites');
   }
 
-  tableData(coins) {
+  async tableData(coins) {
     itemTemplate(coins, this.tBody);
     this.table.style = 'visibility: visible';
 

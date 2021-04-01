@@ -37,11 +37,10 @@ body {
       cursor: pointer;
     }
     div > div:hover {
-      border-color: $primary-2;
+      border-color: $primary-light;
     }
     #total a,
     #markets a {
-      margin-left: 5px;
       font-family: $font-stack-s;
       font-size: 15px;
       & span {
@@ -128,3 +127,4 @@ body {
 @import 'utilities';
 @import 'buttons';
 @import 'media';
+@import 'loader';

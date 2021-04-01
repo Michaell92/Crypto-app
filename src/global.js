@@ -24,9 +24,28 @@ async function globalData(link, link2) {
         })
         .catch((err) => {
           console.log(err);
+          globalData(globalLink, defiLink);
         });
     })
   );
 
-  global.globalData(getArr);
+  await global.globalData(getArr);
+
+  global.totalChart(getArr[0]);
+
+  const globalData = document.getElementById('globalStats').innerHTML;
+  const marketCap = document.getElementById('marketCap').innerHTML;
+
+  if (
+    globalData === '' ||
+    globalData === undefined ||
+    globalData === null ||
+    marketCap === undefined ||
+    marketCap === 'undefined' ||
+    marketCap === NaN ||
+    marketCap === 'NaN' ||
+    marketCap === null
+  ) {
+    globalData(globalLink, defiLink);
+  }
 }

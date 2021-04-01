@@ -33,12 +33,19 @@ class News {
       <div class='card'>
       <div class='topInfo'>
       <span class='timeStamp'>${timeStamp}</span>
-      <div class='category'><span class='${data[i].category}'>${data[i].category}</span><span class='${projectType}'>${projectType}</span></div>
+      <div class='category'><span class='${data[i].category}'>${data[
+        i
+      ].category.replace(
+        '_',
+        ' '
+      )}</span><span class='${projectType}'>${projectType}</span></div>
       </div>
       <span class="description">${description}</span>
       <div class='projectInfo'>
       <div class='project'>
-      <img src='${data[i].project.image.thumb}' alt='${data[i].project.name}'><span>${data[i].project.name}</span><span>${symbol}</span>
+      <img src='${data[i].project.image.thumb}' alt='${
+        data[i].project.name
+      }'><span>${data[i].project.name}</span><span>${symbol}</span>
       </div>
       <span><b>Author</b>: ${user}, ${data[i].user_title}</span>
       </div>

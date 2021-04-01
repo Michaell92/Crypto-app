@@ -6,6 +6,8 @@ class Nav {
     this.topNav = document.querySelector('#nav-data');
     this.total;
     this.exchanges;
+
+    // Check for total data
     if (
       document.querySelector('#total') &&
       document.querySelector('#markets')
@@ -14,8 +16,10 @@ class Nav {
       this.exchanges = document.querySelector('#markets').firstElementChild;
     }
   }
-  getMarketData(link) {
-    http
+
+  // Get nav data
+  async getMarketData(link) {
+    await http
       .get(link)
       .then((data) => {
         navData(data, this.topNav, this.total, this.exchanges);
@@ -23,6 +27,13 @@ class Nav {
       .catch((error) => {
         console.log(error);
       });
+    if (
+      this.topNav.innerHTML === '' ||
+      this.topNav.innerHTML === undefined ||
+      this.topNav.innerHTML === null
+    ) {
+      getMarketData(link);
+    }
   }
 }
 
@@ -40,10 +51,10 @@ function navData(market, topNav, total, exchanges) {
     : (sy = `${parseFloat(percent).toFixed(2)}%`);
 
   // Create data
-  topNav.innerHTML = `<li>Total Market Cap: <a href='#'>$${parseFloat(
+  topNav.innerHTML = `<li>Total Market Cap: <a href='global.html'>$${parseFloat(
     market.data.total_market_cap.usd.toFixed(0)
   ).toLocaleString()}</a><span> ${sy}</span></li>
-  <li>24h Vol: <a href='#'>$${parseFloat(
+  <li>24h Vol: <a href='global.html'>$${parseFloat(
     market.data.total_volume.usd.toFixed(0)
   )
     .toLocaleString()
