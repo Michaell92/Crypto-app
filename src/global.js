@@ -13,25 +13,24 @@ document.addEventListener('DOMContentLoaded', nav.getMarketData(globalLink));
 
 // Get global data
 async function globalData(link, link2) {
-  const dataSet = [link, link2];
+  document.getElementById('loader').className = 'loader';
+  const links = [link, link2];
+
   const getArr = [];
-  await Promise.all(
-    dataSet.map(async (item) => {
-      await http
-        .get(item)
-        .then((data) => {
-          getArr.push(data);
-        })
-        .catch((err) => {
-          console.log(err);
-          globalData(globalLink, defiLink);
-        });
-    })
-  );
+
+  for (const link of links) {
+    await http
+      .get(link)
+      .then((data) => {
+        getArr.push(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        globalData(link, link2);
+      });
+  }
 
   await global.globalData(getArr);
-
-  global.totalChart(getArr[0]);
 
   const globalData = document.getElementById('globalStats').innerHTML;
   const marketCap = document.getElementById('marketCap').innerHTML;
@@ -46,6 +45,10 @@ async function globalData(link, link2) {
     marketCap === 'NaN' ||
     marketCap === null
   ) {
-    globalData(globalLink, defiLink);
+    location.reload();
   }
+
+  global.totalChart(getArr[0]);
+
+  document.getElementById('loader').className = '';
 }

@@ -80,7 +80,7 @@ class GlobalData {
 
     coins.push('other');
     data.push(parseFloat((100 - data.reduce((a, b) => a + b)).toFixed(1)));
-    console.log(coins, data);
+
     const chartElement = document.getElementById('chartStats');
 
     const options = {

@@ -196,7 +196,7 @@ class UI {
 
   // Sort rows by daily
   sort_5(price) {
-    let rows = this.tBody.querySelectorAll('tr');
+    let rows = Array.from(this.tBody.querySelectorAll('tr'));
     let arrLength = rows.length;
     let rowArr = [];
     this.tBody.innerHTML = '';
@@ -204,22 +204,49 @@ class UI {
     if (price.classList.contains('unordered')) {
       price.className = 'ordered';
       price.firstChild.classList.add('down');
-      rowArr = Array.from(rows).sort((a, b) => {
-        return (
-          parseFloat(
-            b.childNodes[4].innerHTML
-              .match(/\d+|\,+/g)
-              .join()
-              .replace(/\,+/g, '.')
-          ) -
-          parseFloat(
-            a.childNodes[4].innerHTML
-              .match(/\d+|\,+/g)
-              .join()
-              .replace(/\,+/g, '.')
+
+      rowArr = [
+        ...rows
+          .filter((row) =>
+            row.childNodes[4].firstChild.classList.contains('fa-caret-down')
           )
-        );
-      });
+          .sort((a, b) => {
+            return (
+              parseFloat(
+                b.childNodes[4].innerHTML
+                  .match(/\d+|\,+/g)
+                  .join()
+                  .replace(/\,+/g, '.')
+              ) -
+              parseFloat(
+                a.childNodes[4].innerHTML
+                  .match(/\d+|\,+/g)
+                  .join()
+                  .replace(/\,+/g, '.')
+              )
+            );
+          }),
+        ...rows
+          .filter((row) =>
+            row.childNodes[4].firstChild.classList.contains('fa-caret-up')
+          )
+          .sort((a, b) => {
+            return (
+              parseFloat(
+                a.childNodes[4].innerHTML
+                  .match(/\d+|\,+/g)
+                  .join()
+                  .replace(/\,+/g, '.')
+              ) -
+              parseFloat(
+                b.childNodes[4].innerHTML
+                  .match(/\d+|\,+/g)
+                  .join()
+                  .replace(/\,+/g, '.')
+              )
+            );
+          }),
+      ];
 
       for (let i = 0; i < arrLength; i++) {
         let row = this.tBody.insertRow(i);
@@ -228,22 +255,49 @@ class UI {
     } else if (price.classList.contains('ordered')) {
       price.className = 'unordered';
       price.firstChild.classList.remove('down');
-      rowArr = Array.from(rows).sort((a, b) => {
-        return (
-          parseFloat(
-            a.childNodes[4].innerHTML
-              .match(/\d+|\,+/g)
-              .join()
-              .replace(/\,+/g, '.')
-          ) -
-          parseFloat(
-            b.childNodes[4].innerHTML
-              .match(/\d+|\,+/g)
-              .join()
-              .replace(/\,+/g, '.')
+
+      rowArr = [
+        ...rows
+          .filter((row) =>
+            row.childNodes[4].firstChild.classList.contains('fa-caret-up')
           )
-        );
-      });
+          .sort((a, b) => {
+            return (
+              parseFloat(
+                b.childNodes[4].innerHTML
+                  .match(/\d+|\,+/g)
+                  .join()
+                  .replace(/\,+/g, '.')
+              ) -
+              parseFloat(
+                a.childNodes[4].innerHTML
+                  .match(/\d+|\,+/g)
+                  .join()
+                  .replace(/\,+/g, '.')
+              )
+            );
+          }),
+        ...rows
+          .filter((row) =>
+            row.childNodes[4].firstChild.classList.contains('fa-caret-down')
+          )
+          .sort((a, b) => {
+            return (
+              parseFloat(
+                a.childNodes[4].innerHTML
+                  .match(/\d+|\,+/g)
+                  .join()
+                  .replace(/\,+/g, '.')
+              ) -
+              parseFloat(
+                b.childNodes[4].innerHTML
+                  .match(/\d+|\,+/g)
+                  .join()
+                  .replace(/\,+/g, '.')
+              )
+            );
+          }),
+      ];
 
       for (let i = 0; i < arrLength; i++) {
         let row = this.tBody.insertRow(i);
@@ -254,7 +308,7 @@ class UI {
 
   // Sort rows by weeekly
   sort_6(price) {
-    let rows = this.tBody.querySelectorAll('tr');
+    let rows = Array.from(this.tBody.querySelectorAll('tr'));
     let arrLength = rows.length;
     let rowArr = [];
     this.tBody.innerHTML = '';
@@ -262,22 +316,49 @@ class UI {
     if (price.classList.contains('unordered')) {
       price.className = 'ordered';
       price.firstChild.classList.add('down');
-      rowArr = Array.from(rows).sort((a, b) => {
-        return (
-          parseFloat(
-            b.childNodes[5].innerHTML
-              .match(/\d+|\,+/g)
-              .join()
-              .replace(/\,+/g, '.')
-          ) -
-          parseFloat(
-            a.childNodes[5].innerHTML
-              .match(/\d+|\,+/g)
-              .join()
-              .replace(/\,+/g, '.')
+
+      rowArr = [
+        ...rows
+          .filter((row) =>
+            row.childNodes[5].firstChild.classList.contains('fa-caret-up')
           )
-        );
-      });
+          .sort((a, b) => {
+            return (
+              parseFloat(
+                b.childNodes[5].innerHTML
+                  .match(/\d+|\,+/g)
+                  .join()
+                  .replace(/\,+/g, '.')
+              ) -
+              parseFloat(
+                a.childNodes[5].innerHTML
+                  .match(/\d+|\,+/g)
+                  .join()
+                  .replace(/\,+/g, '.')
+              )
+            );
+          }),
+        ...rows
+          .filter((row) =>
+            row.childNodes[5].firstChild.classList.contains('fa-caret-down')
+          )
+          .sort((a, b) => {
+            return (
+              parseFloat(
+                a.childNodes[5].innerHTML
+                  .match(/\d+|\,+/g)
+                  .join()
+                  .replace(/\,+/g, '.')
+              ) -
+              parseFloat(
+                b.childNodes[5].innerHTML
+                  .match(/\d+|\,+/g)
+                  .join()
+                  .replace(/\,+/g, '.')
+              )
+            );
+          }),
+      ];
 
       for (let i = 0; i < arrLength; i++) {
         let row = this.tBody.insertRow(i);
@@ -286,22 +367,49 @@ class UI {
     } else if (price.classList.contains('ordered')) {
       price.className = 'unordered';
       price.firstChild.classList.remove('down');
-      rowArr = Array.from(rows).sort((a, b) => {
-        return (
-          parseFloat(
-            a.childNodes[5].innerHTML
-              .match(/\d+|\,+/g)
-              .join()
-              .replace(/\,+/g, '.')
-          ) -
-          parseFloat(
-            b.childNodes[5].innerHTML
-              .match(/\d+|\,+/g)
-              .join()
-              .replace(/\,+/g, '.')
+
+      rowArr = [
+        ...rows
+          .filter((row) =>
+            row.childNodes[5].firstChild.classList.contains('fa-caret-down')
           )
-        );
-      });
+          .sort((a, b) => {
+            return (
+              parseFloat(
+                b.childNodes[5].innerHTML
+                  .match(/\d+|\,+/g)
+                  .join()
+                  .replace(/\,+/g, '.')
+              ) -
+              parseFloat(
+                a.childNodes[5].innerHTML
+                  .match(/\d+|\,+/g)
+                  .join()
+                  .replace(/\,+/g, '.')
+              )
+            );
+          }),
+        ...rows
+          .filter((row) =>
+            row.childNodes[5].firstChild.classList.contains('fa-caret-up')
+          )
+          .sort((a, b) => {
+            return (
+              parseFloat(
+                a.childNodes[5].innerHTML
+                  .match(/\d+|\,+/g)
+                  .join()
+                  .replace(/\,+/g, '.')
+              ) -
+              parseFloat(
+                b.childNodes[5].innerHTML
+                  .match(/\d+|\,+/g)
+                  .join()
+                  .replace(/\,+/g, '.')
+              )
+            );
+          }),
+      ];
 
       for (let i = 0; i < arrLength; i++) {
         let row = this.tBody.insertRow(i);
@@ -501,11 +609,11 @@ function itemTemplate(coin, tBody) {
     dataArr.push(
       `<td style="color:${color24h}">`,
       parseFloat(coin[i].price_change_percentage_24h) > 0
-        ? `<i class="fas fa-caret-up" style="color:${color24h}"></i>${parseFloat(
+        ? `<i class="fas fa-caret-up" style="color:${color24h}"></i> ${parseFloat(
             coin[i].price_change_percentage_24h
           ).toFixed(2)}%`
         : parseFloat(coin[i].price_change_percentage_24h) < 0
-        ? `<i class="fas fa-caret-down" style="color:${color24h}"></i>${parseFloat(
+        ? `<i class="fas fa-caret-down" style="color:${color24h}"></i> ${parseFloat(
             coin[i].price_change_percentage_24h
           )
             .toFixed(2)
@@ -515,11 +623,11 @@ function itemTemplate(coin, tBody) {
     dataArr.push(
       `<td style="color:${color7d}">`,
       parseFloat(coin[i].price_change_percentage_7d_in_currency) > 0
-        ? `<i class="fas fa-caret-up" style="color:${color7d}"></i>${parseFloat(
+        ? `<i class="fas fa-caret-up" style="color:${color7d}"></i> ${parseFloat(
             coin[i].price_change_percentage_7d_in_currency
           ).toFixed(2)}%`
         : parseFloat(coin[i].price_change_percentage_7d_in_currency) < 0
-        ? `<i class="fas fa-caret-down" style="color:${color7d}"></i>${parseFloat(
+        ? `<i class="fas fa-caret-down" style="color:${color7d}"></i> ${parseFloat(
             coin[i].price_change_percentage_7d_in_currency
           )
             .toFixed(2)

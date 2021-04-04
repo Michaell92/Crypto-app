@@ -15,9 +15,45 @@ body {
   color: (lighten($secondary-color, 20%));
 }
 
-#myChart {
-  max-width: 650px;
+#chart {
+  visibility: hidden;
+  max-width: 1000px;
   margin: 35px auto;
+  padding: 20px;
+  border: 5px solid $primary-light;
+}
+
+#toolBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  #intervals a:not(:last-child) {
+    margin-right: 20px;
+  }
+  #coin {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    img {
+      font-size: 11px;
+      margin-right: 10px;
+    }
+    span:nth-child(2) {
+      font-weight: bold;
+    }
+    span:nth-child(3) {
+      font-size: 12px;
+      margin-left: 10px;
+    }
+  }
+  #chartData a:not(:last-child) {
+    margin-right: 10px;
+  }
+}
+
+#myChart {
+  background: #fff;
 }
 
 @import 'nav';

@@ -64,7 +64,27 @@
     </div>
     <section id="home-a">
       <div class="container">
-        <div id="myChart"></div>
+        <div id="chart">
+          <div id="coinInfo"></div>
+          <div id="toolBar" class="text-center">
+            <div id="coin"></div>
+            <div id="intervals">
+              <a href="#" id="oneDay">1D</a href="#">
+              <a href="#" id="oneWeek">1W</a href="#">
+              <a href="#" id="oneMonth">1M</a href="#">
+              <a href="#" id="sixMonths">6M</a href="#">
+              <a href="#" id="oneYear">1Y</a href="#">
+              <a href="#" id="currentYear">YTD</a href="#">
+              <a href="#" id="all" class="active">ALL</a href="#">
+            </div>
+          <div id="chartData">
+            <a href="#" id="Price" class="chartData">Price</a>
+            <!-- <a href="#" id="Market_cap" class="chartData">Market cap</a> -->
+            <a href="#" id="Volume" class="chartData">Volume</a>
+          </div>
+          </div>
+          <div id="myChart"></div>
+        </div>
       </div>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>

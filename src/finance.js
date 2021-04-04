@@ -27,20 +27,20 @@ document.querySelector('#search').addEventListener('keyup', filterList);
 async function finUI() {
   document.getElementById('loader').className = 'loader';
 
-  const dataSet = [platformLink, productLink];
+  const links = [platformLink, productLink];
   const getArr = [];
-  await Promise.all(
-    dataSet.map(async (item) => {
-      await http
-        .get(item)
-        .then((data) => {
-          getArr.push(data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    })
-  );
+
+  for (const link of links) {
+    await http
+      .get(link)
+      .then((data) => {
+        getArr.push(data);
+      })
+      .catch((err) => {
+        finUI();
+        console.log(err);
+      });
+  }
 
   await finance.finData(getArr);
 
@@ -56,7 +56,7 @@ async function finUI() {
     tBody === undefined ||
     tBody === null
   ) {
-    finUI();
+    location.reload();
   }
   document.getElementById('loader').className = '';
 }
