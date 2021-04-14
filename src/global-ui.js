@@ -6,6 +6,7 @@ class GlobalData {
 
   // Display data
   async globalData(data) {
+    document.getElementById('footer').style.visibility = 'visible';
     const global = data[0];
     const defi = data[1];
     const icos = `<div id="icos">

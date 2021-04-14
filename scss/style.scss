@@ -35,9 +35,6 @@ body {
       margin: 0 2px;
       cursor: pointer;
     }
-    div > div:hover {
-      border-color: $primary-light;
-    }
     #total a,
     #markets a {
       font-family: $font-stack-s;
@@ -109,14 +106,16 @@ body {
       td {
         padding: 20px 20px;
         font-size: 14px;
+        white-space: nowrap;
         &:not(:nth-child(2)) {
           font-family: $font-stack;
-          font-weight: bold;
-          color: (lighten($secondary-color, 5%));
+          // font-weight: bold;
+          color: $secondary-color;
         }
         &:nth-child(5),
         &:nth-child(6) {
           text-align: center;
+          font-weight: bold;
         }
       }
       tr {
@@ -131,6 +130,7 @@ body {
         // Positioning icon and name
         & > :nth-child(2) {
           display: flex;
+          position: relative;
           width: 20rem;
           font-weight: normal;
           font-size: 16px;
@@ -143,9 +143,6 @@ body {
             justify-content: center;
             padding: 2px;
             border-bottom: 2px solid transparent;
-            &:hover {
-              border-color: $primary-light;
-            }
           }
           & > :last-child {
             position: absolute;
@@ -157,6 +154,7 @@ body {
           }
         }
         & > :last-child {
+          width: 100%;
           .newFav {
             color: $primary-color;
           }
@@ -179,18 +177,11 @@ body {
             &::before {
               content: attr(data-fav);
               @extend %tooltipBox;
-            }
-            &:hover::before {
-              visibility: visible;
-              opacity: 100;
+              white-space: normal;
             }
             &::after {
               @extend %tooltipArrow;
               margin-right: -8px;
-            }
-            &:hover::after {
-              visibility: visible;
-              opacity: 100;
             }
           }
           // Second tooltip
@@ -199,18 +190,11 @@ body {
             &::before {
               content: attr(data-port);
               @extend %tooltipBox;
-            }
-            &:hover::before {
-              visibility: visible;
-              opacity: 100;
+              white-space: normal;
             }
             &::after {
               @extend %tooltipArrow;
               margin-right: -9px;
-            }
-            &:hover::after {
-              visibility: visible;
-              opacity: 100;
             }
           }
         }
@@ -221,6 +205,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 100px;
     a {
       position: relative;
       margin-left: 20px;
@@ -258,3 +243,4 @@ body {
 @import 'buttons';
 @import 'media';
 @import 'loader';
+@import 'footer';

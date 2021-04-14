@@ -9,7 +9,8 @@ class UI {
 
   async tableData(coins) {
     itemTemplate(coins, this.tBody);
-    this.table.style = 'visibility: visible';
+    this.table.style.visibility = 'visible';
+    document.getElementById('footer').style.visibility = 'visible';
 
     let test = document.querySelector('.message');
 
@@ -593,7 +594,10 @@ function itemTemplate(coin, tBody) {
     // Create array with coin information
     dataArr.push(`<tr id="${coin[i].id}"><td>${coin[i].market_cap_rank}</td>`);
     dataArr.push(
-      `<td><a href="#"><img src="${coin[i].image}" alt="${coin[i].name}"><span>${coin[i].name}</span></a>
+      `<td><a href="#"><img src="${coin[i].image.replace(
+        'large',
+        'thumb'
+      )}" alt="${coin[i].name}"><span>${coin[i].name}</span></a>
         <span>${coin[i].symbol}</span></td>`
     );
     dataArr.push(

@@ -5,6 +5,7 @@ class Finance {
   }
   async finData(data) {
     this.table.style.visibility = 'visible';
+    document.getElementById('footer').style.visibility = 'visible';
     let html = '';
     let check;
     const products = data[1];

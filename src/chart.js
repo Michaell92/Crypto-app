@@ -59,6 +59,8 @@ async function getData(link, link2, type) {
 // Create chart
 async function createChart(data, coin, type) {
   document.getElementById('chart').style.visibility = 'visible';
+  document.getElementById('footer').style.visibility = 'visible';
+
   const myChart = document.getElementById('myChart');
   const coinInfo = document.getElementById('coin');
   type = type.replace('_', ' ');

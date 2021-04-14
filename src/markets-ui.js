@@ -15,6 +15,7 @@ class TableUI {
     }
 
     this.table.style.visibility = 'visible';
+    document.getElementById('footer').style.visibility = 'visible';
 
     // Loop array and display items
     for (let i = 0; i < markets.length; i++) {

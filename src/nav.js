@@ -1,12 +1,36 @@
 import { http } from './http';
 
+// Add event listener for burger menu
+document.getElementById('burgerMenu').addEventListener('click', (e) => {
+  e.preventDefault();
+
+  e.currentTarget.classList.toggle('burgerActive');
+  document.getElementById('navbar').classList.toggle('menuActive');
+});
+
+// Responsive search bar
+// const mediaQuery = window.matchMedia('(max-width: 700px)');
+// function changeState(mediaQuery) {
+//   const tableInfo = document.getElementById('table-info');
+//   const fav = tableInfo.children[1];
+//   const searchBar = document.createElement('div');
+//   searchBar.innerHTML = document.getElementById('searchDiv').innerHTML;
+//   searchBar.id = 'searchDiv';
+
+//   if (mediaQuery.matches) {
+//     tableInfo.insertBefore(searchBar, fav);
+//   }
+// }
+
+// changeState(mediaQuery);
+// mediaQuery.addEventListener('change', changeState);
+
 // Create nav
 class Nav {
   constructor() {
-    this.topNav = document.querySelector('#nav-data');
+    this.topNav = document.getElementById('nav-data');
     this.total;
     this.exchanges;
-
     // Check for total data
     if (
       document.querySelector('#total') &&
@@ -32,39 +56,44 @@ class Nav {
       this.topNav.innerHTML === undefined ||
       this.topNav.innerHTML === null
     ) {
-      getMarketData(link);
+      location.reload();
     }
   }
 }
 
 // Nav data
 function navData(market, topNav, total, exchanges) {
-  let percent = market.data.market_cap_change_percentage_24h_usd;
+  const percent = parseFloat(
+    market.data.market_cap_change_percentage_24h_usd
+  ).toFixed(2);
   let sy;
   // Style icon
   percent > 0
-    ? (sy = `<i class="fas fa-caret-up"></i>${parseFloat(percent).toFixed(2)}%`)
+    ? (sy = `<i class="fas fa-caret-up"></i> <b>${percent}%</b>`)
     : percent < 0
-    ? (sy = `<i class="fas fa-caret-down"></i>${parseFloat(percent)
-        .toFixed(2)
-        .replace('-', '')}%`)
-    : (sy = `${parseFloat(percent).toFixed(2)}%`);
+    ? (sy = `<i class="fas fa-caret-down"></i> <b>${percent.replace(
+        '-',
+        ''
+      )}%</b>`)
+    : (sy = `${percent}%`);
 
   // Create data
-  topNav.innerHTML = `<li>Total Market Cap: <a href='global.html'>$${parseFloat(
+  topNav.innerHTML = `<li><div><span>Total Market Cap: </span><a href='global.html'>$${parseFloat(
     market.data.total_market_cap.usd.toFixed(0)
-  ).toLocaleString()}</a><span> ${sy}</span></li>
+  ).toLocaleString()}</a><span> ${sy}</span></div></li>
   <li>24h Vol: <a href='global.html'>$${parseFloat(
     market.data.total_volume.usd.toFixed(0)
   )
     .toLocaleString()
     .replace('.', ',')}</a></li>
-  <li>Btc dominance: ${parseFloat(
+  <li>Btc dominance: <b>${parseFloat(
     market.data.market_cap_percentage.btc
-  ).toFixed(2)}%</li>`;
+  ).toFixed(2)}%</b></li>`;
 
   // Percentage styling
-  let li = topNav.firstChild.firstChild.nextElementSibling.nextElementSibling;
+  let li =
+    topNav.firstChild.firstChild.firstChild.nextElementSibling
+      .nextElementSibling;
 
   parseFloat(percent) > 0
     ? ((li.style.color = 'green'),

@@ -7,6 +7,7 @@ class News {
   // Get posts
   getData(data) {
     document.getElementById('load').style.visibility = 'visible';
+    document.getElementById('footer').style.visibility = 'visible';
     let html = '';
     for (let i = 0; i < data.length; i++) {
       const timeStamp = new Date(data[i].created_at).toDateString();
