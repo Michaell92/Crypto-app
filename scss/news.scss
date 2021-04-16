@@ -26,6 +26,10 @@ body {
     border-bottom: 5px solid lighten(($primary-color), 30%);
     font-weight: bold;
     font-size: 20px;
+    h1 {
+      font-size: 18px;
+      margin-right: 20px;
+    }
     span {
       font-size: 12px;
       font-weight: bold;
@@ -78,6 +82,9 @@ body {
       width: 100%;
       color: #fff;
       background: rgb(45, 48, 71);
+      .description a {
+        word-wrap: break-word;
+      }
       .projectInfo {
         display: flex;
         align-items: center;

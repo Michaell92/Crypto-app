@@ -26,6 +26,9 @@ body {
     padding: 0 70px;
     margin-bottom: 5px;
     font-family: $font-stack;
+    & > div:first-child {
+      margin-right: 20px;
+    }
     div {
       display: flex;
       align-items: center;
@@ -103,6 +106,9 @@ body {
           font-family: $font-stack;
           font-weight: bold;
           color: (lighten($secondary-color, 5%));
+        }
+        & span {
+          white-space: nowrap;
         }
       }
       tr {

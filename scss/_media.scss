@@ -51,12 +51,44 @@ $lg: 1200px;
 }
 
 @media screen and (max-width: 1300px) {
-  #tableDiv {
+  #tableDiv,
+  #exchangeTable,
+  #financeTable {
     overflow-x: auto;
     overflow-y: hidden;
   }
   #footer #footerMain > div:last-child {
     align-items: center;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  #home-c {
+    margin-top: 0;
+  }
+  #home-c .container {
+    margin: 3rem auto;
+  }
+  #home-c #news-info {
+    flex-wrap: wrap;
+    justify-content: center;
+    h1 {
+      flex-basis: 100%;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    & span {
+      margin-bottom: 10px;
+    }
+  }
+  #home-c .projectInfo {
+    flex-direction: column;
+    & .project {
+      margin: 20px 0;
+    }
+    & span {
+      text-align: center;
+    }
   }
 }
 
@@ -69,7 +101,7 @@ $lg: 1200px;
   }
 }
 
-@media screen and (max-width: 910px) {
+@media screen and (max-width: 925px) {
   #showcase #nav-top {
     flex-direction: column;
   }
@@ -85,21 +117,38 @@ $lg: 1200px;
       padding: 0;
     }
   }
+
+  #toolBar {
+    flex-wrap: wrap;
+    #intervals {
+      order: 1;
+      flex-basis: 100%;
+      margin-top: 50px;
+    }
+  }
+
   #home-a {
     #tableSection {
       margin-top: 0;
+      & #table-info {
+        flex-direction: column;
+        & #coinStats {
+          width: 100%;
+          margin: 10px 0 100px 0;
+        }
+        & #favEl {
+          width: 100%;
+          justify-content: space-between;
+        }
+      }
     }
     margin: 0;
-    #table-info {
-      flex-direction: column;
-      & #coinStats {
-        width: 100%;
-        margin: 10px 0 100px 0;
-      }
-      & #favEl {
-        width: 100%;
-        justify-content: space-between;
-      }
+  }
+  #home-b #table-info {
+    justify-content: center;
+    padding: 0 20px;
+    & > div {
+      justify-content: center;
     }
   }
   // Styling menu icon
@@ -315,7 +364,31 @@ $lg: 1200px;
 }
 
 @media screen and (max-width: $sm) {
-  #showcase #nav-top #nav-data {
-    // justify-content: flex-start;
+  #showcase #nav-top ul {
+    padding: 0 20px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  #toolBar {
+    flex-direction: column;
+    #chartData {
+      margin: 20px 0;
+    }
+    #intervals {
+      margin: 10px 0 20px 0;
+    }
+  }
+}
+
+@media screen and (max-width: 320px) {
+  #showcase #nav-top ul:nth-child(2) {
+    padding: 0;
+  }
+  #footer #footerMain {
+    padding: 30px 10px;
+  }
+  #footer #footerMain > div:nth-child(4) {
+    padding: 0 0 20px 0;
   }
 }

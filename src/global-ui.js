@@ -96,6 +96,9 @@ class GlobalData {
           enabled: true,
         },
       },
+      legend: {
+        position: 'bottom',
+      },
       plotOptions: {
         pie: {
           dataLabels: {

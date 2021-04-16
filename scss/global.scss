@@ -19,7 +19,7 @@ body {
   #table-info {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 0 70px;
     margin-bottom: 5px;
     font-family: $font-stack;
@@ -121,5 +121,6 @@ body {
 @import 'utilities';
 @import 'buttons';
 @import 'media';
+@import 'mediaGlobal';
 @import 'loader';
 @import 'footer';
