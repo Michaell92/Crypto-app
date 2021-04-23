@@ -12,10 +12,8 @@ class Pages {
     leftArrow.setAttribute('id', leftPageId - 1);
 
     if (document.querySelector('#main-table')) {
-      console.log(11);
-      return `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=${counter}&sparkline=false&price_change_percentage=7d`;
+      return `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=25&page=${counter}&sparkline=false&price_change_percentage=7d`;
     } else if (document.querySelector('#market-table')) {
-      console.log(22);
       return `https://api.coingecko.com/api/v3/exchanges?per_page=50&page=${counter}`;
     }
   }
@@ -41,7 +39,7 @@ class Pages {
     }
 
     if (document.querySelector('#main-table')) {
-      return `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=${counter}&sparkline=false&price_change_percentage=7d`;
+      return `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=${counter}&sparkline=false&price_change_percentage=7d`;
     } else if (document.querySelector('#market-table')) {
       return `https://api.coingecko.com/api/v3/exchanges?per_page=50&page=${counter}`;
     }

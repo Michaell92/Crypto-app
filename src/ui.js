@@ -8,7 +8,10 @@ class UI {
   }
 
   async tableData(coins) {
+    // Create table data
     itemTemplate(coins, this.tBody);
+
+    // Show table
     this.table.style.visibility = 'visible';
     document.getElementById('footer').style.visibility = 'visible';
 
@@ -645,10 +648,7 @@ function itemTemplate(coin, tBody) {
         .toLocaleString()
         .replace('.', ',')}</td>`
     );
-    dataArr.push(`<td>
-      ${parseFloat(coin[i].circulating_supply.toFixed(0))
-        .toLocaleString()
-        .replace('.', ',')}</td>`);
+    dataArr.push(`<td><canvas class="tableChart"></canvas></td>`);
 
     // Check local storage
     if (localStorage.coins) {

@@ -50,7 +50,9 @@ class Nav {
       })
       .catch((error) => {
         console.log(error);
+        location.reload();
       });
+
     if (
       this.topNav.innerHTML === '' ||
       this.topNav.innerHTML === undefined ||
@@ -58,6 +60,17 @@ class Nav {
     ) {
       location.reload();
     }
+
+    setTimeout(function () {
+      const topNav = document.getElementById('nav-data');
+      if (
+        topNav.innerHTML === '' ||
+        topNav.innerHTML === undefined ||
+        topNav.innerHTML === null
+      ) {
+        location.reload();
+      }
+    }, 1000);
   }
 }
 

@@ -27,17 +27,22 @@ document.querySelector('#searchForm').addEventListener('submit', getMarket);
 // Create market table
 async function createTable(link) {
   document.getElementById('loader').classList = 'loader';
+
+  // Get data
   await http
     .get(link)
     .then((data) => {
+      // Create table data
       table.fetchMarkets(data);
     })
     .catch((error) => console.log(error));
 
+  // Check if properly loaded
   const tBody = document.getElementById('mt-body').innerHTML;
   if (tBody === '' || tBody === undefined || tBody === null) {
     createTable(link);
   }
+
   document.getElementById('loader').className = '';
 }
 

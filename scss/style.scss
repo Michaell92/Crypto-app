@@ -88,6 +88,19 @@ body {
         font-weight: bold;
         line-height: 40px;
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        white-space: nowrap;
+
+        &:not(:first-child):not(:nth-child(2)):not(:nth-child(5)):not(:nth-child(6)):not(:nth-child(8))
+          a {
+          padding-right: 25px;
+        }
+        &:nth-child(5),
+        &:nth-child(6) {
+          padding-right: 10px;
+        }
+        &:nth-child(8) a {
+          padding-right: 12px;
+        }
         a i {
           visibility: hidden;
           color: (lighten($secondary-color, 70%));
@@ -151,6 +164,12 @@ body {
             font-size: 12px;
             font-weight: lighter;
             color: (lighten($secondary-color, 40%));
+          }
+        }
+        & > :nth-child(8) {
+          padding: 0 20px;
+          & canvas {
+            width: 120px;
           }
         }
         & > :last-child {

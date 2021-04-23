@@ -12,24 +12,34 @@
   //     white-space: nowrap;
   //   }
   // }
-
+  #logo {
+    display: none;
+  }
   ul {
     display: flex;
     align-items: center;
     justify-content: space-between;
     list-style-type: none;
-    padding: 0 2rem;
+    padding: 0 30px;
     & > li {
-      padding: 1rem 0;
+      margin: 10px 0;
       text-align: center;
     }
   }
   > ul:first-child {
     color: $secondary-color;
-    li {
+    > li {
       padding-right: 25px;
       a {
         color: $primary-color;
+      }
+    }
+  }
+  > ul:last-child {
+    & > li:last-child a {
+      background-color: rgb(149, 86, 227);
+      &:hover {
+        background-color: lighten(rgb(149, 86, 227), 5%);
       }
     }
   }
@@ -49,15 +59,31 @@
     font-family: $font-stack;
     font-size: 16px;
     margin-top: 50px;
-    border-top: 1px solid $primary-light;
-    border-bottom: 1px solid $primary-light;
+    border-top: 2px solid $primary-light;
+    border-bottom: 2px solid $primary-light;
     & > li {
       margin-right: -10px;
       user-select: none;
-      &:not(:nth-child(5)) > a {
-        position: relative;
+      &:first-child {
+        padding-right: 40px;
       }
-      &:not(:nth-child(5)) > a::after {
+      &:first-child a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: $font-stack-s;
+        font-size: 18px;
+        & img {
+          margin-right: 5px;
+        }
+      }
+      &:not(:nth-child(5)):not(:first-child) > a {
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+      }
+      &:not(:nth-child(5)):not(:first-child) > a::after {
         content: '';
         display: block;
         position: absolute;
@@ -66,10 +92,6 @@
         transition: width 0.3s linear;
         height: 2px;
         pointer-events: none;
-      }
-      &:not(:nth-child(5)) > a:hover::after {
-        width: 102%;
-        transition: width 0.3s linear;
       }
       ul {
         display: none;
@@ -103,7 +125,6 @@
           &:first-child {
             padding-top: 10px;
           }
-
           &::after {
             content: '';
             display: block;
@@ -112,10 +133,6 @@
             transition: width 0.5s;
             height: 1px;
             margin-top: 2px;
-          }
-          &:hover::after {
-            width: 80%;
-            transition: width 0.5s;
           }
           &:last-child {
             padding-bottom: 5px;
@@ -135,9 +152,9 @@
           position: relative;
           width: 100%;
           padding: 10px;
-          height: 2rem;
+          height: 35px;
           background: (lighten(#000, 94%));
-          font-size: 12px;
+          font-size: 13px;
           font-family: $font-stack-s;
           border: solid 1px (lighten($secondary-color, 87%));
           border-radius: 4px;
@@ -153,13 +170,13 @@
           cursor: pointer;
           padding: 10px 22px;
           right: 0px;
-          top: -6px;
+          top: -7px;
           text-align: center;
-          font-size: 20px;
+          font-size: 22px;
           color: $primary-light;
         }
         i:hover {
-          font-size: 22px;
+          font-size: 24px;
           color: $primary-color;
           transition: color 0.5s, width 0.5s, height 0.5s;
         }
@@ -170,6 +187,8 @@
       margin-left: 20px;
       i {
         color: $primary-light;
+        align-self: center;
+        margin-left: 5px;
       }
       a:hover i {
         color: $primary-color;
@@ -184,7 +203,7 @@
     list-style-type: none;
     margin-bottom: 1rem;
     li {
-      padding: 1rem;
+      padding: 15px;
     }
   }
 }

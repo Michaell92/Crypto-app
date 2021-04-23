@@ -7,12 +7,11 @@ import { filter } from './filterList';
 
 const globalLink = 'https://api.coingecko.com/api/v3/global';
 const coinsLink =
-  'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false&price_change_percentage=7d';
+  'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false&price_change_percentage=7d';
 const icon = document.querySelector('#favorites').childNodes[2];
 
 // Event listeners
-document.addEventListener('DOMContentLoaded', nav.getMarketData(globalLink));
-document.addEventListener('DOMContentLoaded', getCoinData(coinsLink));
+document.addEventListener('DOMContentLoaded', initialLoad());
 document.querySelector('#rank').addEventListener('click', sortByRank);
 document.querySelector('#coin').addEventListener('click', sortByName);
 document.querySelector('#price').addEventListener('click', sortByPrice);
@@ -20,7 +19,7 @@ document.querySelector('#mcap').addEventListener('click', sortByMarketCap);
 document.querySelector('#daily').addEventListener('click', sortByDaily);
 document.querySelector('#weekly').addEventListener('click', sortByWeekly);
 document.querySelector('#volume').addEventListener('click', sortByVolume);
-document.querySelector('#supply').addEventListener('click', sortBySupply);
+// document.querySelector('#supply').addEventListener('click', sortBySupply);
 document.querySelector('#mt-body').addEventListener('click', addToFavorites);
 document.querySelector('#favorites').addEventListener('click', showFavorites);
 document.querySelector('#home-a').addEventListener('click', returnHome);
@@ -37,13 +36,24 @@ document.querySelector('#search').addEventListener('keyup', (e) => {
 document.querySelector('#searchIcon').addEventListener('click', getCoin);
 document.querySelector('#searchForm').addEventListener('submit', getCoin);
 
+// Content loaded listener
+async function initialLoad() {
+  // Get nav data
+  nav.getMarketData(globalLink);
+  // Get table data
+  await getCoinData(coinsLink);
+}
+
 // Create table
 async function getCoinData(link) {
   document.getElementById('loader').className = 'loader';
   await http
     .get(link)
     .then((data) => {
+      // Create table data
       ui.tableData(data);
+      // Create chart
+      createChart();
     })
     .catch((err) => {
       console.log(err);
@@ -55,6 +65,107 @@ async function getCoinData(link) {
     getCoinData(link);
   }
   document.getElementById('loader').className = '';
+}
+
+// Create chart
+function createChart() {
+  // Get table cells
+  const td = Array.from(document.getElementsByClassName('tableChart'));
+  // Loop cells and create chart for each one
+  td.forEach((cell) => {
+    // Get price data for chart
+    http
+      .get(
+        `https://api.coingecko.com/api/v3/coins/${
+          cell.closest('tr').id
+        }/market_chart?vs_currency=usd&days=7&interval=daily`
+      )
+      .then((data) => {
+        const canvas = cell.getContext('2d');
+        const newData = [];
+        let color;
+
+        // Set color
+        data.prices[0][1].toFixed(2) > data.prices[4][1].toFixed(2)
+          ? (color = 'red')
+          : data.prices[0][1].toFixed(2) < data.prices[4][1].toFixed(2)
+          ? (color = 'green')
+          : (color = 'grey');
+
+        // Create price data
+        for (let i = 0; i < 7; i++) {
+          const obj = {};
+
+          // Format tooltip data
+          obj['x'] = new Date(data.prices[i][0]).toISOString().split('T')[0];
+          obj['y'] = data.prices[i][1].toFixed(2);
+
+          newData.push(obj);
+        }
+
+        // Render chart
+        const priceChart = new Chart(canvas, {
+          type: 'line',
+          data: {
+            datasets: [
+              {
+                data: newData,
+                borderColor: color,
+                backgroundColor: color,
+              },
+            ],
+          },
+
+          options: {
+            responsive: false,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: false,
+              },
+              tooltip: {
+                displayColors: false,
+                callbacks: {
+                  label: function (tooltipItem) {
+                    return '$' + tooltipItem.formattedValue;
+                  },
+                },
+              },
+            },
+
+            scales: {
+              x: {
+                ticks: {
+                  display: false,
+                },
+                grid: {
+                  display: false,
+                  drawBorder: false,
+                },
+              },
+              y: {
+                ticks: {
+                  display: false,
+                },
+                grid: {
+                  display: false,
+                  drawBorder: false,
+                },
+              },
+            },
+
+            layout: {
+              //   padding: {
+              //     left: 50,
+              //     right: 0,
+              //     bottom: 0,
+              //     top: 0,
+              //   },
+            },
+          },
+        });
+      });
+  });
 }
 
 // Sort by rank
@@ -136,6 +247,7 @@ function showFavorites(e) {
         .then((data) => {
           // Display favorites
           ui.showFav(icon, data);
+          createChart();
         })
         .catch((err) => console.log(err));
     } else {

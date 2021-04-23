@@ -12,6 +12,21 @@ $lg: 1200px;
   .hover:active {
     transform: scale(1);
   }
+
+  #navbar #base-nav > li:not(:nth-child(5)) a:hover::after {
+    width: 102%;
+    transition: width 0.3s linear;
+  }
+
+  #navbar #base-nav > li:not(:nth-child(5)) a:hover::after {
+    width: 102%;
+    transition: width 0.3s linear;
+  }
+  #navbar #base-nav > li:nth-child(2):hover ul li:hover::after {
+    width: 80%;
+    transition: width 0.5s;
+  }
+
   #home-a {
     #table-info {
       & > div > div:hover {
@@ -40,6 +55,10 @@ $lg: 1200px;
     }
   }
 
+  #coinList li:hover {
+    border-color: (lighten($primary-color, 40%));
+  }
+
   #footer #footerMain .footerDiv {
     & a:hover i:first-child {
       visibility: visible;
@@ -56,9 +75,6 @@ $lg: 1200px;
   #financeTable {
     overflow-x: auto;
     overflow-y: hidden;
-  }
-  #footer #footerMain > div:last-child {
-    align-items: center;
   }
 }
 
@@ -98,12 +114,27 @@ $lg: 1200px;
   }
   #footer #footerMain > div:nth-child(2) {
     width: auto;
+    & a:nth-child(4) {
+      width: 195px;
+    }
   }
 }
 
 @media screen and (max-width: 925px) {
   #showcase #nav-top {
     flex-direction: column;
+    #nav-data {
+      margin-bottom: 20px;
+    }
+  }
+
+  #home-d {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  #chartMain {
+    width: 925px;
   }
 }
 
@@ -115,7 +146,33 @@ $lg: 1200px;
     }
     & > li:nth-child(2) {
       padding: 0;
+      margin: 0;
     }
+    & > li:first-child {
+      margin-top: 0;
+    }
+  }
+  #showcase #nav-top #logo {
+    display: block;
+    padding: 20px 0 50px 0;
+    width: 80%;
+    border-top: 2px solid (lighten($primary-color, 40%));
+    & a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: $font-stack-s;
+      font-size: 20px;
+      & img {
+        margin-right: 5px;
+        width: 35px;
+        height: 35px;
+      }
+    }
+  }
+
+  #chart {
+    margin: 20px;
   }
 
   #toolBar {
@@ -155,7 +212,7 @@ $lg: 1200px;
   #burgerMenu {
     display: flex;
     position: absolute;
-    top: 20px;
+    top: 12px;
     right: 30px;
     align-items: center;
     justify-content: center;
@@ -216,8 +273,13 @@ $lg: 1200px;
       padding-top: 15px;
       color: #fff;
       border: none;
+      border-bottom: 2px solid $primary-color;
       // opacity: 0;
       transition: all 0.2s linear 0.2s;
+      & li:first-child {
+        align-self: center;
+        margin-bottom: 20px;
+      }
       & li {
         padding: 10px;
       }
@@ -226,7 +288,10 @@ $lg: 1200px;
       }
       & li:last-child i {
         color: #fff;
-        margin-left: 3px;
+        margin-left: 5px;
+      }
+      & li:last-child:hover i {
+        color: #fff;
       }
       & li:nth-child(2) i {
         color: #fff;
@@ -287,20 +352,14 @@ $lg: 1200px;
   // Navbar
   #nav-top {
     flex-direction: column;
-    padding-top: 5px;
     & ul:first-child {
       flex-direction: column;
       align-items: flex-start;
       align-self: flex-start;
-      height: 118px;
       & li {
         padding: 10px;
         text-align: left;
       }
-    }
-    #nav-data {
-      margin-bottom: 50px;
-      width: 100%;
     }
     & li:first-child {
       display: flex;
@@ -364,7 +423,7 @@ $lg: 1200px;
 }
 
 @media screen and (max-width: $sm) {
-  #showcase #nav-top ul {
+  #showcase #nav-top ul:nth-child(2) {
     padding: 0 20px;
   }
 }

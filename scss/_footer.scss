@@ -25,9 +25,6 @@ footer {
     div:first-child {
       align-self: center;
     }
-    & > :last-child {
-      max-width: 100px;
-    }
     .footerDiv {
       display: flex;
       flex-direction: column;
@@ -42,6 +39,10 @@ footer {
         width: 10px;
         visibility: hidden;
       }
+    }
+    & > :last-child {
+      max-width: 100px;
+      align-items: center;
     }
   }
   #footerBottom {

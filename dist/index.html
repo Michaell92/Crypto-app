@@ -7,12 +7,18 @@
     <link rel="stylesheet"
     href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css
     />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.js"
+      integrity="sha512-aWx9jeVTj8X49UzUnUHGIlo6rNne1xNsCny/lL0QwUTQK2eilrHXpSk9xbRm4FJ4eLi2XBmnFlRkWPoChSx8bA=="
+      crossorigin="anonymous"
+    ></script>
+    <link rel="icon" type="image/png" href="img/favicon.png" sizes="16x16" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap"
       rel="stylesheet"
     />
-    <title>Coinstats</title>
+    <title>Coinhunter</title>
   </head>
   <body>
     <div id="loadWrap"><div id="loader"></div></div>
@@ -20,6 +26,15 @@
       <div id="burgerMenu"><div></div></div>
       <ul id="nav-top">
         <ul id="nav-data"></ul>
+        <li id="logo">
+          <a href="index.html"
+            ><img
+              src="img/logo.svg"
+              width="30px"
+              height="30px"
+            />Coinhunter</a
+          >
+        </li>
         <ul>
           <li>
             <a class="btn-secondary txt-center" href="#">Sign in</a>
@@ -32,7 +47,15 @@
 
       <nav id="navbar">
         <ul id="base-nav">
-          <li><a href="index.html">Coinstats</a></li>
+          <li>
+            <a href="index.html"
+              ><img
+                src="img/logo.svg"
+                width="30px"
+                height="30px"
+              />Coinhunter</a
+            >
+          </li>
           <li>
             Markets <i class="fas fa-angle-down"></i>
             <ul>
@@ -117,8 +140,8 @@
                   >
                 </th>
                 <th>
-                  <a href="#" id="supply" class="unordered"
-                    ><i class="fas fa-caret-down"></i> Circulating supply</a
+                  <a href="#" id="supply" class="unordered"></a>
+                    <!--<i class="fas fa-caret-down"></i> -->7d Graph</a
                   >
                 </th>
                 <!-- <th>
