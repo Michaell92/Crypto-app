@@ -238,7 +238,7 @@ function showFavorites(e) {
     // Get coins
     let favArr = JSON.parse(localStorage.getItem('coins'));
     // Get favs
-    if (favArr.length > 1) {
+    if (favArr.length > 0) {
       const query = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${favArr.join()}&order=market_cap_desc&price_change_percentage=7d`;
 
       // Get coins
