@@ -35,13 +35,19 @@ class UI {
 
     if (rank.classList.contains('ordered')) {
       rank.className = 'reversed';
+      // Get table rows
       rowArr = Array.from(rows).sort((a, b) => {
         return b.firstChild.innerHTML - a.firstChild.innerHTML;
       });
 
+      // Fill table rows
       for (let i = 0; i < arrLength; i++) {
         let row = this.tBody.insertRow(i);
         row.innerHTML = rowArr[i].innerHTML;
+
+        // Redraw canvas
+        const chart = rowArr[i].children[7].firstChild;
+        row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
       }
     } else if (rank.classList.contains('reversed')) {
       rank.className = 'ordered';
@@ -52,6 +58,10 @@ class UI {
       for (let i = 0; i < arrLength; i++) {
         let row = this.tBody.insertRow(i);
         row.innerHTML = rowArr[i].innerHTML;
+
+        // Redraw canvas
+        const chart = rowArr[i].children[7].firstChild;
+        row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
       }
     }
   }
@@ -78,6 +88,10 @@ class UI {
       for (let i = 0; i < arrLength; i++) {
         let row = this.tBody.insertRow(i);
         row.innerHTML = rowArr[i].innerHTML;
+
+        // Redraw canvas
+        const chart = rowArr[i].children[7].firstChild;
+        row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
       }
     } else if (coin.classList.contains('ordered')) {
       coin.className = 'unordered';
@@ -90,6 +104,10 @@ class UI {
       for (let i = 0; i < arrLength; i++) {
         let row = this.tBody.insertRow(i);
         row.innerHTML = rowArr[i].innerHTML;
+
+        // Redraw canvas
+        const chart = rowArr[i].children[7].firstChild;
+        row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
       }
     }
   }
@@ -124,6 +142,10 @@ class UI {
       for (let i = 0; i < arrLength; i++) {
         let row = this.tBody.insertRow(i);
         row.innerHTML = rowArr[i].innerHTML;
+
+        // Redraw canvas
+        const chart = rowArr[i].children[7].firstChild;
+        row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
       }
     } else if (price.classList.contains('ordered')) {
       price.className = 'unordered';
@@ -148,6 +170,10 @@ class UI {
       for (let i = 0; i < arrLength; i++) {
         let row = this.tBody.insertRow(i);
         row.innerHTML = rowArr[i].innerHTML;
+
+        // Redraw canvas
+        const chart = rowArr[i].children[7].firstChild;
+        row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
       }
     }
   }
@@ -176,6 +202,10 @@ class UI {
       for (let i = 0; i < arrLength; i++) {
         let row = this.tBody.insertRow(i);
         row.innerHTML = rowArr[i].innerHTML;
+
+        // Redraw canvas
+        const chart = rowArr[i].children[7].firstChild;
+        row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
       }
     } else if (mcap.classList.contains('ordered')) {
       mcap.className = 'unordered';
@@ -194,6 +224,10 @@ class UI {
       for (let i = 0; i < arrLength; i++) {
         let row = this.tBody.insertRow(i);
         row.innerHTML = rowArr[i].innerHTML;
+
+        // Redraw canvas
+        const chart = rowArr[i].children[7].firstChild;
+        row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
       }
     }
   }
@@ -255,6 +289,10 @@ class UI {
       for (let i = 0; i < arrLength; i++) {
         let row = this.tBody.insertRow(i);
         row.innerHTML = rowArr[i].innerHTML;
+
+        // Redraw canvas
+        const chart = rowArr[i].children[7].firstChild;
+        row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
       }
     } else if (price.classList.contains('ordered')) {
       price.className = 'unordered';
@@ -306,6 +344,10 @@ class UI {
       for (let i = 0; i < arrLength; i++) {
         let row = this.tBody.insertRow(i);
         row.innerHTML = rowArr[i].innerHTML;
+
+        // Redraw canvas
+        const chart = rowArr[i].children[7].firstChild;
+        row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
       }
     }
   }
@@ -367,6 +409,10 @@ class UI {
       for (let i = 0; i < arrLength; i++) {
         let row = this.tBody.insertRow(i);
         row.innerHTML = rowArr[i].innerHTML;
+
+        // Redraw canvas
+        const chart = rowArr[i].children[7].firstChild;
+        row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
       }
     } else if (price.classList.contains('ordered')) {
       price.className = 'unordered';
@@ -418,6 +464,10 @@ class UI {
       for (let i = 0; i < arrLength; i++) {
         let row = this.tBody.insertRow(i);
         row.innerHTML = rowArr[i].innerHTML;
+
+        // Redraw canvas
+        const chart = rowArr[i].children[7].firstChild;
+        row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
       }
     }
   }
@@ -446,6 +496,10 @@ class UI {
       for (let i = 0; i < arrLength; i++) {
         let row = this.tBody.insertRow(i);
         row.innerHTML = rowArr[i].innerHTML;
+
+        // Redraw canvas
+        const chart = rowArr[i].children[7].firstChild;
+        row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
       }
     } else if (vol.classList.contains('ordered')) {
       vol.className = 'unordered';
@@ -464,44 +518,10 @@ class UI {
       for (let i = 0; i < arrLength; i++) {
         let row = this.tBody.insertRow(i);
         row.innerHTML = rowArr[i].innerHTML;
-      }
-    }
-  }
 
-  // Sort rows by supply
-  sort_8(supply) {
-    let rows = this.tBody.querySelectorAll('tr');
-    let arrLength = rows.length;
-    let rowArr = [];
-    this.tBody.innerHTML = '';
-
-    if (supply.classList.contains('unordered')) {
-      supply.className = 'ordered';
-      supply.firstChild.classList.add('down');
-      rowArr = Array.from(rows).sort((a, b) => {
-        return (
-          parseFloat(b.childNodes[7].innerHTML.replace(/,+/g, '')) -
-          parseFloat(a.childNodes[7].innerHTML.replace(/,+/g, ''))
-        );
-      });
-
-      for (let i = 0; i < arrLength; i++) {
-        let row = this.tBody.insertRow(i);
-        row.innerHTML = rowArr[i].innerHTML;
-      }
-    } else if (supply.classList.contains('ordered')) {
-      supply.className = 'unordered';
-      supply.firstChild.classList.remove('down');
-      rowArr = Array.from(rows).sort((a, b) => {
-        return (
-          parseFloat(a.childNodes[7].innerHTML.replace(/,+/g, '')) -
-          parseFloat(b.childNodes[7].innerHTML.replace(/,+/g, ''))
-        );
-      });
-
-      for (let i = 0; i < arrLength; i++) {
-        let row = this.tBody.insertRow(i);
-        row.innerHTML = rowArr[i].innerHTML;
+        // Redraw canvas
+        const chart = rowArr[i].children[7].firstChild;
+        row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
       }
     }
   }
