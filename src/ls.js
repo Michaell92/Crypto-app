@@ -21,8 +21,10 @@ class LS {
       // Set new arr
       localStorage.coins = JSON.stringify(getArr);
     } else {
-      getArr.push(name);
-      localStorage.coins = JSON.stringify(getArr);
+      if (!coin.firstChild.classList.contains('newFav')) {
+        getArr.push(name);
+        localStorage.coins = JSON.stringify(getArr);
+      }
     }
   }
 }
