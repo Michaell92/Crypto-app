@@ -39,7 +39,7 @@ class Pages {
     }
 
     if (document.querySelector('#main-table')) {
-      return `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=${counter}&sparkline=false&price_change_percentage=7d`;
+      return `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=25&page=${counter}&sparkline=true&price_change_percentage=7d`;
     } else if (document.querySelector('#market-table')) {
       return `https://api.coingecko.com/api/v3/exchanges?per_page=50&page=${counter}`;
     }
