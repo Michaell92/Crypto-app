@@ -685,13 +685,13 @@ i {
   margin-top: 10px;
   padding: 2px 0;
   padding-top: 3px;
-  border: 1px solid #1a1a1a;
+  border: 1px solid rgba(1, 1, 17, 0.8);
   border-radius: 5px;
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.5s;
   margin-left: 10px;
-  background-color: #1a1a1a;
+  background-color: rgba(1, 1, 17, 0.8);
   color: #f4f4f4;
 }
 
@@ -700,8 +700,8 @@ i {
   position: absolute;
   top: 22px;
   right: 7px;
-  border: 8px solid #1a1a1a;
-  border-color: transparent transparent #1a1a1a transparent;
+  border: 8px solid rgba(1, 1, 17, 0.8);
+  border-color: transparent transparent rgba(1, 1, 17, 0.8) transparent;
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.5s;

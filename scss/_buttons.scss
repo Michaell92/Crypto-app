@@ -33,13 +33,13 @@
   margin-top: 10px;
   padding: 2px 0;
   padding-top: 3px;
-  border: 1px solid (lighten($secondary-color, 10%));
+  border: 1px solid (rgba(1, 1, 17, 0.8));
   border-radius: 5px;
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.5s;
   margin-left: 10px;
-  @include set-background((lighten($secondary-color, 10%)));
+  @include set-background(rgba(1, 1, 17, 0.8));
 }
 
 %tooltipArrow {
@@ -47,9 +47,8 @@
   position: absolute;
   top: 22px;
   right: 7px;
-  border: 8px solid (lighten($secondary-color, 10%));
-  border-color: transparent transparent (lighten($secondary-color, 10%))
-    transparent;
+  border: 8px solid (rgba(1, 1, 17, 0.8));
+  border-color: transparent transparent (rgba(1, 1, 17, 0.8)) transparent;
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.5s;
