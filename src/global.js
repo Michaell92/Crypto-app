@@ -1,6 +1,7 @@
 import { http } from './http';
 import { nav } from './nav';
 import { global } from './global-ui';
+import reload from './reload';
 
 const globalLink = 'https://api.coingecko.com/api/v3/global';
 const defiLink =
@@ -13,7 +14,8 @@ document.addEventListener('DOMContentLoaded', nav.getMarketData(globalLink));
 
 // Get global data
 async function globalData(link, link2) {
-  document.getElementById('loader').className = 'loader';
+  const loader = document.getElementById('loader');
+  loader.className = 'loader';
   const links = [link, link2];
 
   const getArr = [];
@@ -25,8 +27,8 @@ async function globalData(link, link2) {
         getArr.push(data);
       })
       .catch((err) => {
-        console.log(err);
-        globalData(link, link2);
+        loader.className = '';
+        reload('home-a');
       });
   }
 
@@ -45,10 +47,11 @@ async function globalData(link, link2) {
     marketCap === 'NaN' ||
     marketCap === null
   ) {
-    location.reload();
+    loader.className = '';
+    reload('home-a');
   }
 
   global.totalChart(getArr[0]);
 
-  document.getElementById('loader').className = '';
+  loader.className = '';
 }

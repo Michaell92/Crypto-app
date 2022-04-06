@@ -7,9 +7,9 @@ class EasyHTTP {
 
   async post(link, data) {
     const response = await fetch(link, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-type': 'application/json',
+        "Content-type": "application/json",
       },
       body: JSON.stringify(data),
     });
@@ -19,9 +19,9 @@ class EasyHTTP {
 
   async update(link, data) {
     const response = await fetch(link, {
-      method: 'PUT',
+      method: "PUT",
       body: {
-        'Content-type': 'application;/json',
+        "Content-type": "application;/json",
       },
       headers: JSON.stringify(data),
     });
@@ -32,10 +32,10 @@ class EasyHTTP {
 
   async delete(link) {
     const response = await fetch(link, {
-      method: 'Delete',
+      method: "Delete",
     });
 
-    const resData = await 'Resource Deleted...';
+    const resData = "Resource Deleted...";
     return resData;
   }
 }

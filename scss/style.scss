@@ -15,7 +15,7 @@ body {
   color: (lighten($secondary-color, 20%));
 }
 
-#home-a {
+#home {
   margin-top: 150px;
   #table-info {
     display: flex;
@@ -25,6 +25,11 @@ body {
     margin-bottom: 5px;
     font-family: $font-stack;
     // font-weight: bold;
+
+    @media screen and (max-width: 600px) {
+      padding: 0;
+    }
+
     div {
       display: flex;
       align-items: center;
@@ -262,4 +267,5 @@ body {
 @import 'buttons';
 @import 'media';
 @import 'loader';
+@import 'reload';
 @import 'footer';

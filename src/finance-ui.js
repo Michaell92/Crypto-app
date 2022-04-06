@@ -1,18 +1,18 @@
 class Finance {
   constructor() {
-    this.tBody = document.getElementById('mt-body');
-    this.table = document.getElementById('finance-table');
+    this.tBody = document.getElementById("mt-body");
+    this.table = document.getElementById("finance-table");
   }
   async finData(data) {
-    this.table.style.visibility = 'visible';
-    document.getElementById('footer').style.visibility = 'visible';
-    let html = '';
+    this.table.style.visibility = "visible";
+    document.getElementById("footer").style.visibility = "visible";
+    let html = "";
     let check;
     const products = data[1];
-    const select = document.createElement('select');
+    const select = document.createElement("select");
     // Create and append data
     for (let i = 0; i < data[0].length; i++) {
-      let options = '';
+      let options = "";
       let supply = [];
 
       // Find all products for certain platform
@@ -23,7 +23,7 @@ class Finance {
         }
       }
       select.innerHTML = options;
-      select.className = 'select';
+      select.className = "select";
       // Check if platform is centralized
       data[0][i].centralized === true
         ? (check = 'class="fas fa-check" style="color:green"')
@@ -34,10 +34,10 @@ class Finance {
         data[0][i].name
       }</a></td><td><i ${check}></i></td>
       <td>
-      ${options[0] ? select.outerHTML : ''}
+      ${options[0] ? select.outerHTML : ""}
       </td>
       <td class="supplyRate">${
-        options[0] ? parseFloat(supply[0]).toFixed(2) : ''
+        options[0] ? parseFloat(supply[0]).toFixed(2) : ""
       }</td>
       </tr>`;
     }
@@ -46,7 +46,7 @@ class Finance {
 
   // Change supply rate
   changeRate(data, select) {
-    const supply = select.closest('tr').lastElementChild;
+    const supply = select.closest("tr").lastElementChild;
     for (let i = 0; i < data.length; i++) {
       if (data[i].identifier === select.value) {
         supply.innerHTML = parseFloat(data[i].supply_rate_percentage).toFixed(
@@ -59,11 +59,11 @@ class Finance {
   // Sort by name
   sort_1(target) {
     const rows = Array.from(
-      document.querySelector('#mt-body').querySelectorAll('tr')
+      document.querySelector("#mt-body").querySelectorAll("tr")
     );
-    this.tBody.innerHTML = '';
-    if (target.className == 'unordered') {
-      target.className = 'ordered';
+    this.tBody.innerHTML = "";
+    if (target.className == "unordered") {
+      target.className = "ordered";
       const reversed = rows.sort((a, b) => {
         return a.firstElementChild.firstElementChild.innerHTML.toUpperCase() >
           b.firstElementChild.firstElementChild.innerHTML.toUpperCase()
@@ -79,7 +79,7 @@ class Finance {
         row.innerHTML = reversed[i].innerHTML;
       }
     } else {
-      target.className = 'unordered';
+      target.className = "unordered";
 
       const reversed = rows.sort((a, b) => {
         return a.firstElementChild.firstElementChild.innerHTML.toUpperCase() <
@@ -101,19 +101,19 @@ class Finance {
   // Sort by category
   sort_2(target) {
     const rows = Array.from(
-      document.querySelector('#mt-body').querySelectorAll('tr')
+      document.querySelector("#mt-body").querySelectorAll("tr")
     );
-    this.tBody.innerHTML = '';
+    this.tBody.innerHTML = "";
 
-    if (target.className == 'unordered') {
-      target.className = 'ordered';
-      target.firstChild.className = 'fas fa-caret-down';
+    if (target.className == "unordered") {
+      target.className = "ordered";
+      target.firstChild.className = "fas fa-caret-down";
       const newArr = [
         ...rows.filter((row) =>
-          row.children[1].firstChild.classList.contains('fa-check') ? 1 : 0
+          row.children[1].firstChild.classList.contains("fa-check") ? 1 : 0
         ),
         ...rows.filter((row) =>
-          row.children[1].firstChild.classList.contains('fa-check') ? 0 : 1
+          row.children[1].firstChild.classList.contains("fa-check") ? 0 : 1
         ),
       ];
       for (let i = 0; i < rows.length; i++) {
@@ -121,14 +121,14 @@ class Finance {
         row.innerHTML = newArr[i].innerHTML;
       }
     } else {
-      target.className = 'unordered';
-      target.firstChild.className = 'fas fa-caret-up';
+      target.className = "unordered";
+      target.firstChild.className = "fas fa-caret-up";
       const newArr = [
         ...rows.filter((row) =>
-          row.children[1].firstChild.classList.contains('fa-check') ? 0 : 1
+          row.children[1].firstChild.classList.contains("fa-check") ? 0 : 1
         ),
         ...rows.filter((row) =>
-          row.children[1].firstChild.classList.contains('fa-check') ? 1 : 0
+          row.children[1].firstChild.classList.contains("fa-check") ? 1 : 0
         ),
       ];
 
@@ -142,17 +142,17 @@ class Finance {
   // Sort by supply rate
   sort_3(target) {
     const rows = Array.from(
-      document.querySelector('#mt-body').querySelectorAll('tr')
+      document.querySelector("#mt-body").querySelectorAll("tr")
     );
-    this.tBody.innerHTML = '';
-    if (target.className == 'unordered') {
-      target.className = 'ordered';
-      target.firstChild.className = 'fas fa-caret-down';
+    this.tBody.innerHTML = "";
+    if (target.className == "unordered") {
+      target.className = "ordered";
+      target.firstChild.className = "fas fa-caret-down";
       const reversed = rows.sort((a, b) => {
         let aa = a.children[3].innerHTML;
         let bb = b.children[3].innerHTML;
         return (
-          parseFloat(bb === '' ? '-1' : bb) - parseFloat(aa === '' ? '-1' : aa)
+          parseFloat(bb === "" ? "-1" : bb) - parseFloat(aa === "" ? "-1" : aa)
         );
       });
 
@@ -161,13 +161,13 @@ class Finance {
         row.innerHTML = reversed[i].innerHTML;
       }
     } else {
-      target.className = 'unordered';
-      target.firstChild.className = 'fas fa-caret-up';
+      target.className = "unordered";
+      target.firstChild.className = "fas fa-caret-up";
       const reversed = rows.sort((a, b) => {
         let aa = a.children[3].innerHTML;
         let bb = b.children[3].innerHTML;
         return (
-          parseFloat(aa === '' ? '-1' : aa) - parseFloat(bb === '' ? '-1' : bb)
+          parseFloat(aa === "" ? "-1" : aa) - parseFloat(bb === "" ? "-1" : bb)
         );
       });
 

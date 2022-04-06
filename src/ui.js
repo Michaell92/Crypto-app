@@ -1,6 +1,6 @@
 class UI {
   constructor() {
-    this.homeSection = document.querySelector('#home-a');
+    this.homeSection = document.querySelector('#home');
     this.table = document.querySelector('#main-table');
     this.tBody = document.querySelector('#mt-body');
     this.rank = document.querySelector('#rank');
@@ -543,7 +543,6 @@ class UI {
 
   // Show favorites
   showFav(icon, coins) {
-    const message = this.messageTemplate();
     // Display coins
     itemTemplate(coins, this.tBody);
 
@@ -559,6 +558,7 @@ class UI {
 
       // Display message if there are no coins
       if (this.tBody.rows.length === 0 && !document.querySelector('.message')) {
+        const message = this.messageTemplate();
         this.homeSection.appendChild(message);
       }
     });
@@ -575,7 +575,7 @@ class UI {
     message.className = 'message';
     message
       .appendChild(document.createElement('h1'))
-      .appendChild(document.createTextNode("You haven't added anything..."));
+      .appendChild(document.createTextNode('You havent added anything...'));
 
     message
       .appendChild(document.createElement('a'))

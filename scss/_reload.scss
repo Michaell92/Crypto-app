@@ -1,0 +1,21 @@
+#reload {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  a {
+    width: 42px;
+  }
+
+  img {
+    width: 40px;
+    margin-left: 10px;
+  }
+
+  img:hover {
+    width: 42px;
+  }
+}

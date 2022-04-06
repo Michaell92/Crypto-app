@@ -1,5 +1,6 @@
 import { http } from './http';
 import { nav } from './nav';
+import reload from './reload';
 
 const globalLink = 'https://api.coingecko.com/api/v3/global';
 let priceData = `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=max&interval=daily`;
@@ -43,7 +44,8 @@ function documentLoadEvents() {
 
 // Get data
 async function getData(link, link2, type) {
-  document.getElementById('loader').className = 'loader';
+  const loader = document.getElementById('loader');
+  loader.className = 'loader';
   const links = [link, link2];
 
   const getArr = [];
@@ -55,8 +57,8 @@ async function getData(link, link2, type) {
         getArr.push(data);
       })
       .catch((err) => {
-        console.log(err);
-        getData(link, link2, 'bitcoin');
+        loader.className = '';
+        reload('home-d');
       });
   }
 
@@ -70,11 +72,13 @@ async function getData(link, link2, type) {
 
   // Check if properly loaded
   const myChart = document.getElementById('myChart').innerHTML;
+
   if (myChart === '' || myChart === undefined || myChart === null) {
-    location.reload();
+    loader.className = '';
+    reload('home-d');
   }
 
-  document.getElementById('loader').className = '';
+  loader.className = '';
 }
 
 // Create chart

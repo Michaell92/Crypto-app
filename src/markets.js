@@ -3,6 +3,7 @@ import { table } from './markets-ui';
 import { nav } from './nav';
 import { pages } from './list-pages';
 import { filter } from './filterList';
+import reload from './reload';
 
 const globalLink = 'https://api.coingecko.com/api/v3/global';
 const markets = 'https://api.coingecko.com/api/v3/exchanges?per_page=50&page=1';
@@ -26,7 +27,8 @@ document.querySelector('#searchForm').addEventListener('submit', getMarket);
 
 // Create market table
 async function createTable(link) {
-  document.getElementById('loader').classList = 'loader';
+  const loader = document.getElementById('loader');
+  loader.classList = 'loader';
 
   // Get data
   await http
@@ -35,22 +37,26 @@ async function createTable(link) {
       // Create table data
       table.fetchMarkets(data);
     })
-    .catch((error) => console.log(error));
+    .catch(() => {
+      reload('home-a');
+      loader.className = '';
+    });
 
   // Check if properly loaded
   const tBody = document.getElementById('mt-body').innerHTML;
-  if (tBody === '' || tBody === undefined || tBody === null) {
-    createTable(link);
+
+  if (!tBody) {
+    reload('home-a');
+    loader.className = '';
   }
 
-  document.getElementById('loader').className = '';
+  loader.className = '';
 }
 
 // Sort by name
-function sortByName(e) {
-  table.sort(e.target);
-  e.preventDefault();
-}
+table.sort(e.target);
+e.preventDefault();
+function sortByName(e) {}
 
 // Sort by price
 function sortByVol(e) {

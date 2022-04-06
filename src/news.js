@@ -1,32 +1,42 @@
 import { http } from './http';
 import { nav } from './nav';
 import { news } from './news-ui';
+import reload from './reload';
 
 const globalLink = 'https://api.coingecko.com/api/v3/global';
 const newsLink = `https://api.coingecko.com/api/v3/status_updates?per_page=10`;
 const categories = document.getElementsByClassName('category');
+const load = document.getElementById('load');
 let counter = 1;
 
 // Event listeners
 document.addEventListener('DOMContentLoaded', nav.getMarketData(globalLink));
 document.addEventListener('DOMContentLoaded', getNewsData(newsLink));
 document.addEventListener('DOMContentLoaded', category());
-document.getElementById('load').addEventListener('click', loadMore);
+load.addEventListener('click', loadMore);
 
 async function getNewsData(link) {
-  document.getElementById('wait-circle').classList = 'loader';
+  const loader = document.getElementById('loader');
+  loader.className = 'loader';
 
   await http
     .get(link)
-    .then((data) => news.getData(data.status_updates))
-    .catch((err) => console.log(err));
+    .then((data) => {
+      load.style.visibility = 'visible';
+      news.getData(data.status_updates);
+    })
+    .catch(() => {
+      loader.className = '';
+      load.style.visibility = 'hidden';
+      reload('home-c');
+    });
 
   const main = document.getElementById('main').innerHTML;
-  if (main === '' || main === undefined || main === null) {
-    getNewsData(link);
+  if (!main) {
+    loader.className = '';
+    load.style.visibility = 'hidden';
+    reload('home-c');
   }
-
-  document.getElementById('wait-circle').classList = 'hidden';
 }
 
 // Load more posts
@@ -37,7 +47,7 @@ async function loadMore(e, x) {
     counter++;
   }
   // Hide load button
-  document.getElementById('load').style.visibility = 'hidden';
+  load.style.visibility = 'hidden';
 
   // Get current category
   const category = document.getElementById('main').className;
@@ -45,9 +55,6 @@ async function loadMore(e, x) {
   // Get posts
   const newsLink = `https://api.coingecko.com/api/v3/status_updates?${category}per_page=10&page=${counter}`;
   await getNewsData(newsLink);
-
-  // Show load button
-  document.getElementById('load').style.visibility = 'visible';
 }
 
 // Add event listener to categories

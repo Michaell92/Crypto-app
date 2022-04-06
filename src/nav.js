@@ -8,23 +8,6 @@ document.getElementById('burgerMenu').addEventListener('click', (e) => {
   document.getElementById('navbar').classList.toggle('menuActive');
 });
 
-// Responsive search bar
-// const mediaQuery = window.matchMedia('(max-width: 700px)');
-// function changeState(mediaQuery) {
-//   const tableInfo = document.getElementById('table-info');
-//   const fav = tableInfo.children[1];
-//   const searchBar = document.createElement('div');
-//   searchBar.innerHTML = document.getElementById('searchDiv').innerHTML;
-//   searchBar.id = 'searchDiv';
-
-//   if (mediaQuery.matches) {
-//     tableInfo.insertBefore(searchBar, fav);
-//   }
-// }
-
-// changeState(mediaQuery);
-// mediaQuery.addEventListener('change', changeState);
-
 // Create nav
 class Nav {
   constructor() {
@@ -50,27 +33,7 @@ class Nav {
       })
       .catch((error) => {
         console.log(error);
-        location.reload();
       });
-
-    if (
-      this.topNav.innerHTML === '' ||
-      this.topNav.innerHTML === undefined ||
-      this.topNav.innerHTML === null
-    ) {
-      location.reload();
-    }
-
-    setTimeout(function () {
-      const topNav = document.getElementById('nav-data');
-      if (
-        topNav.innerHTML === '' ||
-        topNav.innerHTML === undefined ||
-        topNav.innerHTML === null
-      ) {
-        location.reload();
-      }
-    }, 1000);
   }
 }
 

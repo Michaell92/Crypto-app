@@ -4,6 +4,7 @@ import { ls } from './ls';
 import { nav } from './nav';
 import { pages } from './list-pages';
 import { filter } from './filterList';
+import reload from './reload';
 
 const globalLink = 'https://api.coingecko.com/api/v3/global';
 const coinsLink =
@@ -19,10 +20,10 @@ document.querySelector('#mcap').addEventListener('click', sortByMarketCap);
 document.querySelector('#daily').addEventListener('click', sortByDaily);
 document.querySelector('#weekly').addEventListener('click', sortByWeekly);
 document.querySelector('#volume').addEventListener('click', sortByVolume);
-// document.querySelector('#supply').addEventListener('click', sortBySupply);
+document.querySelector('#supply').addEventListener('click', sortBySupply);
 document.querySelector('#mt-body').addEventListener('click', addToFavorites);
 document.querySelector('#favorites').addEventListener('click', showFavorites);
-document.querySelector('#home-a').addEventListener('click', returnHome);
+document.querySelector('#home').addEventListener('click', returnHome);
 document.querySelector('#total').addEventListener('click', () => {
   icon.classList.remove('active');
 });
@@ -37,16 +38,18 @@ document.querySelector('#searchIcon').addEventListener('click', getCoin);
 document.querySelector('#searchForm').addEventListener('submit', getCoin);
 
 // Content loaded listener
-async function initialLoad() {
+function initialLoad() {
   // Get nav data
   nav.getMarketData(globalLink);
   // Get table data
-  await getCoinData(coinsLink);
+  getCoinData(coinsLink);
 }
 
 // Create table
 async function getCoinData(link) {
-  document.getElementById('loader').className = 'loader';
+  const loader = document.getElementById('loader');
+  loader.className = 'loader';
+
   await http
     .get(link)
     .then((data) => {
@@ -55,15 +58,18 @@ async function getCoinData(link) {
       // Create chart
       createChart(data);
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
+      loader.className = '';
+      reload('home');
     });
 
+  const tBody = document.getElementById('mt-body');
   // Check if properly loaded
-  const tBody = document.getElementById('mt-body').innerHTML;
   if (tBody === '' || tBody === undefined || tBody === null) {
-    getCoinData(link);
+    loader.className = '';
+    reload('home');
   }
+
   document.getElementById('loader').className = '';
 }
 
@@ -265,7 +271,7 @@ function showFavorites(e) {
 
       // Check for message and display message
       if (!test)
-        document.querySelector('#home-a').appendChild(ui.messageTemplate());
+        document.querySelector('#home').appendChild(ui.messageTemplate());
     }
   } else {
     icon.classList.remove('active');

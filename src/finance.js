@@ -1,6 +1,7 @@
 import { http } from './http';
 import { nav } from './nav';
 import { finance } from './finance-ui';
+import reload from './reload';
 
 const globalLink = 'https://api.coingecko.com/api/v3/global';
 const platformLink =
@@ -25,7 +26,8 @@ document.getElementById('mt-body').addEventListener('change', (e) => {
 document.querySelector('#search').addEventListener('keyup', filterList);
 
 async function finUI() {
-  document.getElementById('loader').className = 'loader';
+  const loader = document.getElementById('loader');
+  loader.className = 'loader';
 
   const links = [platformLink, productLink];
   const getArr = [];
@@ -36,29 +38,30 @@ async function finUI() {
       .then((data) => {
         getArr.push(data);
       })
-      .catch((err) => {
-        finUI();
-        console.log(err);
+      .catch(() => {
+        loader.className = '';
+        reload('home-b');
       });
   }
 
   await finance.finData(getArr);
 
   const tBody = document.getElementById('mt-body').innerHTML;
-  const finData = document.getElementById('mt-body').firstChild.firstChild
-    .firstChild.innerHTML;
+  // const finData =
+  //   document.getElementById('mt-body').firstChild.firstChild.firstChild
+  //     .innerHTML;
 
   if (
-    finData === '' ||
-    finData === 'undefined' ||
-    finData === null ||
-    tBody === '' ||
-    tBody === undefined ||
-    tBody === null
+    //   finData === '' ||
+    //   finData === 'undefined' ||
+    //   finData === null ||
+    !tBody
   ) {
-    location.reload();
+    loader.className = '';
+    reload('home-b');
   }
-  document.getElementById('loader').className = '';
+
+  loader.className = '';
 }
 
 // Sort by name
