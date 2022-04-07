@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/form.css" />
+    <link rel="stylesheet"
+    href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css
+    />
+    <link rel="icon" type="image/png" href="img/favicon.png" sizes="16x16" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <title>Coinscanner</title>
+  </head>
+
+  <body>
+    <div id="burgerMenu"><div></div></div>
+    <ul id="nav-top">
+      <ul id="nav-data"></ul>
+      <ul>
+        <li>
+          <a class="btn-secondary txt-center" href="signin.html">Sign in</a>
+        </li>
+        <li>
+          <a class="btn-primary txt-center" href="signup.html"
+            >Create account</a
+          >
+        </li>
+      </ul>
+      <li id="logo">
+        <a href="index.html"
+          ><img src="img/logo.svg" width="30px" height="30px" />Coinscanner</a
+        >
+      </li>
+      <!-- <li><a href="https://github.com/Michaell92/Crypto-app" class="navButton" target="_blank">GitHub</a></li> -->
+    </ul>
+    <div id="form-container">
+      <a href="index.html"
+        ><img src="img/logo.svg" width="40px" height="40px" />Coinscanner</a
+      >
+      <form id="signup-form">
+        <span class="title">Sign up</span>
+        <div id="form-wrap">
+          <div id="warning"></div>
+          <input type="email" id="signUpName" placeholder="Email" required />
+
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            required
+          />
+          <input
+            type="password"
+            id="passwordRepeat"
+            placeholder="Repeat password"
+            required
+          />
+
+          <button type="submit" id="signup-button">Sign Up</button>
+          <span class="or">or</span>
+          <a href="signin.html" id="login-button">Log in</a>
+        </div>
+      </form>
+    </div>
+
+    <script src="js/form.js"></script>
+  </body>
+</html>

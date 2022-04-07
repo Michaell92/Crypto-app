@@ -5,7 +5,7 @@ import reload from './reload';
 
 const globalLink = 'https://api.coingecko.com/api/v3/global';
 const platformLink =
-  'https://api.coingecko.com/api/v3/finance_platforms?per_page=50';
+  'https://api.coingecko.com/api/v3/derivatives/exchanges?per_page=50';
 const productLink =
   'https://api.coingecko.com/api/v3/finance_products?per_page=100';
 

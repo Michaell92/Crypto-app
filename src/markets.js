@@ -54,9 +54,10 @@ async function createTable(link) {
 }
 
 // Sort by name
-table.sort(e.target);
-e.preventDefault();
-function sortByName(e) {}
+function sortByName(e) {
+  table.sort(e.target);
+  e.preventDefault();
+}
 
 // Sort by price
 function sortByVol(e) {

@@ -1,0 +1,120 @@
+@import 'config';
+@import 'nav';
+@import 'utilities';
+@import 'buttons';
+@import 'footer';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: $light-color;
+  overflow-y: scroll;
+  font-family: $font-stack-s;
+  line-height: 1.6;
+  font-size: 16px;
+  color: (lighten($secondary-color, 20%));
+}
+
+#form-container {
+  @include flex-center;
+  flex-direction: column;
+  margin: 2rem 0;
+
+  a:first-child {
+    @include flex-center;
+    font-size: 1.5rem;
+    margin-bottom: 5rem;
+
+    img {
+      margin-right: 10px;
+    }
+  }
+
+  #signup-form {
+    @include flex-center;
+    justify-content: space-around;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 20px 40px 40px 40px;
+    border: 2px solid $primary-2;
+    border-radius: 10px;
+
+    .title {
+      margin-bottom: 2rem;
+      font-size: 30px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+    }
+
+    #form-wrap {
+      @include flex-center;
+      justify-content: space-around;
+      flex-direction: column;
+
+      #warning {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      input {
+        padding: 9px;
+        border: 2px solid #cdcaff;
+        border-radius: 6px;
+        margin: 5px;
+        outline: none;
+        font-size: 1rem;
+      }
+
+      %button-base {
+        @include flex-center;
+        border: none;
+        color: white;
+        font-size: 1rem;
+        // padding: 5px 20px;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      #login-button {
+        @extend %button-base;
+        background-color: #f70606;
+
+        &:hover {
+          background-color: darken(#f70606, 10%);
+        }
+      }
+
+      #signup-button {
+        @extend %button-base;
+        background-color: #7354a5;
+
+        &:hover {
+          background-color: lighten(#7354a5, 10%);
+        }
+      }
+
+      button {
+        margin-top: 40px;
+        width: 110px;
+        height: 40px;
+      }
+
+      a {
+        width: 100px;
+        height: 30px;
+      }
+
+      .or {
+        margin: 10px 0;
+        font-weight: bold;
+        font-size: 15px;
+      }
+    }
+  }
+}
