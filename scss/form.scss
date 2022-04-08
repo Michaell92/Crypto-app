@@ -40,7 +40,7 @@ body {
     flex-direction: column;
     background-color: #fff;
     padding: 20px 40px 40px 40px;
-    border: 2px solid $primary-2;
+    border: 3px solid lightblue;
     border-radius: 10px;
 
     .title {
@@ -92,10 +92,10 @@ body {
 
       #signup-button {
         @extend %button-base;
-        background-color: #7354a5;
+        background-color: $primary-color;
 
         &:hover {
-          background-color: lighten(#7354a5, 10%);
+          background-color: lighten($primary-color, 10%);
         }
       }
 
