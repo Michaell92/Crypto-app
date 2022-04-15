@@ -1,4 +1,11 @@
 @import 'config';
+@import 'nav';
+@import 'utilities';
+@import 'buttons';
+@import 'media';
+@import 'loader';
+@import 'reload';
+@import 'footer';
 
 * {
   box-sizing: border-box;
@@ -21,10 +28,7 @@ body {
   #table-info {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin: auto;
-    max-width: 800px;
-    padding: 0 70px;
+    justify-content: center;
     margin-bottom: 5px;
     font-family: $font-stack;
     div {
@@ -57,7 +61,6 @@ body {
 #finance-table {
   border-collapse: collapse;
   visibility: hidden;
-  width: 750px;
   margin: auto;
   thead {
     border-top: 1px solid (lighten($secondary-color, 80%));
@@ -65,10 +68,14 @@ body {
     th {
       font-weight: bold;
       line-height: 40px;
-      width: 150px;
+      padding: 0 20px;
       font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-      th:first-child {
-        width: 20rem;
+
+      @media screen and (max-width: 750px) {
+        padding: 0 10px;
+      }
+      a {
+        white-space: nowrap;
       }
       a i {
         visibility: hidden;
@@ -97,9 +104,6 @@ body {
     }
     tr {
       border-bottom: 1px solid (lighten($secondary-color, 80%));
-      td {
-        max-width: 100px;
-      }
       img {
         width: 20px;
         margin-right: 10px;
@@ -111,11 +115,16 @@ body {
         font-family: $font-stack;
         align-items: center;
         justify-content: flex-start;
-        white-space: nowrap;
+
+        a {
+          @include flex-center;
+        }
       }
-    }
-    .select {
-      width: 100px;
+
+      .volume {
+        color: blue;
+        font-weight: normal;
+      }
     }
   }
 }
@@ -123,11 +132,3 @@ body {
 .span-info {
   color: $primary-color;
 }
-
-@import 'nav';
-@import 'utilities';
-@import 'buttons';
-@import 'media';
-@import 'loader';
-@import 'reload';
-@import 'footer';

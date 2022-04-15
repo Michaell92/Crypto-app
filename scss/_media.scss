@@ -255,8 +255,8 @@ $lg: 1200px;
 
   #navbar {
     position: absolute;
-    transform: scale(0);
     z-index: 100;
+    transform: scale(0);
     top: 0;
     left: 0;
     background: (lighten($secondary-color, 10%));
@@ -265,6 +265,11 @@ $lg: 1200px;
     margin: 0;
     transition: transform 0.2s ease-in-out;
     border: none;
+
+    .menuActive {
+      transform: scale(1);
+    }
+
     #base-nav {
       flex-direction: column;
       align-items: flex-start;

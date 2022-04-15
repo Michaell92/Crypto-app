@@ -617,7 +617,7 @@ function itemTemplate(coin, tBody) {
     // Create array with coin information
     dataArr.push(`<tr id="${coin[i].id}"><td>${coin[i].market_cap_rank}</td>`);
     dataArr.push(
-      `<td><a href="#"><img src="${coin[i].image.replace(
+      `<td><a href="#" class="coin"><img src="${coin[i].image.replace(
         'large',
         'thumb'
       )}" alt="${coin[i].name}"><span>${coin[i].name}</span></a>

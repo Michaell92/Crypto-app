@@ -18,28 +18,71 @@
 
   <body>
     <div id="burgerMenu"><div></div></div>
-    <ul id="nav-top">
-      <ul id="nav-data"></ul>
-      <ul>
-        <li>
-          <a class="btn-secondary txt-center" href="signin.html">Sign in</a>
-        </li>
-        <li>
-          <a class="btn-primary txt-center" href="signup.html"
-            >Create account</a
+    <div id="showcase">
+      <ul id="nav-top">
+        <ul id="nav-data"></ul>
+        <ul>
+          <li>
+            <a class="btn-secondary txt-center" href="signin.html">Sign in</a>
+          </li>
+          <li>
+            <a class="btn-primary txt-center" href="signup.html"
+              >Create account</a
+            >
+          </li>
+        </ul>
+        <li id="logo">
+          <a href="index.html"
+            ><img src="img/logo.svg" width="30px" height="30px" />Coinscanner</a
           >
         </li>
       </ul>
-      <li id="logo">
-        <a href="index.html"
-          ><img src="img/logo.svg" width="30px" height="30px" />Coinscanner</a
-        >
-      </li>
-    </ul>
+
+      <nav id="navbar">
+        <ul id="base-nav">
+          <li>
+            <a href="index.html"
+              ><img
+                src="img/logo.svg"
+                width="30px"
+                height="30px"
+              />Coinscanner</a
+            >
+          </li>
+          <li>
+            Markets <i class="fas fa-angle-down"></i>
+            <ul>
+              <li><a href="global.html">Global</a></li>
+              <li><a href="index.html">Cryptocurrenies</a></li>
+              <li><a href="table.html">Exchanges</a></li>
+              <li><a href="finance.html">Finance Platforms</a></li>
+            </ul>
+          </li>
+          <li><a href="network.html">Network</a></li>
+          <li><a href="chart.html">Chart</a></li>
+          <li id="searchDiv">
+            <form action="#" id="searchForm">
+              <label for="search">
+                <input
+                  type="search"
+                  id="search"
+                  name="search"
+                  placeholder=" Search"
+                />
+                <i class="fas fa-search fa-lg" id="searchIcon"></i>
+              </label>
+            </form>
+          </li>
+          <li>
+            <a href="signin.html"
+              >My Portfolio <i class="fas fa-chart-line"></i
+            ></a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
     <div id="form-container">
-      <a href="index.html"
-        ><img src="img/logo.svg" width="40px" height="40px" />Coinscanner</a
-      >
       <form id="signup-form">
         <span class="title">Sign up</span>
         <div id="form-wrap">
@@ -73,13 +116,6 @@
             and prices, as well as building your own crypto portfolio.
           </p>
         </div>
-        <div class="footerDiv">
-          <span>Info:</span>
-          <a href="#"><i class="fas fa-angle-left"></i> Contact</a>
-          <a href="#"><i class="fas fa-angle-left"></i> About us</a>
-          <a href="#"><i class="fas fa-angle-left"></i> Privacy policy</a>
-          <a href="#"><i class="fas fa-angle-left"></i> Terms and conditions</a>
-        </div>
         <div id="subscribe">
           <form>
             <label for="email">Sign up for latest news:</label>
@@ -89,17 +125,15 @@
         </div>
         <div class="footerDiv">
           <span>Social:</span>
-          <a href="#"
-            ><i class="fas fa-angle-left"></i> <i class="fab fa-github"></i
+          <a href="https://github.com/Michaell92" target="_blank"
+            ><i class="fas fa-angle-left"></i>
+            <i class="fab fa-github fa-2x"></i
           ></a>
-          <a href="#"
-            ><i class="fas fa-angle-left"></i> <i class="fab fa-linkedin-in"></i
-          ></a>
-          <a href="#"
-            ><i class="fas fa-angle-left"></i> <i class="fab fa-facebook-f"></i
-          ></a>
-          <a href="#"
-            ><i class="fas fa-angle-left"></i> <i class="fab fa-twitter"></i
+          <a
+            href="https://www.linkedin.com/in/milos-lazic-6a74b5154/"
+            target="_blank"
+            ><i class="fas fa-angle-left"></i>
+            <i class="fab fa-linkedin-in fa-2x"></i
           ></a>
         </div>
       </div>

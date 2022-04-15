@@ -5,6 +5,7 @@ import { nav } from './nav';
 import { pages } from './list-pages';
 import { filter } from './filterList';
 import reload from './reload';
+import addCoin from './coinDetails';
 
 const globalLink = 'https://api.coingecko.com/api/v3/global';
 const coinsLink =
@@ -234,10 +235,16 @@ function sortBySupply(e) {
 // Add to favorites
 function addToFavorites(e) {
   let fav = e.target.closest('#fav');
-  if (!fav) return;
+  let coin = e.target.closest('.coin');
 
-  ls.addToStorage(fav);
-  ui.addToFav(fav);
+  if (fav) {
+    ls.addToStorage(fav);
+    ui.addToFav(fav);
+  } else if (coin) {
+    // Get coin details
+    const id = coin.closest('tr').id;
+    getSingleCoin(id);
+  }
 
   e.preventDefault();
 }
@@ -337,4 +344,29 @@ function getCoin(e) {
       ui.displayCoin(data);
     })
     .catch((err) => console.log(err));
+}
+
+// Get coin data
+async function getSingleCoin(id) {
+  const loader = document.getElementById('loader');
+  loader.className = 'loader';
+
+  const dataArr = [];
+  const marketsLink = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${id}&order=market_cap_desc&price_change_percentage=1h%2C24h%2C7d%2C30d%2C1y`;
+  const infoLink = `https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=false&market_data=false&community_data=false`;
+
+  for (const link of [marketsLink, infoLink]) {
+    await http
+      .get(link)
+      .then((data) => {
+        dataArr.push(data);
+      })
+      .catch(() => {
+        loader.className = '';
+        reload('home');
+      });
+  }
+
+  addCoin(dataArr);
+  loader.className = '';
 }

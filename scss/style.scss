@@ -1,4 +1,11 @@
 @import 'config';
+@import 'nav';
+@import 'utilities';
+@import 'buttons';
+@import 'media';
+@import 'loader';
+@import 'reload';
+@import 'footer';
 
 * {
   box-sizing: border-box;
@@ -18,17 +25,31 @@ body {
 #home {
   margin-top: 150px;
   min-height: 100vh;
+
+  @media screen and (max-width: 600px) {
+    margin-top: 100px;
+  }
+
   #table-info {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 70px;
+    justify-content: space-around;
     margin-bottom: 5px;
     font-family: $font-stack;
     // font-weight: bold;
 
     @media screen and (max-width: 600px) {
       padding: 0;
+    }
+
+    @media screen and (max-width: 450px) {
+      flex-direction: column;
+
+      #favEl {
+        justify-content: space-around;
+        width: 100%;
+        margin-top: 1rem;
+      }
     }
 
     div {
@@ -49,6 +70,12 @@ body {
         color: $primary-color;
       }
     }
+    #total a:hover,
+    #markets a:hover {
+      border-bottom: solid 2px rgb(177, 169, 204);
+      margin-bottom: -2px;
+    }
+
     #markets {
       margin-left: 15px;
     }
@@ -162,6 +189,10 @@ body {
             justify-content: center;
             padding: 2px;
             border-bottom: 2px solid transparent;
+
+            &:hover {
+              border-bottom: solid 2px rgb(177, 169, 204);
+            }
           }
           & > :last-child {
             position: absolute;
@@ -204,9 +235,20 @@ body {
               @extend %tooltipBox;
               white-space: normal;
             }
+
             &::after {
               @extend %tooltipArrow;
               margin-right: -8px;
+            }
+
+            &:hover::before {
+              visibility: visible;
+              opacity: 1;
+            }
+
+            &:hover::after {
+              visibility: visible;
+              opacity: 1;
             }
           }
           // Second tooltip
@@ -220,6 +262,16 @@ body {
             &::after {
               @extend %tooltipArrow;
               margin-right: -9px;
+            }
+
+            &:hover::before {
+              visibility: visible;
+              opacity: 1;
+            }
+
+            &:hover::after {
+              visibility: visible;
+              opacity: 1;
             }
           }
         }
@@ -263,10 +315,154 @@ body {
   }
 }
 
-@import 'nav';
-@import 'utilities';
-@import 'buttons';
-@import 'media';
-@import 'loader';
-@import 'reload';
-@import 'footer';
+#coin-container {
+  min-height: 100vh;
+  margin: 5rem 0 5rem 0;
+  padding: 0 5vw;
+
+  .num {
+    color: blue;
+    border: 2px solid white;
+    border-radius: 5px;
+    margin: 3px;
+    padding: 6px;
+  }
+
+  .label {
+    color: #000;
+    font-weight: bold;
+  }
+
+  .lead {
+    color: #000f81;
+  }
+
+  // TITLE
+  #title-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    border-bottom: 4px solid #1b18c9;
+    padding-bottom: 2rem;
+    margin-bottom: 4rem;
+
+    @media screen and (min-width: 750px) {
+      align-items: center;
+      justify-content: space-around;
+      flex-direction: row;
+    }
+
+    #market-cap {
+      border: none;
+      font-size: 1.2rem;
+
+      @media screen and (max-width: 450px) {
+        .label {
+          display: block;
+        }
+      }
+    }
+
+    #coin-title {
+      @include flex-center;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+
+      @media screen and (min-width: 750px) {
+        margin: 0;
+      }
+
+      img {
+        width: 35px;
+        margin-right: 10px;
+      }
+
+      span:first-of-type {
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+
+      span:nth-of-type(2) {
+        margin: 0 30px 0 15px;
+        font-size: 15px;
+        color: #8486d5;
+        font-weight: bold;
+      }
+
+      span:last-of-type {
+        font-size: 1.3rem;
+        border: 4px solid #dddddd;
+        border-radius: 10px;
+        padding: 5px;
+      }
+    }
+  }
+
+  #coin-details {
+    #market-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #price-change {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex-direction: column;
+      margin-top: 2rem;
+
+      #price-change-period {
+        margin-bottom: 2rem;
+        display: flex;
+        flex-wrap: wrap;
+
+        .num {
+          margin: 0.5rem 1rem 0.5rem 0;
+        }
+      }
+
+      #price-change-all-time {
+        display: flex;
+        flex-direction: column;
+
+        .high,
+        .low {
+          margin: 1rem 0;
+        }
+
+        #ath-date {
+          margin-left: 2rem;
+        }
+
+        .label {
+          display: block;
+          margin-bottom: 0.5rem;
+        }
+      }
+    }
+
+    #desc {
+      display: flex;
+      flex-direction: column;
+      #description {
+        margin: 2rem 0;
+        display: flex;
+        flex-direction: column;
+
+        a {
+          color: blue;
+        }
+      }
+
+      #dev-info {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+}

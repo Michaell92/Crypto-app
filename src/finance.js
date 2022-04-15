@@ -6,8 +6,6 @@ import reload from './reload';
 const globalLink = 'https://api.coingecko.com/api/v3/global';
 const platformLink =
   'https://api.coingecko.com/api/v3/derivatives/exchanges?per_page=50';
-const productLink =
-  'https://api.coingecko.com/api/v3/finance_products?per_page=100';
 
 // Event listeners
 // Get fin data
@@ -29,34 +27,23 @@ async function finUI() {
   const loader = document.getElementById('loader');
   loader.className = 'loader';
 
-  const links = [platformLink, productLink];
-  const getArr = [];
-
-  for (const link of links) {
-    await http
-      .get(link)
-      .then((data) => {
-        getArr.push(data);
-      })
-      .catch(() => {
-        loader.className = '';
-        reload('home-b');
-      });
-  }
-
-  await finance.finData(getArr);
+  await http
+    .get(platformLink)
+    .then((data) => {
+      finance.finData(data);
+      console.log(data);
+    })
+    .catch(() => {
+      loader.className = '';
+      reload('home-b');
+    });
 
   const tBody = document.getElementById('mt-body').innerHTML;
   // const finData =
   //   document.getElementById('mt-body').firstChild.firstChild.firstChild
   //     .innerHTML;
 
-  if (
-    //   finData === '' ||
-    //   finData === 'undefined' ||
-    //   finData === null ||
-    !tBody
-  ) {
+  if (!tBody) {
     loader.className = '';
     reload('home-b');
   }
@@ -66,10 +53,19 @@ async function finUI() {
 
 // Sort by name
 document.querySelector('#platform').addEventListener('click', sortByName);
-// Sort by category
-document.querySelector('#category').addEventListener('click', sortByCategory);
-// Sort by supply rate
-document.querySelector('#supply').addEventListener('click', sortBySupplyRate);
+// Sort by numbers
+document
+  .querySelector('#interest')
+  .addEventListener('click', sortByNumber('interest'));
+document
+  .querySelector('#futures')
+  .addEventListener('click', sortByNumber('futures'));
+document
+  .querySelector('#perpetual')
+  .addEventListener('click', sortByNumber('perpetual'));
+document
+  .querySelector('#volume')
+  .addEventListener('click', sortByNumber('volume'));
 
 function filterList(e) {
   // Check if there is input value
@@ -100,13 +96,9 @@ function sortByName(e) {
 }
 
 // Sort by category
-function sortByCategory(e) {
-  e.preventDefault();
-  finance.sort_2(e.target);
-}
-
-// Sort by supply rate
-function sortBySupplyRate(e) {
-  e.preventDefault();
-  finance.sort_3(e.target);
+function sortByNumber(type) {
+  return (e) => {
+    e.preventDefault();
+    finance.sort_2(e.target, type);
+  };
 }

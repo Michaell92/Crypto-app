@@ -1,0 +1,104 @@
+@import 'config';
+@import 'nav';
+@import 'utilities';
+@import 'buttons';
+@import 'media';
+@import 'loader';
+@import 'reload';
+@import 'footer';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: $light-color;
+  overflow-y: scroll;
+  font-family: $font-stack-s;
+  line-height: 1.6;
+  font-size: 16px;
+  color: (lighten($secondary-color, 20%));
+}
+
+#home-c {
+  margin-top: 50px;
+  min-height: 100vh;
+
+  .container {
+    @include flex-center;
+    flex-direction: column;
+
+    #buttons-container {
+      @include flex-center;
+      margin: 2rem 0 1rem 0;
+
+      button {
+        width: 4rem;
+        height: 2rem;
+        font-weight: bold;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        margin: 5px;
+        cursor: pointer;
+      }
+
+      button:active {
+        transform: scale(0.95);
+      }
+
+      .btc {
+        background-color: rgb(240, 204, 138);
+      }
+
+      .btc-active {
+        background-color: orange;
+      }
+
+      .eth {
+        background-color: rgb(231, 146, 231);
+      }
+
+      .eth-active {
+        background-color: purple;
+      }
+    }
+
+    #check {
+      margin: 1rem 0;
+      width: 7rem;
+      height: 2.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      background-color: rgb(43, 187, 43);
+      cursor: pointer;
+    }
+
+    #check:hover {
+      background-color: green;
+    }
+
+    #type-container {
+      outline: none;
+      border: none;
+      width: 50vw;
+      height: 20vh;
+      border-radius: 20px;
+      padding: 20px;
+      font-size: 1.2rem;
+
+      @media screen and (max-width: 1200px) {
+        width: 70vw;
+      }
+
+      @media screen and (max-width: 750) {
+        width: 90vw;
+      }
+    }
+  }
+}
