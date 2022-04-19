@@ -18,6 +18,8 @@ buttons.forEach((button) => {
 
 function selectCoin(e) {
   e.preventDefault();
+
+  // SELECT CORRECT COIN
   buttons.forEach((button) => {
     button.classList.remove(button.id + '-active');
   });
@@ -26,6 +28,13 @@ function selectCoin(e) {
   activeCoin = button.id;
 
   button.classList.add(button.id + '-active');
+
+  // Set correct placeholder
+  const placeholder =
+    activeCoin === 'btc' ? 'Enter BTC address...' : 'Enter ETH address...';
+  const coin = document.getElementById('type-container');
+
+  coin.placeholder = placeholder;
 }
 
 async function getAddressInfo() {
