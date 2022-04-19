@@ -369,4 +369,7 @@ async function getSingleCoin(id) {
 
   addCoin(dataArr);
   loader.className = '';
+
+  // SCROLL INTO VIEW
+  document.body.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }

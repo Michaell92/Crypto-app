@@ -105,7 +105,7 @@ class Finance {
         const two = parseFloat(
           b.querySelector(`.${type}`).innerText.replace(',', '')
         );
-        console.log(one, two);
+
         return two - one;
       });
 

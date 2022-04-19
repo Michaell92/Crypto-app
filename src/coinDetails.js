@@ -45,7 +45,7 @@ function addCoin(data) {
   const image = two.image.small;
   const liquidity = two.liquidity_score;
   const alexaRank = two.public_interest_stats.alexa_rank;
-  console.log(mCap);
+
   const template = `<div id='coin-container'>
     <div id="title-container">
      <div id="coin-title">

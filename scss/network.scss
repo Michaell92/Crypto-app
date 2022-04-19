@@ -67,7 +67,7 @@ body {
     }
 
     #check {
-      margin: 1rem 0;
+      margin: 1rem 0 3rem 0;
       width: 7rem;
       height: 2.5rem;
       font-size: 1rem;
@@ -99,6 +99,31 @@ body {
       @media screen and (max-width: 750) {
         width: 90vw;
       }
+    }
+
+    #results {
+      @include flex-center;
+      flex-direction: column;
+
+      div {
+        margin-bottom: 1rem;
+        max-width: 100vw;
+        padding: 0 2rem;
+      }
+
+      span {
+        font-size: 1.2rem;
+        overflow-wrap: break-word;
+      }
+
+      .info {
+        color: blue;
+      }
+    }
+
+    .warning {
+      font-size: 1.5rem;
+      text-align: center;
     }
   }
 }

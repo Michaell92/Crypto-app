@@ -97,7 +97,7 @@ function getMarket(e) {
   let inputValue = document.querySelector('#search').value;
   let query = '';
   const rowArr = document.querySelector('#mt-body').querySelectorAll('tr');
-  console.log(inputValue);
+
   // Check if input is valid
   if (!inputValue || inputValue.length === 0 || !inputValue.trim()) return;
 
