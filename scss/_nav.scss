@@ -214,3 +214,20 @@
   text-align: left;
   -webkit-tap-highlight-color: transparent;
 }
+
+#nav-top .signout {
+  display: none;
+  font-size: 1rem;
+
+  #username {
+    color: blue;
+  }
+}
+
+#nav-top .hide-form {
+  display: none;
+}
+
+#nav-top .show-signout {
+  display: flex;
+}

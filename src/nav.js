@@ -1,4 +1,42 @@
 import { http } from './http';
+import { signOut, onAuthStateChanged } from 'firebase/auth';
+import { auth } from './firebase';
+
+const signup = document.getElementById('signup');
+const signout = document.getElementById('signout');
+const signoutButton = document.getElementById('signoutButton');
+const userName = document.getElementById('username');
+const user = localStorage.getItem('currentUser');
+
+signoutButton.addEventListener('click', logOut);
+
+// Sign out user
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+  } else {
+    localStorage.setItem('currentUser', '');
+    signup.classList.remove('hide-form');
+    signout.classList.remove('show-signout');
+  }
+});
+
+// Hide nav sign up form
+if (user) {
+  signup.classList.add('hide-form');
+  signout.classList.add('show-signout');
+
+  userName.innerText = user;
+  console.log(user);
+}
+
+// Log out user
+function logOut() {
+  signOut(auth)
+    .then(() => {})
+    .catch((err) => {
+      console.log(err);
+    });
+}
 
 // Add event listener for burger menu
 document.getElementById('burgerMenu').addEventListener('click', (e) => {

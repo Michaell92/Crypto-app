@@ -21,7 +21,7 @@
     <div id="showcase">
       <ul id="nav-top">
         <ul id="nav-data"></ul>
-        <ul>
+        <ul id="signup">
           <li>
             <a class="btn-secondary txt-center" href="signin.html">Sign in</a>
           </li>
@@ -29,6 +29,14 @@
             <a class="btn-primary txt-center" href="signup.html"
               >Create account</a
             >
+          </li>
+        </ul>
+        <ul id="signout" class="signout">
+          <li>
+            <span id="user-span"><span id="username"></span></span>
+          </li>
+          <li>
+            <a class="btn-primary txt-center" id="signoutButton">Sign out</a>
           </li>
         </ul>
         <li id="logo">
@@ -83,11 +91,11 @@
     </div>
 
     <div id="form-container">
-      <form id="signup-form">
+      <form id="signup-form" class="form">
         <span class="title">Sign up</span>
         <div id="form-wrap">
           <div id="warning"></div>
-          <input type="email" id="signUpName" placeholder="Email" required />
+          <input type="email" id="form-email" placeholder="Email" required />
 
           <input
             type="password"

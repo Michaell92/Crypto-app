@@ -1,4 +1,4 @@
-import { formatNumber, formatShortDate, formatPercent } from './formatters';
+import { formatNumber } from './formatters';
 class Finance {
   constructor() {
     this.tBody = document.getElementById('mt-body');

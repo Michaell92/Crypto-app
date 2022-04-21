@@ -31,7 +31,6 @@ async function finUI() {
     .get(platformLink)
     .then((data) => {
       finance.finData(data);
-      console.log(data);
     })
     .catch(() => {
       loader.className = '';
@@ -39,9 +38,6 @@ async function finUI() {
     });
 
   const tBody = document.getElementById('mt-body').innerHTML;
-  // const finData =
-  //   document.getElementById('mt-body').firstChild.firstChild.firstChild
-  //     .innerHTML;
 
   if (!tBody) {
     loader.className = '';

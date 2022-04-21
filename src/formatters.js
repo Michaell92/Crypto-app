@@ -1,5 +1,5 @@
 function formatNumber(num, decimal = 2) {
-  if (num == null && num === undefined) return '';
+  if (num === null || num === undefined) return '';
   if (typeof num === 'string') num = parseFloat(num);
   return parseFloat(num.toFixed(decimal)).toLocaleString();
 }
