@@ -14,9 +14,7 @@ signoutButton.addEventListener('click', logOut);
 onAuthStateChanged(auth, (user) => {
   if (user) {
   } else {
-    localStorage.setItem('currentUser', '');
-    signup.classList.remove('hide-form');
-    signout.classList.remove('show-signout');
+    localStorage.removeItem('currentUser');
   }
 });
 
@@ -32,7 +30,12 @@ if (user) {
 // Log out user
 function logOut() {
   signOut(auth)
-    .then(() => {})
+    .then(() => {
+      localStorage.removeItem('coins');
+
+      signup.classList.remove('hide-form');
+      signout.classList.remove('show-signout');
+    })
     .catch((err) => {
       console.log(err);
     });

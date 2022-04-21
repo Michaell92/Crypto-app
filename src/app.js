@@ -259,26 +259,26 @@ function showFavorites(e) {
 
     // Get coins
     let favArr = JSON.parse(localStorage.getItem('coins'));
+
     // Get favs
-    if (favArr[0] || favArr[1]) {
-      const query = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${favArr.join()}&order=market_cap_desc&sparkline=true&price_change_percentage=7d`;
+    if (favArr) {
+      if (favArr.length > 0) {
+        const query = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${favArr.join()}&order=market_cap_desc&sparkline=true&price_change_percentage=7d`;
 
-      // Get coins
-      http
-        .get(query)
-        .then((data) => {
-          // Display favorites
-          ui.showFav(icon, data);
-          createChart(data);
-        })
-        .catch((err) => console.log(err));
+        // Get coins
+        http
+          .get(query)
+          .then((data) => {
+            // Display favorites
+            ui.showFav(icon, data);
+            createChart(data);
+          })
+          .catch((err) => console.log(err));
+      } else {
+        showMessage();
+      }
     } else {
-      document.querySelector('#mt-body').innerHTML = '';
-      const test = document.querySelector('.message');
-
-      // Check for message and display message
-      if (!test)
-        document.querySelector('#home').appendChild(ui.messageTemplate());
+      showMessage();
     }
   } else {
     icon.classList.remove('active');
@@ -288,6 +288,14 @@ function showFavorites(e) {
   }
 
   e.preventDefault();
+}
+
+function showMessage() {
+  document.querySelector('#mt-body').innerHTML = '';
+  const test = document.querySelector('.message');
+
+  // Check for message and display message
+  if (!test) document.querySelector('#home').appendChild(ui.messageTemplate());
 }
 
 // Return home

@@ -63,21 +63,22 @@ function signUp() {
     .then((userCredential) => {
       // Signed in
       const userId = userCredential.user.uid;
+      // Set storage
+      localStorage.setItem('currentUser', email.value);
+
+      const coins = JSON.parse(localStorage.getItem('coins'));
 
       // Get user details
-      const userData = ref(database, 'userList/' + userId);
+      const userData = ref(database, '/userList' + '/' + userId + '/coins');
 
       // Save current settings
-      set(userData, { test: 'abc' });
+      set(userData, coins);
 
       // Show user
       showUser(email.value);
 
-      // Set storage
-      localStorage.setItem('currentUser', email.value);
-
       // Change location
-      location.href = '/index.html';
+      // location.href = '/index.html';
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -105,22 +106,22 @@ function signIn(e) {
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
+      localStorage.setItem('currentUser', email.value);
 
       // Get user details
-      const userData = ref(database, 'userList/' + user.uid);
-      localStorage.setItem('currentUser', email.value);
+      const userData = ref(database, '/userList' + '/' + user.uid + '/coins');
 
       // Show user
       showUser(email.value);
 
       // Get user details
-      get(userData, `userList/${user.uid}`)
+      get(userData)
         .then((snapshot) => {
           if (snapshot.exists()) {
             const userData = snapshot.val();
-
+            console.log(userData);
             // Update local storage
-            localStorage.setItem('userData', JSON.stringify(userData));
+            localStorage.setItem('coins', JSON.stringify(userData));
           } else {
             console.log('No data available');
           }
@@ -130,7 +131,7 @@ function signIn(e) {
         });
 
       // Change location
-      location.href = '/index.html';
+      // location.href = '/index.html';
     })
     .catch((error) => {
       // const errorCode = error.code;
