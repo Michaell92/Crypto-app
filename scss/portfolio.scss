@@ -1,0 +1,173 @@
+@import 'config';
+@import 'nav';
+@import 'utilities';
+@import 'buttons';
+@import 'media';
+@import 'loader';
+@import 'reload';
+@import 'footer';
+@import 'coinDetails';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: $light-color;
+  overflow-y: scroll;
+  font-family: $font-stack-s;
+  line-height: 1.6;
+  font-size: 16px;
+  color: (lighten($secondary-color, 20%));
+}
+
+#home {
+  margin-top: 70px;
+  min-height: 45vh;
+  .title {
+    text-align: center;
+    color: #1c1b70;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-right: 5rem;
+
+    @media screen and (max-width: 550px) {
+      margin-right: 2rem;
+    }
+  }
+}
+
+#title-container {
+  @include flex-center;
+  margin-bottom: 4rem;
+}
+
+#portfolio {
+  @include flex-center;
+  flex-direction: column;
+  padding: 0 1rem;
+}
+
+.row {
+  @include flex-center;
+  flex-wrap: wrap;
+  border-radius: 5px;
+  padding: 15px;
+  background-color: #1c1b70;
+  margin: 5px;
+  color: #fff;
+
+  .name {
+    font-weight: bold;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    min-width: auto;
+
+    &:hover {
+      border-color: #fff;
+    }
+  }
+
+  .symbol {
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    margin: 0 0.5rem;
+  }
+
+  .price {
+    font-weight: bold;
+    min-width: auto;
+  }
+
+  .percent {
+    font-weight: bold;
+  }
+
+  .tooltip {
+    display: flex;
+    position: relative;
+    &::before {
+      content: attr(data-port);
+      @extend %tooltipBox;
+      white-space: normal;
+    }
+
+    &:hover::before {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+  .delete {
+    height: 15px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  span {
+    min-width: 15vw;
+    text-align: center;
+
+    @media screen and (min-width: 900px) {
+      min-width: 10vw;
+    }
+  }
+  .quantity {
+    margin-left: auto;
+    color: #00e6ff;
+    font-weight: bold;
+    margin: 0 0.5rem;
+  }
+}
+
+#info {
+  // display:
+}
+
+#results {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  padding: 10px;
+  background: #1c1b70;
+  border-radius: 10px;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 100px;
+  a {
+    position: relative;
+    margin-left: 20px;
+    i {
+      font-size: 30px;
+      color: $primary-light;
+    }
+  }
+  a:hover i {
+    color: $primary-color;
+    transform: scale(1.05);
+  }
+  a::before {
+    content: attr(data-message);
+    @extend %tooltipBox;
+  }
+  a:hover::before {
+    visibility: visible;
+    opacity: 100;
+  }
+  a::after {
+    @extend %tooltipArrow;
+    margin-top: 25px;
+    margin-right: -3px;
+  }
+  a:hover::after {
+    visibility: visible;
+    opacity: 100;
+  }
+}

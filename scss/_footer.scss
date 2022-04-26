@@ -33,10 +33,16 @@ footer {
         margin: 2px;
         color: $light-color;
         margin-left: -15px;
+        font-size: 0.8rem;
       }
       & a i:first-child {
-        width: 10px;
+        width: 17px;
+        font-size: 20px;
         visibility: hidden;
+      }
+
+      .arrow {
+        font-size: 25px;
       }
     }
     & > :last-child {
@@ -48,10 +54,6 @@ footer {
       a {
         @include flex-center;
         margin: 0.5rem 0;
-
-        & i:first-child {
-          width: 13px;
-        }
       }
     }
   }

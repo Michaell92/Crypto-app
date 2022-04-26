@@ -32,6 +32,7 @@ function logOut() {
   signOut(auth)
     .then(() => {
       localStorage.removeItem('coins');
+      localStorage.removeItem('portfolio');
 
       signup.classList.remove('hide-form');
       signout.classList.remove('show-signout');

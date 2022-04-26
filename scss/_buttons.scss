@@ -22,18 +22,16 @@
 }
 %tooltipBox {
   position: absolute;
-  width: 80px;
   z-index: 1;
   line-height: 1.2;
   text-align: center;
-  font-weight: normal;
+  font-weight: bold;
   font-size: 12px;
+  font-family: 'ui-serif';
   top: 160%;
   left: -26px;
   margin-top: 11px;
-  padding: 2px 0;
-  padding-top: 3px;
-  // border: 1px solid (rgba(1, 1, 17, 0.8));
+  padding: 5px 10px;
   border-radius: 5px;
   visibility: hidden;
   opacity: 0;
@@ -46,8 +44,8 @@
   content: '';
   position: absolute;
   top: 21px;
-  right: 7px;
-  border: 8px solid (rgba(1, 1, 17, 0.8));
+  right: 5px;
+  border: 10px solid rgba(1, 1, 17, 0.8);
   border-color: transparent transparent (rgba(1, 1, 17, 0.8)) transparent;
   visibility: hidden;
   opacity: 0;

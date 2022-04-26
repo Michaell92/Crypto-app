@@ -1,0 +1,151 @@
+#coin-container {
+  min-height: 100vh;
+  margin: 5rem 0 5rem 0;
+  padding: 0 5vw;
+
+  .num {
+    color: blue;
+    border: 2px solid white;
+    border-radius: 5px;
+    margin: 3px;
+    padding: 6px;
+  }
+
+  .label {
+    color: #000;
+    font-weight: bold;
+  }
+
+  .lead {
+    color: #000f81;
+  }
+
+  // TITLE
+  #title-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    border-bottom: 4px solid #1b18c9;
+    padding-bottom: 2rem;
+    margin-bottom: 4rem;
+
+    @media screen and (min-width: 750px) {
+      align-items: center;
+      justify-content: space-around;
+      flex-direction: row;
+    }
+
+    #market-cap {
+      border: none;
+      font-size: 1.2rem;
+
+      @media screen and (max-width: 450px) {
+        .label {
+          display: block;
+        }
+      }
+    }
+
+    #coin-title {
+      @include flex-center;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+
+      @media screen and (min-width: 750px) {
+        margin: 0;
+      }
+
+      img {
+        width: 35px;
+        margin-right: 10px;
+      }
+
+      span:first-of-type {
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+
+      span:nth-of-type(2) {
+        margin: 0 30px 0 15px;
+        font-size: 15px;
+        color: #8486d5;
+        font-weight: bold;
+      }
+
+      span:last-of-type {
+        font-size: 1.3rem;
+        border: 4px solid #dddddd;
+        border-radius: 10px;
+        padding: 5px;
+      }
+    }
+  }
+
+  #coin-details {
+    #market-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #price-change {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex-direction: column;
+      margin-top: 2rem;
+
+      #price-change-period {
+        margin-bottom: 2rem;
+        display: flex;
+        flex-wrap: wrap;
+
+        .num {
+          margin: 0.5rem 1rem 0.5rem 0;
+        }
+      }
+
+      #price-change-all-time {
+        display: flex;
+        flex-direction: column;
+
+        .high,
+        .low {
+          margin: 1rem 0;
+        }
+
+        #ath-date {
+          margin-left: 2rem;
+        }
+
+        .label {
+          display: block;
+          margin-bottom: 0.5rem;
+        }
+      }
+    }
+
+    #desc {
+      display: flex;
+      flex-direction: column;
+      #description {
+        margin: 2rem 0;
+        display: flex;
+        flex-direction: column;
+
+        a {
+          color: blue;
+        }
+      }
+
+      #dev-info {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+}

@@ -1,11 +1,11 @@
 import { http } from './http';
 import { ui } from './ui';
-import { ls } from './ls';
+import addToStorage from './ls';
 import { nav } from './nav';
 import { pages } from './list-pages';
 import { filter } from './filterList';
 import reload from './reload';
-import addCoin from './coinDetails';
+import fetchCoin from './coinDetails';
 
 const globalLink = 'https://api.coingecko.com/api/v3/global';
 const coinsLink =
@@ -71,7 +71,7 @@ async function getCoinData(link) {
     reload('home');
   }
 
-  document.getElementById('loader').className = '';
+  loader.className = '';
 }
 
 // Create chart
@@ -234,19 +234,23 @@ function sortBySupply(e) {
 
 // Add to favorites
 function addToFavorites(e) {
-  let fav = e.target.closest('#fav');
+  e.preventDefault();
+
+  let fav = e.target.closest('.fav');
+  let port = e.target.closest('.portf');
   let coin = e.target.closest('.coin');
 
   if (fav) {
-    ls.addToStorage(fav);
+    addToStorage(fav, 'newFav', 'coins');
     ui.addToFav(fav);
+  } else if (port) {
+    addToStorage(port, 'portfolio-active', 'portfolio');
+    ui.addToPortfolio(port);
   } else if (coin) {
     // Get coin details
     const id = coin.closest('tr').id;
     getSingleCoin(id);
   }
-
-  e.preventDefault();
 }
 
 // Show favorites
@@ -359,23 +363,8 @@ async function getSingleCoin(id) {
   const loader = document.getElementById('loader');
   loader.className = 'loader';
 
-  const dataArr = [];
-  const marketsLink = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${id}&order=market_cap_desc&price_change_percentage=1h%2C24h%2C7d%2C30d%2C1y`;
-  const infoLink = `https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=false&market_data=false&community_data=false`;
+  await fetchCoin(id);
 
-  for (const link of [marketsLink, infoLink]) {
-    await http
-      .get(link)
-      .then((data) => {
-        dataArr.push(data);
-      })
-      .catch(() => {
-        loader.className = '';
-        reload('home');
-      });
-  }
-
-  addCoin(dataArr);
   loader.className = '';
 
   // SCROLL INTO VIEW

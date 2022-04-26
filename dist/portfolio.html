@@ -3,17 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/network.css" />
+    <link rel="stylesheet" href="css/portfolio.css" />
     <link rel="stylesheet"
     href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css
     />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.js"
+      integrity="sha512-aWx9jeVTj8X49UzUnUHGIlo6rNne1xNsCny/lL0QwUTQK2eilrHXpSk9xbRm4FJ4eLi2XBmnFlRkWPoChSx8bA=="
+      crossorigin="anonymous"
+    ></script>
+    <link rel="icon" type="image/png" href="img/favicon.png" sizes="16x16" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap"
       rel="stylesheet"
     />
-    <link rel="icon" type="image/png" href="img/favicon.png" sizes="16x16" />
-    <title>News</title>
+    <title>Coinscanner</title>
   </head>
   <body>
     <div id="loadWrap"><div id="loader"></div></div>
@@ -89,22 +94,19 @@
         </ul>
       </nav>
     </div>
-    <section id="home-c">
-      <div class="container">
-        <span class="lead"
-          >Check for address balance and transaction details</span
-        >
-        <div id="buttons-container">
-          <button class="check-button btc btc-active" id="btc">BTC</button>
-          <button class="check-button eth" id="eth">ETH</button>
-        </div>
-        <textarea
-          type="text"
-          id="type-container"
-          placeholder="Enter BTC address here..."
-        ></textarea>
-        <button id="check">Check</button>
+    <section id="home" class="container">
+      <div id="title-container">
+        <div class="title">Portfolio</div>
         <div id="results"></div>
+      </div>
+      <div id="portfolio">
+        <div class="row info">
+          <span>Coin</span>
+          <span>Price</span>
+          <span>24h Change</span>
+          <span>Quantity</span>
+        </div>
+        <div id="coins"></div>
       </div>
     </section>
     <footer id="footer">
@@ -139,6 +141,6 @@
         <span>&copy; 2022 Coinscanner</span>
       </div>
     </footer>
-    <script src="js/network.js"></script>
+    <script src="js/portfolio.js"></script>
   </body>
 </html>

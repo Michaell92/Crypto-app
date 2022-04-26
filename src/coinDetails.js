@@ -1,4 +1,25 @@
 import { formatNumber, formatShortDate, formatPercent } from './formatters';
+import { http } from './http';
+
+async function fetchCoin(id) {
+  const dataArr = [];
+  const marketsLink = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${id}&order=market_cap_desc&price_change_percentage=1h%2C24h%2C7d%2C30d%2C1y`;
+  const infoLink = `https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=false&market_data=false&community_data=false`;
+
+  for (const link of [marketsLink, infoLink]) {
+    await http
+      .get(link)
+      .then((data) => {
+        dataArr.push(data);
+      })
+      .catch(() => {
+        loader.className = '';
+        reload('home');
+      });
+  }
+
+  addCoin(dataArr);
+}
 
 function addCoin(data) {
   const home = document.getElementById('home');
@@ -113,4 +134,4 @@ function addCoin(data) {
   home.outerHTML = template;
 }
 
-export default addCoin;
+export default fetchCoin;

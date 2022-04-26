@@ -528,16 +528,30 @@ class UI {
 
   // Add to favorites
   addToFav(coin) {
-    let icon = coin.firstChild;
-
-    if (!icon.classList.contains('newFav')) {
-      icon.classList.add('newFav');
-      icon.classList.remove('favHover');
-      coin.setAttribute('data-fav', 'Remove');
+    if (!coin.classList.contains('newFav')) {
+      coin.classList.add('newFav');
+      coin.classList.remove('favHover');
+      coin.closest('.favorite-coin').setAttribute('data-fav', 'Remove');
     } else {
-      icon.classList.remove('newFav');
-      icon.classList.add('favHover');
-      coin.setAttribute('data-fav', 'Add to favorites');
+      coin.classList.remove('newFav');
+      coin.classList.add('favHover');
+      coin
+        .closest('.favorite-coin')
+        .setAttribute('data-fav', 'Add to favorites');
+    }
+  }
+
+  addToPortfolio(coin) {
+    if (!coin.classList.contains('portfolio-active')) {
+      coin.classList.add('portfolio-active');
+      coin.classList.remove('portfolio');
+      coin.closest('.portfolio-coin').setAttribute('data-port', 'Remove');
+    } else {
+      coin.classList.remove('portfolio-active');
+      coin.classList.add('portfolio');
+      coin
+        .closest('.portfolio-coin')
+        .setAttribute('data-port', 'Add to portfolio');
     }
   }
 
@@ -549,7 +563,7 @@ class UI {
     // Remove coins from favorites
     this.tBody.addEventListener('click', (e) => {
       if (icon.classList.contains('active')) {
-        let fav = e.target.closest('#fav');
+        let fav = e.target.closest('.fav');
         if (!fav) return;
 
         let row = fav.closest('tr');
@@ -593,6 +607,7 @@ function itemTemplate(coin, tBody) {
   let dataArr = [];
   let getArr = [];
   let active = '';
+  let portfolioActive = '';
   let html = '';
   let color24h;
   let color7d;
@@ -682,8 +697,19 @@ function itemTemplate(coin, tBody) {
       }
     }
 
+    if (localStorage.portfolio) {
+      getArr = JSON.parse(localStorage.getItem('portfolio'));
+
+      // Add fav coins
+      if (getArr.indexOf(coin[i].id) >= 0) {
+        portfolioActive = 'portfolio-active';
+      } else {
+        portfolioActive = 'portfolio';
+      }
+    }
+
     dataArr.push(
-      `<td><a href="#" data-fav="Add to favorites" id="fav"><i class="fas fa-star ${active}"></i></a><a href="#" data-port="Add to portfolio" id="portf"><i class="fas fa-plus"></i></a></td></tr>`
+      `<td><a href="#" data-fav="Add to favorites" class="favorite-coin"><i class="fas fa-star fav ${active}"></i></a><a href="#" data-port="Add to portfolio" class="portfolio-coin"><i class="fas fa-plus portf ${portfolioActive}"></i></a></td></tr>`
     );
 
     // Join arr

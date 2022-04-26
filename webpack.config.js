@@ -17,6 +17,7 @@ module.exports = {
     'js/markets': path.resolve(__dirname, './src/markets.js'),
     'js/network': path.resolve(__dirname, './src/network.js'),
     'js/form': path.resolve(__dirname, './src/form.js'),
+    'js/portfolio': path.resolve(__dirname, './src/portfolio.js'),
     'css/chart': path.resolve(__dirname, './scss/chart.scss'),
     'css/finance': path.resolve(__dirname, './scss/finance.scss'),
     'css/global': path.resolve(__dirname, './scss/global.scss'),
@@ -24,6 +25,7 @@ module.exports = {
     'css/style': path.resolve(__dirname, './scss/style.scss'),
     'css/table': path.resolve(__dirname, './scss/table.scss'),
     'css/form': path.resolve(__dirname, './scss/form.scss'),
+    'css/portfolio': path.resolve(__dirname, './scss/portfolio.scss'),
   },
 
   module: {

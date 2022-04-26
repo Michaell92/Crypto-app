@@ -12,11 +12,11 @@ function formatPercent(num, decimal = 2) {
   const per = parseFloat(num).toFixed(decimal);
 
   if (per > 0) {
-    return `<i class="fas fa-caret-up" style="color: green"}"></i>
-       <span style="color: green">${per}%</span>`;
+    return `<i class="fas fa-caret-up" style="color: lime"}"></i>
+       <span style="color: lime">${per}</span>`;
   } else if (per < 0) {
     return `<i class="fas fa-caret-down" style="color: red"}"></i>
-      <span style="color: red">${String(per).replace('-', '')}%</span>`;
+      <span style="color: red">${String(per).replace('-', '')}</span>`;
   } else {
     return per + '%';
   }
