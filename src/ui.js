@@ -700,8 +700,17 @@ function itemTemplate(coin, tBody) {
     if (localStorage.portfolio) {
       getArr = JSON.parse(localStorage.getItem('portfolio'));
 
-      // Add fav coins
-      if (getArr.indexOf(coin[i].id) >= 0) {
+      let isCoin = null;
+
+      // Check if portfolio coin is present
+      getArr.forEach((item) => {
+        if (item.id === coin[i].id) {
+          isCoin = true;
+        }
+      });
+
+      // Add portfolio coin
+      if (isCoin) {
         portfolioActive = 'portfolio-active';
       } else {
         portfolioActive = 'portfolio';

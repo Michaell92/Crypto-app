@@ -55,12 +55,16 @@ portfolio.addEventListener('click', async (e) => {
 function editQuantity(row) {
   const input = row.querySelector('.input-quantity');
   const quantity = row.querySelector('.quantity');
+  const tooltip = row.querySelector('.quantity-container');
 
   toggleVisibility(row, quantity, input);
+
+  tooltip.setAttribute('data-port', 'Confirm');
 
   // Track input value
   input.addEventListener('input', trackChanges);
   input.focus();
+
   // Show current value
   input.value = quantity.innerText;
 
@@ -71,13 +75,24 @@ function editQuantity(row) {
 function confirmQuantity(row) {
   const quantity = row.querySelector('.quantity');
   const input = row.querySelector('.input-quantity');
-
-  input.removeEventListener('input', trackChanges);
+  const tooltip = row.querySelector('.quantity-container');
+  const coins = JSON.parse(localStorage.getItem('portfolio'));
 
   toggleVisibility(row, quantity, input);
 
+  tooltip.setAttribute('data-port', 'Change quantity');
+
+  input.removeEventListener('input', trackChanges);
+
   // Show new value
   quantity.innerText = inputValue;
+
+  // Change quantity in ls
+  coins.forEach((coin) => {
+    if (coin.id === row.id) coin.quantity = inputValue;
+  });
+
+  localStorage.setItem('portfolio', JSON.stringify(coins));
 
   calculateTotal();
 }
@@ -103,7 +118,11 @@ async function getPortfolioCoins() {
   const loader = document.getElementById('loader');
   loader.className = 'loader';
 
-  const coins = lsCoins.join();
+  let coins = '';
+
+  for (let i = 0; i < lsCoins.length; i++) {
+    coins += lsCoins[i].id + ',';
+  }
 
   //   Get coins
   const api = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coins}&order=market_cap_desc&sparkline=false`;
@@ -155,29 +174,44 @@ function addToHTML(coins) {
   const coinsHTML = document.getElementById('coins');
 
   for (const coin of coins) {
+    let quantity = 0;
+    // Find quantity for coin
+    for (let i = 0; i < lsCoins.length; i++) {
+      if (lsCoins[i].id === coin.id) {
+        quantity = lsCoins[i].quantity;
+        break;
+      }
+    }
+
     html += `
     <div class="row" id=${coin.id}>
+    <div class="first">
           <img src="${coin.image.replace('large', 'thumb')}" class="coin">
           <span class="cell"><span class="name">${coin.name}</span></span>
           <span class="symbol cell">${coin.symbol}</span>
-          <span class="cell">$<span class="price">${formatNumber(
+          <span class="cell price-container">$<span class="price">${formatNumber(
             coin.current_price
           )}</span></span>
           <span class="percent cell">${formatPercent(
             coin.price_change_percentage_24h
           )}</span>
-          <div class="cell edit-container">
-          <div class="total cell">
-              <span class="quantity">1</span>
-              <input type="text" class="input-quantity">
-          </div>
-            <div class="quantity-container" data-port="Change quantity">
-              <i class="fas fa-pencil-alt edit-quantity"></i>
-              <i class="fas fa-check confirm-quantity"></i>
+      </div>
+          <div class="second">
+
+            <span class="value cell"></span>
+            <div class="cell edit-container">
+            <div class="total cell">
+                <span class="quantity">${quantity}</span>
+                <input type="text" class="input-quantity">
             </div>
-          </div>
-          <div class="tooltip" data-port="Remove from portfolio">
-              <img class="delete" src="./img/delete.png" alt="">
+              <div class="quantity-container" data-port="Change quantity">
+                <i class="fas fa-pencil-alt edit-quantity"></i>
+                <i class="fas fa-check confirm-quantity"></i>
+              </div>
+            </div>
+            <div class="tooltip" data-port="Remove from portfolio">
+                <img class="delete" src="./img/delete.png" alt="">
+            </div>
           </div>
     </div>
     `;
@@ -190,19 +224,18 @@ function addToHTML(coins) {
 function deleteCoin(del) {
   const row = del.closest('.row');
   const id = row.id;
+  const coins = JSON.parse(localStorage.getItem('portfolio'));
+  const index = coins.findIndex((coin) => coin.id === id);
 
   // Remove coin from dom
   row.remove();
 
   // Remove coin from ls
-  const lsCoins = localStorage.getItem('portfolio');
-  const coins = JSON.parse(lsCoins);
-  coins.splice(coins.indexOf(id), 1);
+  coins.splice(index, 1);
   localStorage.setItem('portfolio', JSON.stringify(coins));
 
   // Check if portfolio is empty
-  const allCoins = JSON.parse(localStorage.getItem('portfolio'));
-  if (!allCoins || !allCoins.length) setMessage();
+  if (!coins || !coins.length) setMessage();
 
   // Recalculate total
   calculateTotal();
@@ -219,6 +252,8 @@ function calculateTotal() {
       parseFloat(rows[i].querySelector('.price').innerHTML.replace(',', '')) *
       rows[i].querySelector('.quantity').innerHTML;
     sum += value;
+
+    rows[i].querySelector('.value').innerText = `$${formatNumber(value)}`;
   }
 
   total.innerHTML = formatNumber(sum);

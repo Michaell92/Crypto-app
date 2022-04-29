@@ -8,20 +8,41 @@ function addToStorage(coin, active, ls) {
 
   // Get coin arr from storage, else new
   if (coins) {
-    getArr = JSON.parse(localStorage.getItem(ls));
+    getArr = JSON.parse(coins);
+    const newCoin = ls === 'coins' ? id : { id: id, quantity: 2 };
 
-    // Add new coin to arr
-    if (getArr.indexOf(id) < 0) {
-      getArr.push(id);
+    if (ls === 'coins') {
+      const id = getArr.indexOf(id);
+
+      // Add new coin to arr
+      if (id < 0) {
+        getArr.push(id);
+      } else {
+        getArr.splice(id, 1);
+      }
     } else {
-      getArr.splice(getArr.indexOf(id), 1);
+      const index = getArr.findIndex((coin) => coin.id === id);
+
+      // Check if portfolio coin is present
+      if (index >= 0) {
+        getArr.splice(index, 1);
+      } else {
+        getArr.push({ id: id, quantity: 2 });
+      }
     }
 
     // Set new arr
     localStorage.setItem(ls, JSON.stringify(getArr));
   } else {
+    // Add new coin to ls
     if (!coin.classList.contains(active)) {
-      getArr.push(id);
+      if (ls === 'coins') {
+        getArr.push(id);
+      } else {
+        const portfolioCoin = { id: id, quantity: 2 };
+        getArr.push(portfolioCoin);
+      }
+
       localStorage.setItem(ls, JSON.stringify(getArr));
     }
   }
