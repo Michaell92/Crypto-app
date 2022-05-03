@@ -124,7 +124,12 @@ body {
         line-height: 40px;
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         white-space: nowrap;
-
+        a,
+        span {
+          font-size: 0.9rem;
+          padding: 0 10px;
+          color: #1c1b70;
+        }
         &:not(:first-child):not(:nth-child(2)):not(:nth-child(5)):not(:nth-child(6))
           a {
           padding-right: 25px;
@@ -132,11 +137,6 @@ body {
         &:nth-child(5),
         &:nth-child(6) {
           padding-right: 10px;
-        }
-        &:last-child span {
-          font-size: 0.9rem;
-          padding: 0 10px;
-          color: #1c1b70;
         }
         a i {
           visibility: hidden;

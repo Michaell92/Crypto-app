@@ -606,8 +606,6 @@ class UI {
 function itemTemplate(coin, tBody) {
   let dataArr = [];
   let getArr = [];
-  let active = '';
-  let portfolioActive = '';
   let html = '';
   let color24h;
   let color7d;
@@ -615,6 +613,11 @@ function itemTemplate(coin, tBody) {
   for (let i = 0; i < coin.length; i++) {
     const percent24h = coin[i].price_change_percentage_24h;
     const percent7d = coin[i].price_change_percentage_7d_in_currency;
+
+    let active = 'favHover';
+    let portfolioActive = 'portfolio';
+    let dataFavorites = 'Add to favorites';
+    let dataPortfolio = 'Add to portfolio';
 
     // Percentage styling
     parseFloat(percent24h) > 0
@@ -692,33 +695,30 @@ function itemTemplate(coin, tBody) {
       // Add fav coins
       if (getArr.indexOf(coin[i].id) >= 0) {
         active = 'newFav';
-      } else {
-        active = 'favHover';
       }
     }
 
     if (localStorage.portfolio) {
       getArr = JSON.parse(localStorage.getItem('portfolio'));
-
-      let isCoin = null;
-
       // Check if portfolio coin is present
-      getArr.forEach((item) => {
-        if (item.id === coin[i].id) {
-          isCoin = true;
-        }
-      });
 
-      // Add portfolio coin
-      if (isCoin) {
-        portfolioActive = 'portfolio-active';
-      } else {
-        portfolioActive = 'portfolio';
+      for (let e = 0; e < getArr.length; e++) {
+        if (getArr[e].id === coin[i].id) {
+          portfolioActive = 'portfolio-active';
+          break;
+        }
       }
     }
 
+    if (active === 'newFav') dataFavorites = 'Remove';
+    if (portfolioActive === 'portfolio-active') dataPortfolio = 'Remove';
+
     dataArr.push(
-      `<td><a href="#" data-fav="Add to favorites" class="favorite-coin"><i class="fas fa-star fav ${active}"></i></a><a href="#" data-port="Add to portfolio" class="portfolio-coin"><i class="fas fa-plus portf ${portfolioActive}"></i></a></td></tr>`
+      `<td><a href="#" data-fav='${dataFavorites}' class="favorite-coin">
+      <i class="fas fa-star fav ${active}"></i></a>
+      <a href="#" data-port='${dataPortfolio}' class="portfolio-coin">
+      <i class="fas fa-plus portf ${portfolioActive}">
+      </i></a></td></tr>`
     );
 
     // Join arr
