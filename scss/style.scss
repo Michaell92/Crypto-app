@@ -7,6 +7,7 @@
 @import 'reload';
 @import 'footer';
 @import 'coinDetails';
+@import 'confirmation';
 
 * {
   box-sizing: border-box;
@@ -124,7 +125,7 @@ body {
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         white-space: nowrap;
 
-        &:not(:first-child):not(:nth-child(2)):not(:nth-child(5)):not(:nth-child(6)):not(:nth-child(8))
+        &:not(:first-child):not(:nth-child(2)):not(:nth-child(5)):not(:nth-child(6))
           a {
           padding-right: 25px;
         }
@@ -132,8 +133,10 @@ body {
         &:nth-child(6) {
           padding-right: 10px;
         }
-        &:nth-child(8) a {
-          padding-right: 12px;
+        &:last-child span {
+          font-size: 0.9rem;
+          padding: 0 10px;
+          color: #1c1b70;
         }
         a i {
           visibility: hidden;
@@ -185,7 +188,7 @@ body {
           align-items: center;
           justify-content: flex-start;
 
-          @media screen and (max-width: 550px) {
+          @media screen and (max-width: 1400px) {
             width: auto;
           }
           & > :first-child {
@@ -208,7 +211,7 @@ body {
             font-weight: lighter;
             color: (lighten($secondary-color, 40%));
 
-            @media screen and (max-width: 550px) {
+            @media screen and (max-width: 1400px) {
               position: static;
               transform: translateX(0);
               margin-left: 15px;
@@ -223,18 +226,25 @@ body {
         }
         & > :last-child {
           width: 100%;
-          .newFav {
-            color: $primary-color;
-          }
+          text-align: center;
+
           a {
             margin-right: 7px;
+            i {
+              font-size: 16px;
+            }
           }
           .favHover:hover {
             color: (lighten($primary-color, 35%));
           }
-          a i {
-            color: $primary-light;
-            padding: 3px;
+          .favorite-coin {
+            i {
+              color: $primary-light;
+              padding: 3px;
+            }
+            .newFav {
+              color: $primary-color;
+            }
           }
           .portfolio {
             color: #c3e3bb;
@@ -260,7 +270,7 @@ body {
 
             &::after {
               @extend %tooltipArrow;
-              margin-right: -5px;
+              margin-right: -4px;
             }
 
             &:hover::before {
@@ -283,7 +293,7 @@ body {
             }
             &::after {
               @extend %tooltipArrow;
-              margin-right: -6px;
+              margin-right: -8px;
             }
 
             &:hover::before {

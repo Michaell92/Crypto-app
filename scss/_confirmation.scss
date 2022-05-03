@@ -1,0 +1,55 @@
+.confirmation-box {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: fixed;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #0a005c;
+  padding: 0.5rem 2rem 2rem;
+  color: #fff;
+  border-radius: 20px;
+
+  .lead {
+    text-align: center;
+    font-size: 22px;
+    #newCoin {
+    }
+  }
+
+  #addQuantity {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0 2rem 0;
+    font-weight: bold;
+    input {
+      margin-left: 1rem;
+      padding: 5px;
+      border-radius: 5px;
+      border: none;
+      outline-color: aqua;
+    }
+  }
+  #confirm {
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 9px 39px;
+    border: none;
+    background-color: #4949cf;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    &:hover {
+      background-color: #3838ff;
+    }
+  }
+}
+
+.show-element {
+  display: flex;
+}

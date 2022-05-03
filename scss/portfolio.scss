@@ -214,7 +214,7 @@ body {
   font-weight: bold;
   color: white;
   padding: 10px;
-  background: #1c1b70;
+  background: #1c7dfc;
   border-radius: 10px;
 }
 
@@ -252,6 +252,29 @@ body {
     visibility: visible;
     opacity: 100;
   }
+}
+
+#save,
+#saveInfo {
+  display: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  padding: 12px 25px;
+  margin-top: 2rem;
+  background-color: #1c1b70;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+
+  &:hover {
+    background-color: #6766c1;
+  }
+}
+
+#portfolio .show-save {
+  display: block;
 }
 
 @media screen and (max-width: 850px) {

@@ -23,8 +23,8 @@ if (user) {
   signup.classList.add('hide-form');
   signout.classList.add('show-signout');
 
-  userName.innerText = user;
-  console.log(user);
+  const name = JSON.parse(user).name;
+  userName.innerText = name;
 }
 
 // Log out user
@@ -36,6 +36,8 @@ function logOut() {
 
       signup.classList.remove('hide-form');
       signout.classList.remove('show-signout');
+
+      location.href = 'index.html';
     })
     .catch((err) => {
       console.log(err);

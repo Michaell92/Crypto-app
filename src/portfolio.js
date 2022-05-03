@@ -3,13 +3,22 @@ import { http } from './http';
 import reload from './reload';
 import { formatNumber, formatPercent } from './formatters';
 import fetchCoin from './coinDetails';
+import { database, ref, update } from './firebase';
 
 const globalLink = 'https://api.coingecko.com/api/v3/global';
 
 const portfolio = document.getElementById('coins');
 const lsCoins = JSON.parse(localStorage.getItem('portfolio'));
 const total = document.getElementById('total');
+const save = document.getElementById('save');
+const saveInfo = document.getElementById('saveInfo');
+const user = localStorage.getItem('currentUser');
 let inputValue = '';
+
+if (user) {
+  saveInfo.classList.remove('show-save');
+  save.classList.add('show-save');
+}
 
 // Event listeners
 document.addEventListener('DOMContentLoaded', () => {
@@ -51,6 +60,7 @@ portfolio.addEventListener('click', async (e) => {
       break;
   }
 });
+save.addEventListener('click', addToFB);
 
 function editQuantity(row) {
   const input = row.querySelector('.input-quantity');
@@ -80,7 +90,7 @@ function confirmQuantity(row) {
 
   toggleVisibility(row, quantity, input);
 
-  tooltip.setAttribute('data-port', 'Change quantity');
+  tooltip.setAttribute('data-port', 'Edit quantity');
 
   input.removeEventListener('input', trackChanges);
 
@@ -201,10 +211,10 @@ function addToHTML(coins) {
             <span class="value cell"></span>
             <div class="cell edit-container">
             <div class="total cell">
-                <span class="quantity">${quantity}</span>
+                <span class="quantity">${quantity || 1}</span>
                 <input type="text" class="input-quantity">
             </div>
-              <div class="quantity-container" data-port="Change quantity">
+              <div class="quantity-container" data-port="Edit quantity">
                 <i class="fas fa-pencil-alt edit-quantity"></i>
                 <i class="fas fa-check confirm-quantity"></i>
               </div>
@@ -223,6 +233,7 @@ function addToHTML(coins) {
 // Delete a coin from the portfolio
 function deleteCoin(del) {
   const row = del.closest('.row');
+
   const id = row.id;
   const coins = JSON.parse(localStorage.getItem('portfolio'));
   const index = coins.findIndex((coin) => coin.id === id);
@@ -255,7 +266,6 @@ function calculateTotal() {
 
     rows[i].querySelector('.value').innerText = `$${formatNumber(value)}`;
   }
-
   total.innerHTML = formatNumber(sum);
 }
 
@@ -274,4 +284,14 @@ async function getCoinDetails(coin) {
 
 function isNumber(n) {
   return !isNaN(parseFloat(n)) && !isNaN(n - 0);
+}
+
+function addToFB() {
+  if (user) {
+    const coins = JSON.parse(localStorage.getItem('portfolio'));
+    const id = JSON.parse(user).id;
+    const db = ref(database, '/userList/' + id);
+
+    update(db, { coins });
+  }
 }

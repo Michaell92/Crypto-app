@@ -22,9 +22,6 @@ const passwordRepeat = document.getElementById('passwordRepeat');
 const signup = document.getElementById('signup');
 const signout = document.getElementById('signout');
 const userName = document.getElementById('username');
-
-const form = document.getElementById('form-container');
-
 const globalLink = 'https://api.coingecko.com/api/v3/global';
 
 // Event listeners
@@ -59,26 +56,35 @@ function validate(e) {
 
 // Create firebase account
 function signUp() {
+  const loader = document.getElementById('loader');
+  loader.className = 'loader';
+
   createUserWithEmailAndPassword(auth, email.value, password.value)
-    .then((userCredential) => {
+    .then(async (userCredential) => {
       // Signed in
       const userId = userCredential.user.uid;
-      // Set storage
-      localStorage.setItem('currentUser', email.value);
 
-      const coins = JSON.parse(localStorage.getItem('coins'));
+      // Set storage
+      localStorage.setItem(
+        'currentUser',
+        JSON.stringify({ name: email.value, id: userId })
+      );
+
+      const coins = JSON.parse(localStorage.getItem('portfolio'));
 
       // Get user details
-      const userData = ref(database, '/userList' + '/' + userId + '/coins');
+      const userData = ref(database, '/userList/' + userId + '/coins');
 
       // Save current settings
-      set(userData, coins);
+      await set(userData, coins);
 
       // Show user
       showUser(email.value);
 
+      loader.className = '';
+
       // Change location
-      // location.href = '/index.html';
+      location.href = '/index.html';
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -101,12 +107,15 @@ function createWarning(message) {
 
 function signIn(e) {
   e.preventDefault();
+  const loader = document.getElementById('loader');
+  loader.className = 'loader';
 
   signInWithEmailAndPassword(auth, email.value, password.value)
-    .then((userCredential) => {
+    .then(async (userCredential) => {
       // Signed in
       const user = userCredential.user;
-      localStorage.setItem('currentUser', email.value);
+      const userName = { name: email.value, id: user.uid };
+      localStorage.setItem('currentUser', JSON.stringify(userName));
 
       // Get user details
       const userData = ref(database, '/userList' + '/' + user.uid + '/coins');
@@ -115,13 +124,12 @@ function signIn(e) {
       showUser(email.value);
 
       // Get user details
-      get(userData)
+      await get(userData)
         .then((snapshot) => {
           if (snapshot.exists()) {
             const userData = snapshot.val();
-            console.log(userData);
             // Update local storage
-            localStorage.setItem('coins', JSON.stringify(userData));
+            localStorage.setItem('portfolio', JSON.stringify(userData));
           } else {
             console.log('No data available');
           }
@@ -130,8 +138,10 @@ function signIn(e) {
           console.error(error);
         });
 
+      loader.className = '';
+
       // Change location
-      // location.href = '/index.html';
+      location.href = '/index.html';
     })
     .catch((error) => {
       // const errorCode = error.code;

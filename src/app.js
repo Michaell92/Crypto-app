@@ -11,6 +11,8 @@ const globalLink = 'https://api.coingecko.com/api/v3/global';
 const coinsLink =
   'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=25&page=1&sparkline=true&price_change_percentage=7d';
 const icon = document.querySelector('#favorites').childNodes[2];
+const confirmButton = document.getElementById('confirm');
+let port = null;
 
 // Event listeners
 document.addEventListener('DOMContentLoaded', initialLoad());
@@ -21,7 +23,6 @@ document.querySelector('#mcap').addEventListener('click', sortByMarketCap);
 document.querySelector('#daily').addEventListener('click', sortByDaily);
 document.querySelector('#weekly').addEventListener('click', sortByWeekly);
 document.querySelector('#volume').addEventListener('click', sortByVolume);
-document.querySelector('#supply').addEventListener('click', sortBySupply);
 document.querySelector('#mt-body').addEventListener('click', addToFavorites);
 document.querySelector('#favorites').addEventListener('click', showFavorites);
 document.querySelector('#home').addEventListener('click', returnHome);
@@ -37,6 +38,11 @@ document.querySelector('#search').addEventListener('keyup', (e) => {
 });
 document.querySelector('#searchIcon').addEventListener('click', getCoin);
 document.querySelector('#searchForm').addEventListener('submit', getCoin);
+confirmButton.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  confirmAdditionToPortfolio();
+});
 
 // Content loaded listener
 function initialLoad() {
@@ -226,31 +232,58 @@ function sortByVolume(e) {
   e.preventDefault();
 }
 
-// Sort by supply
-function sortBySupply(e) {
-  ui.sort_8(e.currentTarget);
-  e.preventDefault();
-}
-
 // Add to favorites
 function addToFavorites(e) {
   e.preventDefault();
 
   let fav = e.target.closest('.fav');
-  let port = e.target.closest('.portf');
   let coin = e.target.closest('.coin');
+  port = e.target.closest('.portf');
 
   if (fav) {
     addToStorage(fav, 'newFav', 'coins');
     ui.addToFav(fav);
   } else if (port) {
-    addToStorage(port, 'portfolio-active', 'portfolio');
-    ui.addToPortfolio(port);
+    addToPortfolio();
   } else if (coin) {
     // Get coin details
     const id = coin.closest('tr').id;
     getSingleCoin(id);
   }
+}
+
+// Add coin to portfolio
+function addToPortfolio() {
+  const confirm = document.getElementById('confirmation');
+  const newCoin = document.getElementById('newCoin');
+  const isNew = !port.classList.contains('portfolio-active');
+  const input = document.getElementById('quantityInput');
+
+  input.value = '';
+  newCoin.innerText = port.closest('tr').id;
+
+  // Check if coin is already in portfolio
+  if (isNew) {
+    confirm.classList.add('show-element');
+
+    input.focus();
+  } else {
+    confirm.classList.remove('show-element');
+
+    addToStorage(port, 'portfolio-active', 'portfolio');
+    ui.addToPortfolio(port);
+  }
+}
+
+function confirmAdditionToPortfolio() {
+  const confirm = document.getElementById('confirmation');
+  const quantity = document.getElementById('quantityInput');
+
+  addToStorage(port, 'portfolio-active', 'portfolio', quantity.value);
+  ui.addToPortfolio(port);
+
+  // Reset input and hide confirmation
+  confirm.classList.remove('show-element');
 }
 
 // Show favorites

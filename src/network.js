@@ -1,5 +1,6 @@
 import { http } from './http';
 import { nav } from './nav';
+import reload from './reload';
 import { formatNumber } from './formatters';
 
 const globalLink = 'https://api.coingecko.com/api/v3/global';
@@ -58,7 +59,10 @@ async function getAddressInfo() {
         results.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     })
-    .catch(() => {});
+    .catch(() => {
+      loader.className = '';
+      reload('home-c');
+    });
 
   loader.className = '';
 }

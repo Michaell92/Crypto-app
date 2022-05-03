@@ -22,6 +22,15 @@
   </head>
   <body>
     <div id="loadWrap"><div id="loader"></div></div>
+    <div id="confirmation" class="confirmation-box">
+      <span class="lead"
+        >Add <span id="newCoin">Bitcoin</span> to your portfolio</span
+      >
+      <div id="addQuantity">
+        Quantity: <input type="text" id="quantityInput" />
+      </div>
+      <button id="confirm">OK</button>
+    </div>
     <div id="showcase">
       <div id="burgerMenu"><div></div></div>
       <ul id="nav-top">
@@ -31,12 +40,16 @@
             <a class="btn-secondary txt-center" href="signin.html">Sign in</a>
           </li>
           <li>
-            <a class="btn-primary txt-center" href="signup.html">Create account</a>
+            <a class="btn-primary txt-center" href="signup.html"
+              >Create account</a
+            >
           </li>
         </ul>
         <ul id="signout" class="signout">
           <li>
-            <span id="user-span"><span id="username"></span></span>
+            <span id="user-span"
+              ><a href="portfolio.html" id="username"></a
+            ></span>
           </li>
           <li>
             <a class="btn-primary txt-center" id="signoutButton">Sign out</a>
@@ -44,11 +57,7 @@
         </ul>
         <li id="logo">
           <a href="index.html"
-            ><img
-              src="img/logo.svg"
-              width="30px"
-              height="30px"
-            />Coinscanner</a
+            ><img src="img/logo.svg" width="30px" height="30px" />Coinscanner</a
           >
         </li>
       </ul>
@@ -89,7 +98,9 @@
             </form>
           </li>
           <li>
-            <a href="portfolio.html">My Portfolio <i class="fas fa-chart-line"></i></a>
+            <a href="portfolio.html"
+              >My Portfolio <i class="fas fa-chart-line"></i
+            ></a>
           </li>
         </ul>
       </nav>
@@ -148,15 +159,10 @@
                   >
                 </th>
                 <th>
-                  <a href="#" id="supply" class="unordered"></a>
-                    <!--<i class="fas fa-caret-down"></i> -->7d Graph</a
-                  >
+                  <span id="supply">7d Graph</span>
                 </th>
-                <!-- <th>
-                <a href="#">Total supply</a>
-              </th> -->
                 <th>
-                  <a href="#"></a>
+                  <span>Add to fav/portfolio</span>
                 </th>
               </tr>
             </thead>
@@ -182,10 +188,14 @@
         </div>
         <div class="footerDiv">
           <a href="https://github.com/Michaell92" target="_blank"
-            ><i class="fas fa-angle-left arrow"></i> <i class="fab fa-github fa-3x"></i
+            ><i class="fas fa-angle-left arrow"></i>
+            <i class="fab fa-github fa-3x"></i
           ></a>
-          <a href="https://www.linkedin.com/in/milos-lazic-6a74b5154/" target="_blank"
-            ><i class="fas fa-angle-left arrow"></i> <i class="fab fa-linkedin-in fa-3x"></i
+          <a
+            href="https://www.linkedin.com/in/milos-lazic-6a74b5154/"
+            target="_blank"
+            ><i class="fas fa-angle-left arrow"></i>
+            <i class="fab fa-linkedin-in fa-3x"></i
           ></a>
         </div>
       </div>

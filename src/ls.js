@@ -1,4 +1,4 @@
-function addToStorage(coin, active, ls) {
+function addToStorage(coin, active, ls, quantity) {
   // Get name of the coin
   let id = coin.closest('tr').id;
 
@@ -9,16 +9,15 @@ function addToStorage(coin, active, ls) {
   // Get coin arr from storage, else new
   if (coins) {
     getArr = JSON.parse(coins);
-    const newCoin = ls === 'coins' ? id : { id: id, quantity: 2 };
 
     if (ls === 'coins') {
-      const id = getArr.indexOf(id);
+      const index = getArr.indexOf(id);
 
       // Add new coin to arr
-      if (id < 0) {
+      if (index < 0) {
         getArr.push(id);
       } else {
-        getArr.splice(id, 1);
+        getArr.splice(index, 1);
       }
     } else {
       const index = getArr.findIndex((coin) => coin.id === id);
@@ -27,7 +26,7 @@ function addToStorage(coin, active, ls) {
       if (index >= 0) {
         getArr.splice(index, 1);
       } else {
-        getArr.push({ id: id, quantity: 2 });
+        getArr.push({ id: id, quantity: quantity });
       }
     }
 
@@ -39,7 +38,7 @@ function addToStorage(coin, active, ls) {
       if (ls === 'coins') {
         getArr.push(id);
       } else {
-        const portfolioCoin = { id: id, quantity: 2 };
+        const portfolioCoin = { id: id, quantity: quantity };
         getArr.push(portfolioCoin);
       }
 
