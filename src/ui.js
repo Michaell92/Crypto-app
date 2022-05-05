@@ -637,7 +637,7 @@ function itemTemplate(coin, tBody) {
     dataArr.push(
       `<td><a href="#" class="coin"><img src="${coin[i].image.replace(
         'large',
-        'thumb'
+        'small'
       )}" alt="${coin[i].name}"><span>${coin[i].name}</span></a>
         <span>${coin[i].symbol}</span></td>`
     );
@@ -656,30 +656,30 @@ function itemTemplate(coin, tBody) {
       parseFloat(coin[i].price_change_percentage_24h) > 0
         ? `<i class="fas fa-caret-up" style="color:${color24h}"></i> ${parseFloat(
             coin[i].price_change_percentage_24h
-          ).toFixed(2)}%`
+          ).toFixed(2)}`
         : parseFloat(coin[i].price_change_percentage_24h) < 0
         ? `<i class="fas fa-caret-down" style="color:${color24h}"></i> ${parseFloat(
             coin[i].price_change_percentage_24h
           )
             .toFixed(2)
-            .replace('-', '')}%`
-        : `${parseFloat(coin[i].price_change_percentage_24h).toFixed(2)}%</td>`
+            .replace('-', '')}`
+        : `${parseFloat(coin[i].price_change_percentage_24h).toFixed(2)}</td>`
     );
     dataArr.push(
       `<td style="color:${color7d}">`,
       parseFloat(coin[i].price_change_percentage_7d_in_currency) > 0
         ? `<i class="fas fa-caret-up" style="color:${color7d}"></i> ${parseFloat(
             coin[i].price_change_percentage_7d_in_currency
-          ).toFixed(2)}%`
+          ).toFixed(2)}`
         : parseFloat(coin[i].price_change_percentage_7d_in_currency) < 0
         ? `<i class="fas fa-caret-down" style="color:${color7d}"></i> ${parseFloat(
             coin[i].price_change_percentage_7d_in_currency
           )
             .toFixed(2)
-            .replace('-', '')}%`
+            .replace('-', '')}`
         : `${parseFloat(coin[i].price_change_percentage_7d_in_currency).toFixed(
             2
-          )}%</td>`
+          )}</td>`
     );
     dataArr.push(
       `<td>$${parseFloat(coin[i].total_volume.toFixed(0))

@@ -2,6 +2,8 @@ import { http } from './http';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
 
+document.addEventListener('ontouchstart', () => true);
+
 const signup = document.getElementById('signup');
 const signout = document.getElementById('signout');
 const signoutButton = document.getElementById('signoutButton');
@@ -89,13 +91,13 @@ function navData(market, topNav, total, exchanges) {
   let sy;
   // Style icon
   percent > 0
-    ? (sy = `<i class="fas fa-caret-up"></i> <b>${percent}%</b>`)
+    ? (sy = `<i class="fas fa-caret-up"></i> <b>${percent}</b>`)
     : percent < 0
     ? (sy = `<i class="fas fa-caret-down"></i> <b>${percent.replace(
         '-',
         ''
-      )}%</b>`)
-    : (sy = `${percent}%`);
+      )}</b>`)
+    : (sy = `${percent}`);
 
   // Create data
   topNav.innerHTML = `<li><div><span>Total Market Cap: </span><a href='global.html'>$${parseFloat(

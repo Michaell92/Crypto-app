@@ -18,7 +18,7 @@ function formatPercent(num, decimal = 2) {
     return `<i class="fas fa-caret-down" style="color: red"}"></i>
       <span style="color: red">${String(per).replace('-', '')}</span>`;
   } else {
-    return per + '%';
+    return per;
   }
 }
 
