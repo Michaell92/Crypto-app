@@ -26,504 +26,93 @@ class UI {
     if (test) test.remove();
   }
 
-  // Sort rows by rank
-  sort(rank) {
-    let rows = this.tBody.querySelectorAll('tr');
-    let arrLength = rows.length;
-    let rowArr = [];
+  // Sort rows
+  sort(category, index) {
+    const rows = Array.from(this.tBody.querySelectorAll('tr'));
+    const length = rows.length;
+    let newArr = [];
+    const icon = category.querySelector('i');
     this.tBody.innerHTML = '';
 
-    if (rank.classList.contains('ordered')) {
-      rank.className = 'reversed';
+    if (category.classList.contains('ordered')) {
+      category.classList.toggle('ordered');
+      if (icon) icon.classList.remove('down');
+
       // Get table rows
-      rowArr = Array.from(rows).sort((a, b) => {
-        return b.firstChild.innerHTML - a.firstChild.innerHTML;
-      });
+      newArr = this.sortRows(rows, index, true);
 
       // Fill table rows
-      for (let i = 0; i < arrLength; i++) {
+      for (let i = 0; i < length; i++) {
         let row = this.tBody.insertRow(i);
-        row.innerHTML = rowArr[i].innerHTML;
+        row.innerHTML = newArr[i].innerHTML;
 
         // Redraw canvas
-        const chart = rowArr[i].children[7].firstChild;
+        const chart = newArr[i].children[7].firstChild;
         row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
       }
-    } else if (rank.classList.contains('reversed')) {
-      rank.className = 'ordered';
-      rowArr = Array.from(rows).sort((a, b) => {
-        return a.firstChild.innerHTML - b.firstChild.innerHTML;
-      });
+    } else {
+      category.classList.toggle('ordered');
+      if (icon) icon.classList.add('down');
 
-      for (let i = 0; i < arrLength; i++) {
+      newArr = this.sortRows(rows, index, false);
+
+      for (let i = 0; i < length; i++) {
         let row = this.tBody.insertRow(i);
-        row.innerHTML = rowArr[i].innerHTML;
+        row.innerHTML = newArr[i].innerHTML;
 
         // Redraw canvas
-        const chart = rowArr[i].children[7].firstChild;
-        row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
-      }
-    }
-  }
-
-  // Sort rows by name
-  sort_2(coin) {
-    let rows = this.tBody.querySelectorAll('tr');
-    let arrLength = rows.length;
-    let rowArr = [];
-    this.tBody.innerHTML = '';
-
-    if (coin.classList.contains('unordered')) {
-      coin.className = 'ordered';
-      rowArr = Array.from(rows).sort((a, b) => {
-        return a.childNodes[1].firstChild.childNodes[1].innerHTML >
-          b.childNodes[1].firstChild.childNodes[1].innerHTML
-          ? 1
-          : a.childNodes[1].firstChild.childNodes[1].innerHTML <
-            b.childNodes[1].firstChild.childNodes[1].innerHTML
-          ? -1
-          : 0;
-      });
-
-      for (let i = 0; i < arrLength; i++) {
-        let row = this.tBody.insertRow(i);
-        row.innerHTML = rowArr[i].innerHTML;
-
-        // Redraw canvas
-        const chart = rowArr[i].children[7].firstChild;
-        row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
-      }
-    } else if (coin.classList.contains('ordered')) {
-      coin.className = 'unordered';
-      rowArr = Array.from(rows).sort((a, b) => {
-        return b.childNodes[1].firstChild.childNodes[1].innerHTML.localeCompare(
-          a.childNodes[1].firstChild.childNodes[1].innerHTML
-        );
-      });
-
-      for (let i = 0; i < arrLength; i++) {
-        let row = this.tBody.insertRow(i);
-        row.innerHTML = rowArr[i].innerHTML;
-
-        // Redraw canvas
-        const chart = rowArr[i].children[7].firstChild;
+        const chart = newArr[i].children[7].firstChild;
         row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
       }
     }
   }
 
-  // Sort rows by price
-  sort_3(price) {
-    let rows = this.tBody.querySelectorAll('tr');
-    let arrLength = rows.length;
-    let rowArr = [];
-    this.tBody.innerHTML = '';
+  sortRows(rows, index, lower) {
+    if (![4, 5].includes(index)) {
+      return rows.sort((a, b) => {
+        if (index === 1) {
+          const aa = a.childNodes[1].firstChild.childNodes[1].innerHTML;
+          const bb = b.childNodes[1].firstChild.childNodes[1].innerHTML;
 
-    if (price.classList.contains('unordered')) {
-      price.className = 'ordered';
-      price.firstChild.classList.add('down');
-      rowArr = Array.from(rows).sort((a, b) => {
-        return (
-          parseFloat(
-            b.childNodes[2].innerHTML
-              .match(/[\d+|,|.]+/g)
-              .join()
-              .replace(/,+/g, '')
-          ) -
-          parseFloat(
-            a.childNodes[2].innerHTML
-              .match(/[\d+|,|.]+/g)
-              .join()
-              .replace(/,+/g, '')
-          )
-        );
+          if (lower) {
+            return aa.localeCompare(bb);
+          } else {
+            return bb.localeCompare(aa);
+          }
+        } else {
+          const regEx = /\$|,/g;
+          return this.quickSort(a, b, index, lower, regEx);
+        }
       });
+    } else {
+      const redClass = lower ? 'fa-caret-up' : 'fa-caret-down';
+      const greenClass = lower ? 'fa-caret-down' : 'fa-caret-up';
 
-      for (let i = 0; i < arrLength; i++) {
-        let row = this.tBody.insertRow(i);
-        row.innerHTML = rowArr[i].innerHTML;
+      const redRow = this.sortPercentage(rows, index, redClass, true);
+      const greenRow = this.sortPercentage(rows, index, greenClass, false);
 
-        // Redraw canvas
-        const chart = rowArr[i].children[7].firstChild;
-        row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
-      }
-    } else if (price.classList.contains('ordered')) {
-      price.className = 'unordered';
-      price.firstChild.classList.remove('down');
-      rowArr = Array.from(rows).sort((a, b) => {
-        return (
-          parseFloat(
-            a.childNodes[2].innerHTML
-              .match(/[\d+|,|.]+/g)
-              .join()
-              .replace(/,+/g, '')
-          ) -
-          parseFloat(
-            b.childNodes[2].innerHTML
-              .match(/[\d+|,|.]+/g)
-              .join()
-              .replace(/,+/g, '')
-          )
-        );
-      });
-
-      for (let i = 0; i < arrLength; i++) {
-        let row = this.tBody.insertRow(i);
-        row.innerHTML = rowArr[i].innerHTML;
-
-        // Redraw canvas
-        const chart = rowArr[i].children[7].firstChild;
-        row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
-      }
+      return [...redRow, ...greenRow];
     }
   }
 
-  // Sort rows by market cap
-  sort_4(mcap) {
-    let rows = this.tBody.querySelectorAll('tr');
-    let arrLength = rows.length;
-    let rowArr = [];
-    this.tBody.innerHTML = '';
+  quickSort(a, b, index, lower, regEx) {
+    const aa = parseFloat(a.childNodes[index].innerText.replace(regEx, ''));
+    const bb = parseFloat(b.childNodes[index].innerText.replace(regEx, ''));
 
-    if (mcap.classList.contains('unordered')) {
-      mcap.className = 'ordered';
-      mcap.firstChild.classList.add('down');
-      rowArr = Array.from(rows).sort((a, b) => {
-        return (
-          parseFloat(
-            b.childNodes[3].innerHTML.match(/\d+/g).join().replace(/,+/g, '')
-          ) -
-          parseFloat(
-            a.childNodes[3].innerHTML.match(/\d+/g).join().replace(/,+/g, '')
-          )
-        );
-      });
-
-      for (let i = 0; i < arrLength; i++) {
-        let row = this.tBody.insertRow(i);
-        row.innerHTML = rowArr[i].innerHTML;
-
-        // Redraw canvas
-        const chart = rowArr[i].children[7].firstChild;
-        row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
-      }
-    } else if (mcap.classList.contains('ordered')) {
-      mcap.className = 'unordered';
-      mcap.firstChild.classList.remove('down');
-      rowArr = Array.from(rows).sort((a, b) => {
-        return (
-          parseFloat(
-            a.childNodes[3].innerHTML.match(/\d+/g).join().replace(/,+/g, '')
-          ) -
-          parseFloat(
-            b.childNodes[3].innerHTML.match(/\d+/g).join().replace(/,+/g, '')
-          )
-        );
-      });
-
-      for (let i = 0; i < arrLength; i++) {
-        let row = this.tBody.insertRow(i);
-        row.innerHTML = rowArr[i].innerHTML;
-
-        // Redraw canvas
-        const chart = rowArr[i].children[7].firstChild;
-        row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
-      }
-    }
+    return lower ? bb - aa : aa - bb;
   }
 
-  // Sort rows by daily
-  sort_5(price) {
-    let rows = Array.from(this.tBody.querySelectorAll('tr'));
-    let arrLength = rows.length;
-    let rowArr = [];
-    this.tBody.innerHTML = '';
+  sortPercentage(rows, index, orderClass, red) {
+    return rows
+      .filter((row) =>
+        row.childNodes[index].firstChild.classList.contains(orderClass)
+      )
+      .sort((a, b) => {
+        const aa = parseFloat(a.childNodes[index].innerText);
+        const bb = parseFloat(b.childNodes[index].innerText);
 
-    if (price.classList.contains('unordered')) {
-      price.className = 'ordered';
-      price.firstChild.classList.add('down');
-
-      rowArr = [
-        ...rows
-          .filter((row) =>
-            row.childNodes[4].firstChild.classList.contains('fa-caret-down')
-          )
-          .sort((a, b) => {
-            return (
-              parseFloat(
-                b.childNodes[4].innerHTML
-                  .match(/\d+|\,+/g)
-                  .join()
-                  .replace(/\,+/g, '.')
-              ) -
-              parseFloat(
-                a.childNodes[4].innerHTML
-                  .match(/\d+|\,+/g)
-                  .join()
-                  .replace(/\,+/g, '.')
-              )
-            );
-          }),
-        ...rows
-          .filter((row) =>
-            row.childNodes[4].firstChild.classList.contains('fa-caret-up')
-          )
-          .sort((a, b) => {
-            return (
-              parseFloat(
-                a.childNodes[4].innerHTML
-                  .match(/\d+|\,+/g)
-                  .join()
-                  .replace(/\,+/g, '.')
-              ) -
-              parseFloat(
-                b.childNodes[4].innerHTML
-                  .match(/\d+|\,+/g)
-                  .join()
-                  .replace(/\,+/g, '.')
-              )
-            );
-          }),
-      ];
-
-      for (let i = 0; i < arrLength; i++) {
-        let row = this.tBody.insertRow(i);
-        row.innerHTML = rowArr[i].innerHTML;
-
-        // Redraw canvas
-        const chart = rowArr[i].children[7].firstChild;
-        row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
-      }
-    } else if (price.classList.contains('ordered')) {
-      price.className = 'unordered';
-      price.firstChild.classList.remove('down');
-
-      rowArr = [
-        ...rows
-          .filter((row) =>
-            row.childNodes[4].firstChild.classList.contains('fa-caret-up')
-          )
-          .sort((a, b) => {
-            return (
-              parseFloat(
-                b.childNodes[4].innerHTML
-                  .match(/\d+|\,+/g)
-                  .join()
-                  .replace(/\,+/g, '.')
-              ) -
-              parseFloat(
-                a.childNodes[4].innerHTML
-                  .match(/\d+|\,+/g)
-                  .join()
-                  .replace(/\,+/g, '.')
-              )
-            );
-          }),
-        ...rows
-          .filter((row) =>
-            row.childNodes[4].firstChild.classList.contains('fa-caret-down')
-          )
-          .sort((a, b) => {
-            return (
-              parseFloat(
-                a.childNodes[4].innerHTML
-                  .match(/\d+|\,+/g)
-                  .join()
-                  .replace(/\,+/g, '.')
-              ) -
-              parseFloat(
-                b.childNodes[4].innerHTML
-                  .match(/\d+|\,+/g)
-                  .join()
-                  .replace(/\,+/g, '.')
-              )
-            );
-          }),
-      ];
-
-      for (let i = 0; i < arrLength; i++) {
-        let row = this.tBody.insertRow(i);
-        row.innerHTML = rowArr[i].innerHTML;
-
-        // Redraw canvas
-        const chart = rowArr[i].children[7].firstChild;
-        row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
-      }
-    }
-  }
-
-  // Sort rows by weeekly
-  sort_6(price) {
-    let rows = Array.from(this.tBody.querySelectorAll('tr'));
-    let arrLength = rows.length;
-    let rowArr = [];
-    this.tBody.innerHTML = '';
-
-    if (price.classList.contains('unordered')) {
-      price.className = 'ordered';
-      price.firstChild.classList.add('down');
-
-      rowArr = [
-        ...rows
-          .filter((row) =>
-            row.childNodes[5].firstChild.classList.contains('fa-caret-up')
-          )
-          .sort((a, b) => {
-            return (
-              parseFloat(
-                b.childNodes[5].innerHTML
-                  .match(/\d+|\,+/g)
-                  .join()
-                  .replace(/\,+/g, '.')
-              ) -
-              parseFloat(
-                a.childNodes[5].innerHTML
-                  .match(/\d+|\,+/g)
-                  .join()
-                  .replace(/\,+/g, '.')
-              )
-            );
-          }),
-        ...rows
-          .filter((row) =>
-            row.childNodes[5].firstChild.classList.contains('fa-caret-down')
-          )
-          .sort((a, b) => {
-            return (
-              parseFloat(
-                a.childNodes[5].innerHTML
-                  .match(/\d+|\,+/g)
-                  .join()
-                  .replace(/\,+/g, '.')
-              ) -
-              parseFloat(
-                b.childNodes[5].innerHTML
-                  .match(/\d+|\,+/g)
-                  .join()
-                  .replace(/\,+/g, '.')
-              )
-            );
-          }),
-      ];
-
-      for (let i = 0; i < arrLength; i++) {
-        let row = this.tBody.insertRow(i);
-        row.innerHTML = rowArr[i].innerHTML;
-
-        // Redraw canvas
-        const chart = rowArr[i].children[7].firstChild;
-        row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
-      }
-    } else if (price.classList.contains('ordered')) {
-      price.className = 'unordered';
-      price.firstChild.classList.remove('down');
-
-      rowArr = [
-        ...rows
-          .filter((row) =>
-            row.childNodes[5].firstChild.classList.contains('fa-caret-down')
-          )
-          .sort((a, b) => {
-            return (
-              parseFloat(
-                b.childNodes[5].innerHTML
-                  .match(/\d+|\,+/g)
-                  .join()
-                  .replace(/\,+/g, '.')
-              ) -
-              parseFloat(
-                a.childNodes[5].innerHTML
-                  .match(/\d+|\,+/g)
-                  .join()
-                  .replace(/\,+/g, '.')
-              )
-            );
-          }),
-        ...rows
-          .filter((row) =>
-            row.childNodes[5].firstChild.classList.contains('fa-caret-up')
-          )
-          .sort((a, b) => {
-            return (
-              parseFloat(
-                a.childNodes[5].innerHTML
-                  .match(/\d+|\,+/g)
-                  .join()
-                  .replace(/\,+/g, '.')
-              ) -
-              parseFloat(
-                b.childNodes[5].innerHTML
-                  .match(/\d+|\,+/g)
-                  .join()
-                  .replace(/\,+/g, '.')
-              )
-            );
-          }),
-      ];
-
-      for (let i = 0; i < arrLength; i++) {
-        let row = this.tBody.insertRow(i);
-        row.innerHTML = rowArr[i].innerHTML;
-
-        // Redraw canvas
-        const chart = rowArr[i].children[7].firstChild;
-        row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
-      }
-    }
-  }
-
-  // Sort rows by volume
-  sort_7(vol) {
-    let rows = this.tBody.querySelectorAll('tr');
-    let arrLength = rows.length;
-    let rowArr = [];
-    this.tBody.innerHTML = '';
-
-    if (vol.classList.contains('unordered')) {
-      vol.className = 'ordered';
-      vol.firstChild.classList.add('down');
-      rowArr = Array.from(rows).sort((a, b) => {
-        return (
-          parseFloat(
-            b.childNodes[6].innerHTML.match(/\d+/g).join().replace(/,+/g, '')
-          ) -
-          parseFloat(
-            a.childNodes[6].innerHTML.match(/\d+/g).join().replace(/,+/g, '')
-          )
-        );
+        return red ? bb - aa : aa - bb;
       });
-
-      for (let i = 0; i < arrLength; i++) {
-        let row = this.tBody.insertRow(i);
-        row.innerHTML = rowArr[i].innerHTML;
-
-        // Redraw canvas
-        const chart = rowArr[i].children[7].firstChild;
-        row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
-      }
-    } else if (vol.classList.contains('ordered')) {
-      vol.className = 'unordered';
-      vol.firstChild.classList.remove('down');
-      rowArr = Array.from(rows).sort((a, b) => {
-        return (
-          parseFloat(
-            a.childNodes[6].innerHTML.match(/\d+/g).join().replace(/,+/g, '')
-          ) -
-          parseFloat(
-            b.childNodes[6].innerHTML.match(/\d+/g).join().replace(/,+/g, '')
-          )
-        );
-      });
-
-      for (let i = 0; i < arrLength; i++) {
-        let row = this.tBody.insertRow(i);
-        row.innerHTML = rowArr[i].innerHTML;
-
-        // Redraw canvas
-        const chart = rowArr[i].children[7].firstChild;
-        row.children[7].firstChild.getContext('2d').drawImage(chart, 0, 0);
-      }
-    }
   }
 
   // Add to favorites

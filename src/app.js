@@ -12,17 +12,17 @@ const coinsLink =
   'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=25&page=1&sparkline=true&price_change_percentage=7d';
 const icon = document.querySelector('#favorites').childNodes[2];
 const confirmButton = document.getElementById('confirm');
+const categories = Array.from(document.querySelectorAll('.th'));
 let port = null;
 
 // Event listeners
 document.addEventListener('DOMContentLoaded', initialLoad());
-document.querySelector('#rank').addEventListener('click', sortByRank);
-document.querySelector('#coin').addEventListener('click', sortByName);
-document.querySelector('#price').addEventListener('click', sortByPrice);
-document.querySelector('#mcap').addEventListener('click', sortByMarketCap);
-document.querySelector('#daily').addEventListener('click', sortByDaily);
-document.querySelector('#weekly').addEventListener('click', sortByWeekly);
-document.querySelector('#volume').addEventListener('click', sortByVolume);
+categories.forEach((el, index) => {
+  el.addEventListener('click', (e) => {
+    e.preventDefault();
+    ui.sort(e.target, index);
+  });
+});
 document.querySelector('#mt-body').addEventListener('click', addToFavorites);
 document.querySelector('#favorites').addEventListener('click', showFavorites);
 document.querySelector('#home').addEventListener('click', returnHome);
@@ -189,6 +189,12 @@ function createChart(coins) {
     // });
   });
 }
+
+// Sort
+// function sort(e, index) {
+//   e.preventDefault();
+
+// }
 
 // Sort by rank
 function sortByRank(e) {
